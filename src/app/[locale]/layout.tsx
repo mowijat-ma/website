@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { NextIntlClientProvider, useLocale } from "next-intl";
 import { DirectionProvider } from "@/components/ui/direction";
 import { amiri, ibmArabic, lora } from "./fonts";
-import LanguageSwitcher from "@/components/i18n-switcher";
+import LanguageSwitcher from "@/components/ux/i18n-switcher";
 
 
 
