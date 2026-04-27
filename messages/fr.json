@@ -1,0 +1,94 @@
+{
+  "HomePage": {
+    "title": "Bienvenue",
+    "intevriewsTitle": "Entretiens Cinématographiques",
+    "newsTitle": "Dernières Actualités"
+  },
+  "pages": {
+    "cinema": {
+      "moroccan": {
+        "title": "Cinéma Marocain",
+        "description": "Miroir de soi et écran de la mémoire..."
+      },
+      "arabic": {
+        "title": "Cinéma Arabe",
+        "description": "La voix de la langue arabe dans le monde de l'image..."
+      },
+      "world": {
+        "title": "Cinéma Mondial",
+        "description": "Votre fenêtre sur les frontières lointaines de l'imaginaire..."
+      }
+    }
+  },
+  "sections": {
+    "hero": {
+      "title": "Articles récents"
+    },
+    "more_reads": {
+      "title": "Les plus lus"
+    },
+    "cinemaworld": {
+      "title": "Cinéma Mondial"
+    },
+    "cinemaarabe": {
+      "title": "Cinéma Arabe"
+    },
+    "cinemamorrocan": {
+      "title": "Cinéma Marocain"
+    },
+    "interviews": {
+      "title": "Entretiens"
+    },
+    "news": {
+      "title": "Actualités"
+    },
+    "calendar": {
+      "title": "Prochains rendez-vous"
+    },
+    "related_articles": {
+      "title": "Articles similaires"
+    }
+  },
+  "ui": {
+    "search": {
+      "placeholder": "Rechercher...",
+      "results": "Résultats"
+    },
+    "more_readable": "Le plus lu"
+  },
+  "layout": {
+    "otherLinks": {
+      "about_": "À propos de Mowijat",
+      "contact_us": "Contactez-nous",
+      "publish_in": "Publier dans Mowijat",
+      "terms": "Conditions d'utilisation",
+      "team": "L'équipe"
+    },
+    "navLinks": {
+      "home": "Accueil",
+      "news": "Actualités",
+      "cinema": "Cinéma",
+      "cinema_world": "Cinéma Mondial",
+      "cinema_arabe": "Cinéma Arabe",
+      "cinema_morrocan": "Cinéma Marocain",
+      "interviews": "Entretiens Ciné",
+      "events": "Festivals",
+      "critic": "Critique",
+      "calendar": "Agenda",
+      "other": "Autres Cultures & Arts",
+      "theater": "Théâtre",
+      "paint": "Arts Plastiques",
+      "music": "Musique",
+      "interviews_mobile": "Entretien"
+    },
+    "footer": {
+      "quickLinks": "Liens rapides",
+      "mowijat": "Mowijat",
+      "copyright": "Tous droits réservés",
+      "tagline": "Le pouls du cinéma... l'élixir de la culture. Nous plongeons dans les profondeurs du 7ème art pour en extraire l'essence de la pensée.\nLectures critiques | Chroniques | Dialogues culturels."
+    }
+  },
+  "Manifest": {
+    "name": "Mowijat | Cinéma & Culture"
+  }
+}

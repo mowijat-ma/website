@@ -1,0 +1,94 @@
+{
+  "HomePage": {
+    "title": "مرحبا",
+    "intevriewsTitle": "حوارات سينمائية",
+    "newsTitle": "آخر المستجدات"
+  },
+  "pages": {
+    "cinema": {
+      "moroccan": {
+        "title": "السينما المغربية",
+        "description": "مرآة الذات وشاشة الذاكرة..."
+      },
+      "arabic": {
+        "title": "السينما العربية",
+        "description": "صوت الضاد في عالم الصورة..."
+      },
+      "world": {
+        "title": "السينما العالمية",
+        "description": "نافذتكم على أبعد حدود الخيال..."
+      }
+    }
+  },
+  "sections": {
+    "hero": {
+      "title": "أحدث المقالات"
+    },
+    "more_reads": {
+      "title": "اكثر قراءة"
+    },
+    "cinemaworld": {
+      "title": "سينما عالمية"
+    },
+    "cinemaarabe": {
+      "title": "سينما عربية"
+    },
+    "cinemamorrocan": {
+      "title": "سينما مغربية"
+    },
+    "interviews": {
+      "title": "حوارات"
+    },
+    "news": {
+      "title": "آخر المستجدات"
+    },
+    "calendar": {
+      "title": "آخر المواعيد"
+    },
+    "related_articles": {
+      "title": "مقالات ذات صلة"
+    }
+  },
+  "ui": {
+    "search": {
+      "placeholder": "بحت",
+      "results": "نتايج"
+    },
+    "more_readable": "اكثر قراءة"
+  },
+  "layout": {
+    "otherLinks": {
+      "about_": "عن مويجات",
+      "contact_us": "اتصل بنا",
+      "publish_in": "للنشر في مويجات",
+      "terms": "شروط الاستخدام",
+      "team": "فريق العمل"
+    },
+    "navLinks": {
+      "home": "الرئيسية",
+      "news": "مستجدات",
+      "cinema": "سينما",
+      "cinema_world": "سينما عالمية",
+      "cinema_arabe": "سينما عربية",
+      "cinema_morrocan": "سينما مغربية",
+      "interviews": "حوار سينمائي",
+      "events": "مهرجانات",
+      "critic": "نقد",
+      "calendar": "مواعيد",
+      "other": "ثقافة و فنون اخرى",
+      "theater": "مسرح",
+      "paint": "فن تشكيل",
+      "music": "موسيقى",
+      "interviews_mobile": "حوار"
+    },
+    "footer": {
+      "quickLinks": "روابط",
+      "mowijat": "مويجات",
+      "copyright": "",
+      "tagline": " نبضُ السينما.. وإكسيرُ الثقافة. نغوصُ في أعماق الفن السابع لنستخلص جوهر الفكر.\n قراءات نقدية | مراجعات | حوارات ثقافية."
+    }
+  },
+  "Manifest": {
+    "name": "مويجات | سينما و ثقافة"
+  }
+}
