@@ -1,5 +1,13 @@
-import { Footer2 } from "@/components/footer2"
+// import { Footer2 } from "@/components/footer2"
+import { socialLinks } from "@/data/social"
+// import { IconContext } from "@phosphor-icons/react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
+import { Logo, LogoImage } from "../Logo"
+import { Separator } from "@/components/ui/separator"
+// import { Fo } from "@/data/navigation"
+import { IconContext } from "react-icons"
+import { FOOTER_LINKS } from "@/data/navigation"
 
 interface FooterLink {
   id?: number
@@ -11,86 +19,65 @@ interface FooterProps {
   links?: FooterLink[]
 }
 
-const Footer = ({ links }: FooterProps) => {
-  const t = useTranslations('layout')
-  const menuItems = [
-    {
-      title: t("footer.mowijat"),
-      links: [
-        {
-          title: t('otherLinks.about_'),
-          href: "",
-        },
-        {
-          title: t('otherLinks.contact_us'),
-          href: "",
-        },
-        {
-          title: t('otherLinks.publish_in'),
-          href: "",
-        },
-        {
-          title: t('otherLinks.terms'),
-          href: "",
-        },
-        {
-          title: t('otherLinks.team'),
-          href: "",
-        }
-      ]
-    },
-    {
-      title: t("footer.quickLinks"),
-      links: [
-
-        {
-          id: 2,
-          title: t("navLinks.news"),
-          href: "/news"
-        },
-        {
-          id: 3,
-          title: t("navLinks.cinema_world"),
-          href: "/cinema/world"
-        },
-        {
-          id: 4,
-          title: t("navLinks.cinema_arabe"),
-          href: "/cinema/arabe"
-        },
-        {
-          id: 5,
-          title: t("navLinks.cinema_morrocan"),
-          href: "/cinema/morrocan"
-        },
-        {
-          id: 6,
-          title: t("navLinks.interviews"),
-          href: "/interviews"
-        },
-        {
-          id: 7,
-          title: t("navLinks.critic"),
-          href: "/critic"
-        },
-        {
-          id: 7,
-          title: t("navLinks.calendar"),
-          href: "/calendar"
-        },
-      ]
-    },
-    
-
-  ]
-  if (links)
+const Footer = () => {
+  const t = useTranslations()
+  const links = FOOTER_LINKS || []
 
     return (<>
-      <footer className="pb-20 sm:pb-0">
-        <div className="max-w-5xl mx-auto py-4">
-          <Footer2 menuItems={menuItems} tagline={t('footer.tagline')} />
+      <section className=" bg-white">
+        <footer className="border lg:max-w-7xl px-4 py-8 w-full mx-auto">
+          {/* <Footer2 menuItems={menuItems} tagline={t('footer.tagline')} /> */}
+          <div className="border">
+          <div className="grid md:grid-cols-12 gap-8 text-center sm:text-start ">
+{/* {JSON.stringify(menuItems)}
+{menuItems.length} */}
+            {links?.length > 0 && links.map((section, sectionIdx) => (
+              <div key={sectionIdx} className="col-span-4 flex flex-col border">
+                <h3 className="mb-4 font-bold">{t(section.title)}</h3>
+                <ul className="space-y-4 text-muted-foreground ">
+                  {section.links.map((link, linkIdx) => (
+                    <li
+                      key={linkIdx}
+                      className="font-medium group w-full"
+                    >
+                      <Link href={link.href} className="group-hover:text-primary group-hover:underline">
+                        {t(link.title)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <div className="col-span-4 sm:mb-8 lg:mb-0 flex flex-col items-center sm:items-center justify-center gap-8 border">
+              <Logo url="/" className="flex items-center gap-2 w-full border  max-w-48">
+                <LogoImage
+                  src={'/logos/logo_light_1.png'}
+                  alt={'logo.alt'}
+                  className="w-full"
+                />
+              </Logo>
+              {/* {tagline && <p className="mt-4 text-sm font-medium text-muted-foreground text-left">{tagline}</p>} */}
+              <div className="flex gap-2 justify-end">
+
+                  {socialLinks.map(link=>(
+                    <Link key={link.id} href={link.href} target="_blank" rel="noopener noreferrer">
+                      <link.icon  size='25' className="text-primary"  />
+                    </Link>
+                  ))}
+
+
+              </div>
+
+            </div>
+          </div>
+          <Separator role="presentation" className="my-4 sm:my-10" />
+          <div className="flex flex-col justify-center gap-4 text-base font-semibold text-muted-foreground md:flex-row md:items-center text-center sm:text-start">
+            <p>{t('footer.copyright')}</p>
+  
+          </div>
         </div>
-      </footer>
+        </footer>
+      </section>
     </>)
 }
 

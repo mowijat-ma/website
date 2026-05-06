@@ -1,14 +1,14 @@
 'use client'
+import { socialLinks } from "@/data/social"
 import Link from "next/link"
 import { IconContext } from "react-icons"
 import { FaFacebook } from "react-icons/fa"
 import { FaSquareInstagram, FaThreads } from "react-icons/fa6"
 
- const TopHeader = ()=>{
+ const LogoBar = ()=>{
+    const links = socialLinks
     return (
-        <>
-         <div className="border-b- bg-background py-2 ">
-        <div className="lg:max-w-7xl max-w-3xl mx-auto w-full flex items-center justify-between px-4 sm:px-0 py-3">
+        <div className="lg:max-w-7xl w-full mx-auto flex items-center justify-between px-12 py-3 bg-background">
           <Link href="/" className="flex items-center gap-2">
             <img 
               src="/logos/logo_light_1.png" 
@@ -22,9 +22,11 @@ import { FaSquareInstagram, FaThreads } from "react-icons/fa6"
             <div className="flex gap-2 justify-end">
               <IconContext.Provider value={{ size: '25', className: "text-primary" }}>
 
-                  <FaThreads />
-                  <FaSquareInstagram/>
-                  <FaFacebook />
+                  {links.map(link=>(
+                    <Link key={link.id} href={link.href} target="_blank" rel="noopener noreferrer">
+                      <link.icon />
+                    </Link>
+                  ))}
 
 
                 </IconContext.Provider>
@@ -32,9 +34,7 @@ import { FaSquareInstagram, FaThreads } from "react-icons/fa6"
             {/* <div className="">mowijat.contact@gmail.com</div> */}
           </div>
         </div>
-      </div>
-        </>
     )
  }
 
- export default TopHeader
+ export default LogoBar

@@ -1,8 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { MagnifyingGlassIcon } from '@phosphor-icons/react';
-import { Book, Menu, Search, Sunset, Trees, Zap } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 
 import {
   Accordion,
@@ -11,47 +10,26 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  NavigationMenuList
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
 
-import { IconContext } from "react-icons";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaSquareInstagram, FaThreads } from "react-icons/fa6";
-import { TiSocialFacebookCircular } from "react-icons/ti";
 
-import { usePathname } from "next/navigation"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { Separator } from "@/components/ui/separator";
+import { usePathname } from "next/navigation";
 // import { searchWpPosts } from "@/app/api/posts";
 // import { LayoutSearch } from "./custom/search-input";
 interface MenuItem {
@@ -85,12 +63,6 @@ interface Navbar1Props {
 }
 
 const Navbar1 = ({
-  logo = {
-    url: "/",
-    src: "/logos/logo_light.png",
-    alt: "logo",
-    title: "Shadcnblocks.com",
-  },
   menu = [
 
   ],
@@ -148,9 +120,9 @@ const Navbar1 = ({
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
-              
+
               <div className="flex gap-4">
-                     {/* <div className="bg-muted w-full flex items-center rounded-full p-3 py-1">
+                {/* <div className="bg-muted w-full flex items-center rounded-full p-3 py-1">
                       <MagnifyingGlassIcon size={25} className=""/>
                       <input type="text" className="w-full  border-none- p-none ring-none outline-none border-input-0 bg-transparent p-2" placeholder={t('ui.search.placeholder')}/>
                      </div> */}
@@ -173,7 +145,7 @@ const Navbar1 = ({
         {/* Mobile Menu */}
         <div className="block sm:hidden fixed- top-0 py-4 bg-primary z-10 ">
           <div className="px-4 sm:px-0 flex gap-4 flex-row-reverse items-center justify-between">
-            {/* Logo */}   
+            {/* Logo */}
             {/* <LayoutSearch /> */}
             <Sheet >
               <SheetTrigger asChild onClick={() => setOpen(!open)}>
@@ -215,6 +187,7 @@ const Navbar1 = ({
 };
 
 const renderMenuItem = (item: MenuItem) => {
+  const t = useTranslations('layout.navLinks');
   const pathname = usePathname();
   let isActive = false
   if (item.href) {
@@ -241,19 +214,19 @@ const renderMenuItem = (item: MenuItem) => {
   // }
 
   return (
-      <Link
-        // href={item.href}
-        href={item.href || ''}
-        key={item.title}
-        className={cn(
-          "font-semibold group inline-flex items-center justify-center text-lg transition-colors border-b-[3px] py-4 px-3",
-          isActive ? "text-primary border-b-primary" : "border-transparent",
+    <Link
+      // href={item.href}
+      href={item.href || ''}
+      key={item.title}
+      className={cn(
+        "font- group inline-flex items-center justify-center text-lg transition-colors border-b-[3px] py-4 px-3",
+        isActive ? "text-primary border-b-primary" : "border-transparent",
 
-        )}
+      )}
 
-      >
-        {item.title}
-      </Link>
+    >
+      {t(item.title)}
+    </Link>
     // <NavigationMenuItem key={item.title}>
     // </NavigationMenuItem>
   );
@@ -305,33 +278,26 @@ const SubMenuLink = ({ item }: { item: MenuItem }) => {
 
 };
 
-const SearchForm = () =>{
-  const [searchResults, setSearchResults] = useState([])
-  const OnUpdateQuery = async (e: any)=>{
-    // const res : any = await searchWpPosts(e.target.value)
-    // setSearchResults(res)
-  }
+const DesktopNavbar = ({
+  links
+}: {
+  links: Array<{
+    title: string
+    href?: string
+    items?: Array<{ title: string; href: string }>
+  }>
+}) => {
   return (<>
-  <div className="">
-    <div className="">
-      <InputGroup className="max-w-xs p-3">
-      <InputGroupInput placeholder="بحث..." onChange={OnUpdateQuery}/>
-      <InputGroupAddon>
-        <Search />
-      </InputGroupAddon>
-      {/* <InputGroupAddon align="inline-end">12 نتيجة</InputGroupAddon> */}
-    </InputGroup>
-    </div>
-    {/* {JSON.stringify(searchResults[0].title)} */}
-    {searchResults && searchResults.length >0 && searchResults.map((post: any)=>{
-      return (
-        <Link key={post.id} href={`/cinema/${post.id}/content`}>
-          <div className="" dangerouslySetInnerHTML={{ __html: post.title }}></div>
-        </Link>
-       
-      )
-    })}
-  </div>
+    <nav className="w-full flex items-center justify-between">
+      <div className="grow flex gap-4 ">
+          {links.map((item) => renderMenuItem(item))}
+      </div>
+      <div className="px-4 ">
+        Search
+      </div>
+    </nav>
   </>)
 }
-export { Navbar1 };
+
+export default DesktopNavbar;
+

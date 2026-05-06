@@ -1,7 +1,11 @@
 // import { Navbar1 } from "@/components/navbar"
-import { navigationLinksWithIntl } from "@/data/navigation"
+import { NAVIGATION_LINKS } from "@/data/navigation"
 import { useTranslations } from "next-intl"
-import { Navbar1 } from "./navbar"
+import DesktopNavbar  from "./DesktopNavbar"
+import LogoBar from "./LogoBar"
+// import MobileNavbar from "./MobileNavbar"
+import { Separator } from "@/components/ui/separator"
+import MobileNavigation from "./MobileNavbar"
 
 interface HeaderProps {
   links?: Array<{
@@ -14,8 +18,14 @@ interface HeaderProps {
 const Header = () => {
   const t = useTranslations('layout.navLinks')
   
-  const links = navigationLinksWithIntl(t)
-  return <Navbar1 menu={links} />
+
+  return <header className="lg:max-w-7xl w-full mx-auto bg-background px- px-4 border">
+  {/* <Navbar1 menu={links} /> */}
+  {/* <LogoBar /> */}
+    {/* <Separator className="my-2" /> */}
+    <DesktopNavbar links={NAVIGATION_LINKS || []} />
+    <MobileNavigation />
+  </header>
 }
 
 export default Header

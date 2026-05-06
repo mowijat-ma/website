@@ -71,7 +71,7 @@
       "cinema_world": "سينما عالمية",
       "cinema_arabe": "سينما عربية",
       "cinema_morrocan": "سينما مغربية",
-      "interviews": "حوار سينمائي",
+      "interviews": "حوار ",
       "events": "مهرجانات",
       "critic": "نقد",
       "calendar": "مواعيد",
@@ -80,12 +80,36 @@
       "paint": "فن تشكيل",
       "music": "موسيقى",
       "interviews_mobile": "حوار"
-    },
-    "footer": {
-      "quickLinks": "روابط",
-      "mowijat": "مويجات",
-      "copyright": "",
-      "tagline": " نبضُ السينما.. وإكسيرُ الثقافة. نغوصُ في أعماق الفن السابع لنستخلص جوهر الفكر.\n قراءات نقدية | مراجعات | حوارات ثقافية."
+    }
+  },
+  "footer": {
+    "quickLinks": "روابط",
+    "mowijat": "مويجات",
+    "copyright":  "© 2026 جميع الحقوق محفوظة.",
+    "tagline": " نبضُ السينما.. وإكسيرُ الثقافة. نغوصُ في أعماق الفن السابع لنستخلص جوهر الفكر.\n قراءات نقدية | مراجعات | حوارات ثقافية."
+  },
+  "navigation": {
+    "links": {
+      "home": "الرئيسية",
+      "news": "مستجدات",
+      "cinema": "سينما",
+      "cinema_world": "سينما عالمية",
+      "cinema_arabe": "سينما عربية",
+      "cinema_morrocan": "سينما مغربية",
+      "interviews": "حوار ",
+      "events": "مهرجانات",
+      "critic": "نقد",
+      "calendar": "مواعيد",
+      "other": "ثقافة و فنون اخرى",
+      "theater": "مسرح",
+      "paint": "فن تشكيل",
+      "music": "موسيقى",
+      "interviews_mobile": "حوار",
+      "about_": "عن مويجات",
+      "contact_us": "اتصل بنا",
+      "publish_in": "للنشر في مويجات",
+      "terms": "شروط الاستخدام",
+      "team": "فريق العمل"
     }
   },
   "Manifest": {

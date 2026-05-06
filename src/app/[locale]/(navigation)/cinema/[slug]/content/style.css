@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply font-ui leading-relaxed;
+  }
+  article{
+    @apply text-lg text-primary !important;
+  }
+  .wp-block-paragraph{
+    @apply text-muted-foreground;
+  }
+}
+
+.wp-block-paragraph {
+    color: #4e4e4e;
+    text-align: justify;
+    line-height: 40px;
+}
+
+.wp-block-image.size-large img{
+  aspect-ratio: 2/3; 
+  height: 50vh;
+  object-fit: cover;
+  margin: 10px;
+  width: 100%;
+  border-radius: 10px;
+}

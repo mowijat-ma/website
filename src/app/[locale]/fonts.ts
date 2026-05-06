@@ -25,6 +25,10 @@ const ibmArabic = IBM_Plex_Sans_Arabic({
 });
 
 
+
+// إعداد خط Amiri للغة العربية
+
+
 export {
     ibmArabic, amiri, lora
 }

@@ -30,7 +30,7 @@ export default function RootLayout({
         <DirectionProvider dir={direction}>
           {/* {children} */}
           {/* Your app content */}
-          <body className="" dir={direction}>
+          <body  dir={direction} className={amiri.className}>
           {/* <LanguageSwitcher /> */}
             {children}
           </body>

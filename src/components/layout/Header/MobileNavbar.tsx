@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"; // Standard shadcn utility
 import { HouseIcon , NewspaperIcon , ArticleIcon , CalendarDotsIcon } from "@phosphor-icons/react";
 import { TfiMicrophone } from "react-icons/tfi";
 
-export default function HeaderMobile() {
+export default function MobileNavigation() {
   const t = useTranslations('layout.navLinks');
   const pathname = usePathname();
 
@@ -49,7 +49,7 @@ export default function HeaderMobile() {
   ];
   
   return (
-    <div className="sm:hidden bg-white/90 backdrop-blur-md border-t-2 fixed- bottom-0 right-0 left-0 z-50 pb-safe">
+    <div className="sm:hidden bg-white backdrop-blur-md- border-t-2- fixed bottom-0 right-0 left-0 z-50 pb-safe lg:w-7xl mx-auto">
       <nav className="px-4 py-3-">
         <IconContext.Provider value={{ size: '24' }}>
           <div className="flex justify-around items-center gap-4">
@@ -63,7 +63,7 @@ export default function HeaderMobile() {
                     "flex flex-col flex-1 items-center justify-center gap-1 transition-all duration-200 py-2",
                     isActive 
                       ? "text-primary scale-110- " 
-                      : "text-muted-foreground- hover:text-primary "
+                      : "text-muted-foreground- hover:text-primary"
                   )}
                 >
                   <div className={cn(
@@ -72,7 +72,7 @@ export default function HeaderMobile() {
                   )}>
                     {link.icon}
                   </div>
-                  <span className="text-xs font-bold">
+                  <span className="text-xs font-">
                     {link.title}
                   </span>
                 </Link>

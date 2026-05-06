@@ -1,106 +1,174 @@
 import { useTranslations } from "next-intl"
 
-export const navigationLinksWithIntl = (t: any)=>{
-    const links = [
+export const NAVIGATION_LINKS  = [
     {
       id: 1,
-      title: t("home"),
+      title: "home",
       href: "/"
     },
     {
       id: 2,
-      title: t("news"),
+      title: "news",
       href: "/news"
     },
     {
       id: 3,
-      title: t("cinema_world"),
+      title: "cinema_world",
       href: "/cinema/world"
     },
     {
       id: 4,
-      title: t("cinema_arabe"),
+      title: "cinema_arabe",
       href: "/cinema/arabe"
     },
     {
       id: 5,
-      title: t("cinema_morrocan"),
+      title: "cinema_morrocan",
       href: "/cinema/morrocan"
     },
     {
       id: 6,
-      title: t("interviews"),
+      title: "interviews",
       href: "/interviews"
     },
     {
       id: 7,
-      title: t("critic"),
+      title: "critic",
       href: "/critic"
     },
     {
       id: 7,
-      title: t("calendar"),
+      title: "calendar",
       href: "/calendar"
     },
   ]
-  const menu = [
+
+export const FOOTER_LINKS = [
     {
-      title: t("home"),
+      title: "footer.mowijat",
+      links: [
+        {
+          title: "navigation.links.about_",
+          href: "",
+        },
+        {
+          title: "navigation.links.contact_us",
+          href: "",
+        },
+        {
+          title: "navigation.links.publish_in",
+          href: "",
+        },
+        {
+          title: "navigation.links.terms",
+          href: "",
+        },
+        {
+          title: "navigation.links.team",
+          href: "",
+        }
+      ]
+    },
+    {
+      title: "footer.quickLinks",
+      links: [
+
+        {
+          id: 2,
+          title: "navigation.links.news",
+          href: "/news"
+        },
+        {
+          id: 3,
+          title: "navigation.links.cinema_world",
+          href: "/cinema/world"
+        },
+        {
+          id: 4,
+          title: "navigation.links.cinema_arabe",
+          href: "/cinema/arabe"
+        },
+        {
+          id: 5,
+          title: "navigation.links.cinema_morrocan",
+          href: "/cinema/morrocan"
+        },
+        {
+          id: 6,
+          title: "navigation.links.interviews",
+          href: "/interviews"
+        },
+        {
+          id: 7,
+          title: "navigation.links.critic",
+          href: "/critic"
+        },
+        {
+          id: 7,
+          title: "navigation.links.calendar",
+          href: "/calendar"
+        },
+      ]
+    },
+    
+
+  ]
+
+const menu = [
+    {
+      title: "home",
       href: "/"
     },
     {
-      title: t("news"),
+      title: "news",
       href: "/news"
     },
     {
-      title: t("cinema_morrocan"),
+      title: "cinema_morrocan",
       href: "/cinema/morrocan"
     },
     {
-      title: t("cinema_arabe"),
+      title: "cinema_arabe",
       href: "/cinema/arabe"
     },
     {
-      title: t("cinema_world"),
+      title: "cinema_world",
       href: "/cinema/world"
     },
     {
-      title: t("events"),
+      title: "events",
       href: "/events",
     },
     {
-      title: t("interviews"),
+      title: "interviews",
       href: "/interviews",
 
     },
     {
-      title: t("critic"),
+      title: "critic",
       href: "/critic"
     },
     {
-      title: t("calendar"),
+      title: "calendar",
       href: "/calendar"
     },
     {
-      title: t("other"),
+      title: "other",
       // href: "/others"
       items: [
         {
-          title: t("theater"),
+          title: "theater",
           href: "/theater"
         },
         {
-          title: t("paint"),
+          title: "paint",
           href: "/paint"
         },
         {
-          title: t("music"),
+          title: "music",
           href: "/music"
         },
       ]
     },
 
   ]
-    return links
-
-}
