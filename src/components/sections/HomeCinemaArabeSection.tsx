@@ -26,7 +26,7 @@ export default async function HomeCinemaArabeSection() {
             <div className="">
               <div className="bg-background z-50 flex justify-between items-center">
                 <SectionTitle value={t('title')} />
-                <Link href={""}>المزيد</Link>
+                {/* <Link href={""}>المزيد</Link> */}
               </div>
               <div className="flex flex-co gap-10 md:gap-12">
 

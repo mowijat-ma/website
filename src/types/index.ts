@@ -43,6 +43,17 @@ export interface InterviewPost {
 }
 
 
+
+export interface CalendarEventProps {
+    id?: number;
+    title?: string;
+    startDate?: string;
+    endDate: string;
+    location?: string;
+    description?: string;
+    image?: string;  
+}
+
 // This type can be used for any font-related component that accepts a value and className
 export interface FontComponentProps extends React.HTMLAttributes<HTMLParagraphElement> {
   value?: string;

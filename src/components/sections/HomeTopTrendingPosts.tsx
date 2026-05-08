@@ -3,9 +3,12 @@ import { Post, WpPost } from "@/types";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
-import PostDescription from "../font/description";
+import PostDescription, { Description } from "../font/description";
 import PostTitle from "../font/title";
 import SectionTitle from "../font/section-title";
+import Heading3 from "../font/h3";
+import Heading4 from "../font/h4";
+// import Heading4 from "../font/h4";
 
 
 export default async function HomeTopTrendingPosts() {
@@ -56,11 +59,8 @@ export default async function HomeTopTrendingPosts() {
                       {mainArticle.category}
                     </span>
                   </div>
-                  {/* Post Title */}
-                  <PostTitle dangerouslySetInnerHTML={{ __html: mainArticle.title }} />
-                  {/* Post Summary */}
-                  <PostDescription dangerouslySetInnerHTML={{ __html: mainArticle.description }} />
-
+                  <Heading3 className="line-clamp-2">{mainArticle.title}</Heading3>
+                  <Description className="line-clamp-2">{mainArticle.description}</Description>
                   
                 </div>
               </div>
@@ -80,9 +80,8 @@ export default async function HomeTopTrendingPosts() {
                         />
                       </AspectRatio>
                       <div className="flex flex-col gap-3">
-                          <PostTitle dangerouslySetInnerHTML={{ __html: post.title }} className="" />
-                          <PostDescription dangerouslySetInnerHTML={{ __html: post.description }} />
-
+                          <Heading4 className="line-clamp-2">{post.title}</Heading4>
+                          <Description className="line-clamp-2">{post.description}</Description>
                       </div>
                     </div>
                   </Link>

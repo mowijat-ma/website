@@ -5,6 +5,7 @@ import { WpPost } from "@/types";
 // import { getWpMoreReads } from "@/app/api/posts";
 import { getTranslations } from "next-intl/server";
 import { getWpMoreReads } from "@/api/posts";
+import SectionTitle from "../font/section-title";
 
 export default async function HomeTopReadsAside({}: any) {
     // const t= useTranslations("sections.more_reads")
@@ -14,12 +15,10 @@ export default async function HomeTopReadsAside({}: any) {
       getWpMoreReads()
     ])
     return (
-        <aside className=""> {/* هنا السحر: sticky + top-24 */}
+        <aside className="border"> {/* هنا السحر: sticky + top-24 */}
             <div className="bg-background border-primary border-none rounded p-8">
               <div className="mb-6">
-                <h3 className="text-primary text-xl font-bold border-r-4 border-primary pr-3">
-                  {t('title')}
-                </h3>
+                <SectionTitle >{t("title")}</SectionTitle>
               </div>
               <div className="flex flex-col gap-2">
                 {data?.slice(0, 5)?.map((item: any, i:number) => (

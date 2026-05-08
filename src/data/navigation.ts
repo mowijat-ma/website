@@ -41,6 +41,21 @@ export const NAVIGATION_LINKS  = [
       title: "calendar",
       href: "/calendar"
     },
+    {
+      id: 8,
+      title: "other",
+      // href: "/calendar"
+      items: [
+        {
+          title: "theater",
+          href: "/theater"}
+      ]
+    },
+    {
+      id: 9,
+      title: "portrait",
+      href: "/portraits"
+    },
   ]
 
 export const FOOTER_LINKS = [

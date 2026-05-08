@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/apiclient"
-import { extractWpPost, extractWpPosts, getWpPostsService } from "@/services/post.services"
+import { extractWpPost, extractWpPosts, getWpPostByIdService, getWpPostsService } from "@/services/post.services"
 // import { extractWpPost, extractWpPosts } from "@/services/post.services"
 // import { WpPost } from "@/types"
 
@@ -23,11 +23,11 @@ export const getWpPosts = async (): Promise<Post[]> => {
   }
 }
 
-export const searchWpPosts = async (query: string, page = 1): Promise<Post[]> => {
+export const searchWpPosts = async (query: string, page = 1) => {
   const params = new URLSearchParams({
     search: query,
     page: page.toString(),
-    per_page: '10',
+    // per_page: '10',
     type: 'post', // Only search blog posts
     subtype: 'post'
   });
@@ -236,4 +236,11 @@ export const getHomeTopInterviews = async () => {
       error instanceof Error ? error.message : "Failed to fetch posts"
     )
   }
+}
+
+
+export const getWpPostById = async (id: string) => {
+  const res = await getWpPostByIdService(id)
+  const data = extractWpPost(res)
+  return data
 }

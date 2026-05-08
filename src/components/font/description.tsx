@@ -18,3 +18,13 @@ export default function PostDescription({className, ...props }: PostDescriptionP
     </p>
   );
 }
+export const Description = ({className, ...props}: {className?: string} & React.HTMLAttributes<HTMLParagraphElement>)=>{
+  return (
+    <p className={cn(
+      className,
+      "text-muted-foreground! text-base leading-normal",
+    )} {...props}>
+      {props.children}
+    </p>
+  )
+}

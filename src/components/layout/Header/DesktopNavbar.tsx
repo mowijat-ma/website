@@ -13,7 +13,11 @@ import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import {
   NavigationMenu,
-  NavigationMenuList
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -30,6 +34,7 @@ import { useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
 import { usePathname } from "next/navigation";
+import { SearchInput } from "@/components/ux/search-input";
 // import { searchWpPosts } from "@/app/api/posts";
 // import { LayoutSearch } from "./custom/search-input";
 interface MenuItem {
@@ -288,12 +293,18 @@ const DesktopNavbar = ({
   }>
 }) => {
   return (<>
-    <nav className="w-full flex items-center justify-between">
-      <div className="grow flex gap-4 ">
+    <nav className="w-full flex items-center justify-between gap-8 text-nowrap">
+      <div className="flex gap-4">
+          {/* <NavigationMenu> */}
           {links.map((item) => renderMenuItem(item))}
+          {/* </NavigationMenu> */}
       </div>
-      <div className="px-4 ">
-        Search
+      <div className="grow w-full border">
+        <SearchInput />
+        {/* <div className="bg-muted p-2 rounded flex">
+          <input type="text" className="w-full border-none outline-none bg-transparent" placeholder="Search..." />
+
+        </div> */}
       </div>
     </nav>
   </>)

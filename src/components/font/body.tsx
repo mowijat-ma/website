@@ -1,8 +1,10 @@
-export default function Heading1 ({value}:  {value?:string}){
+import { cn } from "@/lib/utils";
+
+export default function Article ({className, ...props}: {className?: string, children: React.ReactNode}){
     return (
         <>
-        <div className="lg:text-xl text-lg">
-            {value}
+        <div className={cn("text-lg text-muted-foreground- ", className)} {...props}>
+             {props.children}
         </div>
         </>
     )

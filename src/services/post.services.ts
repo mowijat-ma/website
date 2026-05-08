@@ -6,7 +6,7 @@ export const extractWpPosts = (res:any) => {
   const data = res.map((item: any) => {
     return {
       id: item.id,
-      title: item.title.rendered,
+      title: stripHtml(item.title.rendered.replace(/<[^>]*>?/gm, '')),
       // WP excerpts come wrapped in <p> tags; item.excerpt.rendered is the correct path
       description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
       date: new Date(item.date).toLocaleDateString('ar-EG', {
@@ -24,20 +24,20 @@ export const extractWpPosts = (res:any) => {
   return data
 }
 
-export const extractWpPost =  (post: any) => {
+export const extractWpPost =  (item: any) => {
     return {
-      id: post.id,
-      title: stripHtml(post.title.rendered),
+      id: item.id,
+      title: stripHtml(item.title.rendered),
       // WP excerpts come wrapped in <p> tags; post.excerpt.rendered is the correct path
-      description: stripHtml(post.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
-      date: new Date(post.date).toLocaleDateString('ar-EG', {
+      description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
+      date: new Date(item.date).toLocaleDateString('ar-EG', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
       }),
-      category: post.context || "Cinema",
-      image: post.jetpack_featured_media_url,
-      content: post.content.rendered
+      category: item.context || "سينما",
+      image: item.yoast_head_json?.og_image?.[0]?.url || item.jetpack_featured_media_url || '',
+      content: item.content.rendered
     };
 }
 
@@ -56,7 +56,16 @@ export const getWpPostsService = async () => {
   }
 }
 
-
+export const getWpPostByIdService = async (id: string) => {
+  try {
+    const { res } = await apiClient<WordPressPost>(`posts/${id}`, {})
+    return res
+  } catch (error) {
+     throw new Error(
+      error instanceof Error ? error.message : "Failed to fetch post"
+    )
+  }
+}
 
 const stripHtml = (html: string) => {
   if (typeof window !== "undefined") {

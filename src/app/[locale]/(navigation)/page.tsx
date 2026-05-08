@@ -5,6 +5,7 @@ import { HomeInterviewsSection } from "@/components/sections/HomeInterviewsSecti
 import HomeCinemaMorrocanSection from "@/components/sections/HomeCinemaMorrocanSection";
 import HomeCinemaArabeSection from "@/components/sections/HomeCinemaArabeSection";
 import HomeCinemaWorldSection from "@/components/sections/HomeCinemaWorldSection";
+import HomeCalendarSection from "@/components/sections/HomeCalendarSection";
 
 
 export default function Home() {
@@ -20,16 +21,18 @@ export default function Home() {
           <NewsSection />
         </div>
         {/* Sidebar */}
-        <aside className="col-span-4 hidden md:block sticky top-24 h-fit">
+        <aside className="col-span-4 hidden md:block sticky top-24 h-fit border">
           <HomeTopReadsAside />
+          
         </aside>
       </div>
       <HomeInterviewsSection />
-      <div className="bg-background p-8 rounded-lg flex flex-col gap-8">
+      <div className="bg-background p-8 rounded-lg flex flex-col gap-16">
           <HomeCinemaMorrocanSection />
           <HomeCinemaArabeSection />
           <HomeCinemaWorldSection />
       </div>
+      <HomeCalendarSection />
     </div>
     </>
   );

@@ -1,7 +1,23 @@
-export default function SectionTitle ({value}:  {value?:string}){
-    return (
-        <>
-        <h2 className="lg:text-3xl text-2xl font-bold text-primary border-r-4 border-primary pr-3">{value}</h2>
-        </>
-    )
+import { cn } from '@/lib/utils';
+import { FontComponentProps } from '@/types';
+import React from 'react';
+
+interface Font extends React.HTMLAttributes<HTMLParagraphElement> {
+  value?: string;
+  className?: string;
+}
+
+export default function SectionTitle({value, className, ...props }: FontComponentProps) {
+  return (
+    <h2
+      className={
+        cn(
+             "lg:text-2xl text-lg font-bold text-primary border-r-4 border-primary pr-3 py-2 mb-4",
+            className)
+      } 
+      {...props}
+    >
+      {value || props.children}
+    </h2>
+  );
 }

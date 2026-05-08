@@ -1,8 +1,10 @@
-export default function Heading1 ({value}:  {value?:string}){
+import { cn } from "@/lib/utils";
+
+export default function Heading1 ({className, ...props}: {className?: string} & React.HTMLAttributes<HTMLDivElement>){
     return (
         <>
-        <div className="lg:text-5xl text-3xl">
-            {value}
+    <div className={cn("lg:text-4xl text-3xl", className)}   {...props}>
+            {props.children}
         </div>
         </>
     )

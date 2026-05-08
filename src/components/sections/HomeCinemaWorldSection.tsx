@@ -23,9 +23,9 @@ export default async function HomeCinemaWorldSection() {
       <section aria-labelledby="blog-section-heading">
         <div className="bg-background z-50 flex justify-between items-center">
           <SectionTitle value={t('title')} />
-          <Link href={"/cinema"} className="text-sm font-medium hover:underline text-muted-foreground transition-colors hover:text-primary">
+          {/* <Link href={"/cinema"} className="text-sm font-medium hover:underline text-muted-foreground transition-colors hover:text-primary">
             المزيد
-          </Link>
+          </Link> */}
         </div>
 
         {/* Bento Grid */}
