@@ -13,6 +13,7 @@ import { getWpPostById } from "@/api/posts";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import Article from "@/components/font/body";
+import HomeTopReadsAside from "@/components/asides/HomeTopReadsAside";
 
 // Ensure you are destructuring params from the component props
 export default async function PostContentPage({
@@ -101,7 +102,10 @@ export default async function PostContentPage({
                     </Article>
                 </div>
             </div>
-            <div className="col-span-3"></div>
+            <div className="col-span-4">
+                <HomeTopReadsAside />
+
+            </div>
         </div>
     </>)
 
