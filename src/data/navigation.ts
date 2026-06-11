@@ -12,9 +12,9 @@ export const NAVIGATION_LINKS  = [
       href: "/news"
     },
     {
-      id: 3,
-      title: "cinema_world",
-      href: "/cinema/world"
+      id: 5,
+      title: "cinema_morrocan",
+      href: "/cinema/morrocan"
     },
     {
       id: 4,
@@ -22,39 +22,40 @@ export const NAVIGATION_LINKS  = [
       href: "/cinema/arabe"
     },
     {
-      id: 5,
-      title: "cinema_morrocan",
-      href: "/cinema/morrocan"
+      id: 3,
+      title: "cinema_world",
+      href: "/cinema/world"
     },
+    
     {
       id: 6,
       title: "interviews",
       href: "/interviews"
     },
-    {
-      id: 7,
-      title: "critic",
-      href: "/critic"
-    },
-    {
-      id: 7,
-      title: "calendar",
-      href: "/calendar"
-    },
+    // {
+    //   id: 9,
+    //   title: "portrait",
+    //   href: "/portraits"
+    // },
+    // {
+    //   id: 7,
+    //   title: "critic",
+    //   href: "/critic"
+    // },
+    // {
+    //   id: 7,
+    //   title: "calendar",
+    //   href: "/calendar"
+    // },
     {
       id: 8,
       title: "other",
-      // href: "/calendar"
-      items: [
-        {
-          title: "theater",
-          href: "/theater"}
-      ]
-    },
-    {
-      id: 9,
-      title: "portrait",
-      href: "/portraits"
+      href: "/cultures-arts",
+      // items: [
+      //   {
+      //     title: "theater",
+      //     href: "/theater"}
+      // ]
     },
   ]
 

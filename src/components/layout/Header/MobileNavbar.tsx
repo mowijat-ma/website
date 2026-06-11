@@ -8,11 +8,11 @@ import { BiHomeAlt, BiCalendar, BiMessageDetail } from "react-icons/bi";
 import { PiNewspaperBold } from "react-icons/pi";
 import { FaRegRectangleList } from "react-icons/fa6";
 import { cn } from "@/lib/utils"; // Standard shadcn utility
-import { HouseIcon , NewspaperIcon , ArticleIcon , CalendarDotsIcon } from "@phosphor-icons/react";
+import { HouseIcon , NewspaperIcon , ArticleIcon , CalendarDotsIcon, MagnifyingGlassIcon, LightningIcon } from "@phosphor-icons/react";
 import { TfiMicrophone } from "react-icons/tfi";
 
 export default function MobileNavigation() {
-  const t = useTranslations('layout.navLinks');
+  const t = useTranslations('navigation.links');
   const pathname = usePathname();
 
   const MobileLinks = [
@@ -22,35 +22,36 @@ export default function MobileNavigation() {
       href: "/",
       icon: <HouseIcon size={25} />,
     },
+    
     {
       id: 2,
-      title: t("cinema"),
-      href: "/cinema",
-      icon: <ArticleIcon   size={25}/>,
+      title: t("news"),
+      href: "/news",
+      icon: <LightningIcon   size={25}/>,
     },
     {
       id: 3,
-      title: t("interviews_mobile"),
-      href: "/interviews",
-      icon: <TfiMicrophone   size={25} className=""/>,
+      title: t("articles"),
+      href: "/articles",
+      icon: <ArticleIcon   size={25} className=""/>,
     },
     {
       id: 4,
-      title: t("critic"),
-      href: "/critic",
-      icon: <BiMessageDetail   size={25}/>,
+      title: t("search"),
+      href: "/search",
+      icon: <MagnifyingGlassIcon   size={25}/>,
     },
-    {
-      id: 5,
-      title: t("calendar"),
-      href: "/calendar",
-      icon: <CalendarDotsIcon   size={25}/>,
-    },
+    // {
+    //   id: 5,
+    //   title: t("calendar"),
+    //   href: "/calendar",
+    //   icon: <CalendarDotsIcon   size={25}/>,
+    // },
   ];
   
   return (
-    <div className="sm:hidden bg-white backdrop-blur-md- border-t-2- fixed bottom-0 right-0 left-0 z-50 pb-safe lg:w-7xl mx-auto">
-      <nav className="px-4 py-3-">
+    <div className="sm:hidden bg-white backdrop-blur-md- border-t-2- fixed bottom-0 right-0 left-0 z-50 pb-safe lg:w-7xl mx-auto border-t ">
+      <nav className="px-4- py-">
         <IconContext.Provider value={{ size: '24' }}>
           <div className="flex justify-around items-center gap-4">
             {MobileLinks.map((link) => {
@@ -60,19 +61,19 @@ export default function MobileNavigation() {
                   key={link.id}
                   href={link.href}
                   className={cn(
-                    "flex flex-col flex-1 items-center justify-center gap-1 transition-all duration-200 py-2",
+                    "flex flex-col flex-1 items-center justify-center gap-1 transition-all duration-200 py-3",
                     isActive 
                       ? "text-primary scale-110- " 
                       : "text-muted-foreground- hover:text-primary"
                   )}
                 >
                   <div className={cn(
-                    "p-1 rounded-xl transition-colors",
+                    "px-1 rounded-xl transition-colors",
                     isActive ? "bg-primary/10" : "bg-transparent"
                   )}>
                     {link.icon}
                   </div>
-                  <span className="text-xs font-">
+                  <span className="text-sm leading-normal font-">
                     {link.title}
                   </span>
                 </Link>

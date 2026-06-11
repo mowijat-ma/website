@@ -16,8 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   const locale = useLocale();
   const direction = locale === "ar" ? 'rtl' : 'ltr'
@@ -30,9 +32,10 @@ export default function RootLayout({
         <DirectionProvider dir={direction}>
           {/* {children} */}
           {/* Your app content */}
-          <body  dir={direction} className={amiri.className}>
+          <body  dir={direction} className={cn(amiri.className, 'bg-muted')}>
           {/* <LanguageSwitcher /> */}
             {children}
+            {modal}
           </body>
         </DirectionProvider>
       </NextIntlClientProvider>

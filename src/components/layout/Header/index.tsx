@@ -6,6 +6,7 @@ import LogoBar from "./LogoBar"
 // import MobileNavbar from "./MobileNavbar"
 import { Separator } from "@/components/ui/separator"
 import MobileNavigation from "./MobileNavbar"
+import MobileHeader from "./MobileHeader"
 
 interface HeaderProps {
   links?: Array<{
@@ -19,11 +20,12 @@ const Header = () => {
   const t = useTranslations('layout.navLinks')
   
 
-  return <header className="lg:max-w-7xl w-full mx-auto bg-background px- px-4 border">
+  return <header className="lg:max-w-6xl w-full mx-auto bg-background px-4 border-mesure">
   {/* <Navbar1 menu={links} /> */}
   {/* <LogoBar /> */}
     {/* <Separator className="my-2" /> */}
     <DesktopNavbar links={NAVIGATION_LINKS || []} />
+    <MobileHeader links={NAVIGATION_LINKS || []} />
     <MobileNavigation />
   </header>
 }

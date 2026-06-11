@@ -12,7 +12,7 @@ export default function SectionTitle({value, className, ...props }: FontComponen
     <h2
       className={
         cn(
-             "lg:text-2xl text-lg font-bold text-primary border-r-4 border-primary pr-3 py-2 mb-4",
+             "lg:text-xl text-lg font-bold text-primary border-r-4 border-primary pr-3 mb-4",
             className)
       } 
       {...props}

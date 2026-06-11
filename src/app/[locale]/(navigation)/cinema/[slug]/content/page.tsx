@@ -14,6 +14,12 @@ import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import Article from "@/components/font/body";
 import HomeTopReadsAside from "@/components/asides/HomeTopReadsAside";
+import RelatedArticlesAside from "@/components/asides/RelatedArticlesAside";
+import SameAuthorSection from "@/components/sections/SameAuthorSection";
+import Heading3 from "@/components/font/h3";
+import Heading2 from "@/components/font/h2";
+import Heading4 from "@/components/font/h4";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 // Ensure you are destructuring params from the component props
 export default async function PostContentPage({
@@ -24,10 +30,10 @@ export default async function PostContentPage({
     // 1. Await params in Next.js 15+ 
     const { slug } = await params;
 
-    const [t, data] = await Promise.all([
-        getTranslations(),
+    const [t, tNavigation, data] = await Promise.all([
+        getTranslations("pages.cinema.post"),
+        getTranslations("navigation.links"),
         getWpPostById(slug)
-        // getWpPosts({ slug }) // Fetch the post data based on the slug
     ]);
     const post = {
         id: "",
@@ -44,8 +50,25 @@ export default async function PostContentPage({
     };
 
     return (<>
-        <div className="grid grid-cols-12 gap-4">
-            {/* <div className="col-span-1 border">
+       <Breadcrumb dir="rtl" className="mb-8 px-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{tNavigation("cinema.morrocan")}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+                <div className="col-span-12 sm:col-span-8  px-4 text-center sm:text-right">
+                    <Heading2 className="text-primary">{t("title")}</Heading2>
+                    <Heading4 className="text-primary">
+                        {t("subtitle")}
+                    </Heading4>
+                </div>      
+        <div className="grid grid-cols-12 gap-8 bg-background  px-8 py-8" >
+            {/* <div className="col-span-1 ">
                 <div className="rounded flex flex-col w-full bg-background sticky top-24 h-fit">
                     <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibold hover:bg-slate-100  py-4 ">
@@ -74,14 +97,18 @@ export default async function PostContentPage({
                     </button>
                 </div>
             </div> */}
-            <div className="col-span-8">
-                <div className="p-4 md:p-8 bg-background rounded">
+            <div className="col-span-8 ">
+                <div className="rounded ">
 
-                    <div className="">
+                    <div className=" ">
                         {/* {slug} */}
-                        <img src={data.image} alt="" className={cn("aspect-video object-cover rounded-lg sm:rounded-2xl border w-full")} />
+                        <img src={data.image} alt="" className={cn("aspect-video object-cover rounded-lg sm:rounded-2xl  w-full")} />
                     </div>
                     <div className="flex flex-col gap-2 sm:gap-4 my-4 sm:my-8">
+                        <Heading2
+                           
+                            className="font-semibold"
+                        >{data.title}</Heading2>
                         <div className="flex items-center gap-2 text-left">
                             <span className="text-muted-foreground text-sm">
                                 {data.date}
@@ -91,10 +118,6 @@ export default async function PostContentPage({
                                 {data.category}
                             </span>
                         </div>
-                        <h3
-                            dangerouslySetInnerHTML={{ __html: data.title }}
-                            className="text-xl sm:text-3xl leading-normal font-semibold text-primary"
-                        />
                     </div>
                     {/* <Separator className="my-4 sm:my-8 max-w-[95%] mx-auto" /> */}
                     <Article>
@@ -102,9 +125,14 @@ export default async function PostContentPage({
                     </Article>
                 </div>
             </div>
-            <div className="col-span-4">
-                <HomeTopReadsAside />
-
+            <div className="col-span-4 ">
+                {/* <HomeTopReadsAside /> */}
+                {/* <div className="sticky top-24 h-fit ">
+                <RelatedArticlesAside />
+                </div> */}
+            </div>
+            <div className="col-span-12 bg-background rounded">
+                <SameAuthorSection />
             </div>
         </div>
     </>)
@@ -127,7 +155,7 @@ export default async function PostContentPage({
     //             </div>
     // <div className="">
     //     {slug}
-    //     <img src={post.image} alt="" className="aspect-video object-cover rounded-lg sm:rounded-2xl border w-full" />
+    //     <img src={post.image} alt="" className="aspect-video object-cover rounded-lg sm:rounded-2xl  w-full" />
     // </div>
     // <div className="flex flex-col gap-2 sm:gap-4 my-4 sm:my-8">
     //     <div className="flex items-center gap-2 text-left">

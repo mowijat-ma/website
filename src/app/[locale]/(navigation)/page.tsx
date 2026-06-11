@@ -16,12 +16,12 @@ export default function Home() {
     <div className="flex flex-col gap-8">
     
     <div className="grid grid-cols-12 gap-8 items-start">
-        <div className="md:col-span-8 col-span-12 flex flex-col gap-8 border">
+        <div className="md:col-span-8 col-span-12 flex flex-col gap-8 border-mesure">
           <HomeTopTrendingPosts />
           <NewsSection />
         </div>
         {/* Sidebar */}
-        <aside className="col-span-4 hidden md:block sticky top-24 h-fit border">
+        <aside className="col-span-4 hidden md:block sticky top-24 h-fit border-mesure">
           <HomeTopReadsAside />
           
         </aside>

@@ -17,7 +17,7 @@ export default async function HomeCinemaArabeSection() {
     <>
 
 
-      <div className="mx-auto sm:py-10- py-8- border" dir="rtl">
+      <div className="mx-auto sm:py-10- py-8- border-mesure" dir="rtl">
         <section>
           <section
             className=""

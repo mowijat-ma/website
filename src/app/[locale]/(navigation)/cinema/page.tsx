@@ -1,12 +1,13 @@
-import { getWpPosts } from "@/app/api/posts"
+// import { getWpPosts } from "@/app/api/posts"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BlogPost } from "@/types";
 import { useTranslations } from "next-intl"
 import CinemaWorldPage from "./world/page";
+import { getHomeTopTrendingPosts } from "@/api/posts";
 
 export default async function CinemaPage() {
     // const t = useTranslations()
-    const res = await getWpPosts()    
+    const res = await getHomeTopTrendingPosts()    
     const posts = res.map((item: any) => {
     return {
       id: item.id,

@@ -18,7 +18,7 @@ export default async function HomeCinemaMorrocanSection() {
     getCinemaMorrocanWpPosts()
   ])
   return (
-    <section className="mx-auto sm:py-10- py-8- border" dir="rtl">
+    <section className="mx-auto sm:py-10- py-8- border-mesure" dir="rtl">
       <div className="bg-background flex justify-between items-center">
         <SectionTitle value={t('title')} />
         {/* <Link href={""}>المزيد</Link> */}

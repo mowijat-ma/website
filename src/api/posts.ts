@@ -35,7 +35,8 @@ export const searchWpPosts = async (query: string, page = 1) => {
     const { res } = await apiClient<Post[]>(`search?${params}`, {
       method: 'GET',
     })
-    return res
+    // const data = extractWpPosts(await res)
+    return res;
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to fetch posts"

@@ -8,7 +8,7 @@ import { FaSquareInstagram, FaThreads } from "react-icons/fa6"
  const LogoBar = ()=>{
     const links = socialLinks
     return (
-        <div className="lg:max-w-7xl w-full mx-auto flex items-center justify-between px-12 py-3 bg-background">
+        <div className="lg:max-w-6xl w-full mx-auto flex items-center justify-between px-4 py-3 bg-background">
           <Link href="/" className="flex items-center gap-2">
             <img 
               src="/logos/logo_light_1.png" 

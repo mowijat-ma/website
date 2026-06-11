@@ -23,16 +23,16 @@ export default async function NewsSection() {
             <div className="flex flex-col gap-8">
                 {news.map((post: Post) => (
                     <Link key={post.id} href={`/news/${post.id}`}>
-                        <article className="group relative grid grid-cols-3 gap-8 items-start border">
+                        <article className="group relative grid grid-cols-3 gap-8 items-start border-mesure">
 
-                            <div className="w-full shrink-0 bg-muted h-full rounded-lg overflow-hidden border">
+                            <div className="w-full shrink-0 bg-muted h-full rounded-lg overflow-hidden border-mesure">
                                 <img
                                     src={post.image || "https://ui.shadcn.com/placeholder.svg"}
                                     className=" object-cover h-full border border-slate-100 group-hover:scale-105  transition-transform duration-200 aspect-video"
                                 />
                             </div>
 
-                            <div className="col-span-2 flex flex-col h-full pt-2 border">
+                            <div className="col-span-2 flex flex-col h-full pt-2 border-mesure">
                                 <div className="flex items-center gap-4 mb-4 text-sm">
                                     <time className="text-slate-500">{post.date}</time>
                                     <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium text-xs">

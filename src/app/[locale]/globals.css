@@ -190,3 +190,20 @@ h1 { @apply text-3xl lg:text-5xl font-bold leading-tight mb-6 ; }
     display: none;
   }
 }
+
+:root{
+  --mesure-color: green;
+}
+.border-mesure {
+  /* border-width: 1px; */
+  /* border-color: var(--mesure-color); */
+  /* border-color: var(--primary); */
+  border-color: var(--border);
+}
+
+
+.button-mesure {
+  display: none;
+  background-color: var(--mesure-color);
+  color: #ffffff;
+}

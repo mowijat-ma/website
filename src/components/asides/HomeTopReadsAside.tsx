@@ -15,7 +15,7 @@ export default async function HomeTopReadsAside({}: any) {
       getWpMoreReads()
     ])
     return (
-        <aside className="border"> {/* هنا السحر: sticky + top-24 */}
+        <aside className="border-mesure"> {/* هنا السحر: sticky + top-24 */}
             <div className="bg-background border-primary border-none rounded p-8">
               <div className="mb-6">
                 <SectionTitle >{t("title")}</SectionTitle>
