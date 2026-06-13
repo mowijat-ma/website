@@ -10,6 +10,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import ArticleContentCtrl from '@/components/asides/ArticleContentCtrl';
 import BreadcrumbGenerator from '@/components/ux/breadcrumb-generator';
 import { title } from 'process';
+import { BreadCrumbLinksType } from '@/types';
 
 // Ensure you are destructuring params from the component props
 export default async function PostContentPage({
@@ -39,7 +40,7 @@ export default async function PostContentPage({
         content: data.content
     };
 
-    const breadcrumbLinks = [
+    const breadcrumbLinks : BreadCrumbLinksType[] = [
         {
             title: tNavigation("home"),
             href: "/"

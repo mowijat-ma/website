@@ -6,7 +6,7 @@ import ArticlesPage from "../../(navigation)/articles/page"; // استيراد �
 export default function ArticlesModal(props: any) {
   return (
     <ModalWrapper>
-      <div className="max-h-[90vh] overflow-y-auto custom-h-scroll p-4">
+      <div className="">
         {/* يمكنك عرض مكونات صفحة المقالات هنا مباشرة */}
         <ArticlesPage {...props} />
       </div>

@@ -31,7 +31,7 @@ export default async function HomeCinemaMorrocanSection() {
           role="list"
         >
           {data.map((post: Post, i: number) => (
-            <Link href="#" key={i} className="group block">
+            <Link href={`/articles/${post.id}/content`}  key={i} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                 {/* Image Wrapper */}

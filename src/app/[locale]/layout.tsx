@@ -6,6 +6,7 @@ import { NextIntlClientProvider, useLocale } from "next-intl";
 import { DirectionProvider } from "@/components/ui/direction";
 import { amiri, ibmArabic, lora } from "./fonts";
 import LanguageSwitcher from "@/components/ux/i18n-switcher";
+import Link from "next/link";
 
 
 
@@ -17,9 +18,11 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   modal,
+  auth
 }: Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;
+  auth : React.ReactNode;
 }>) {
   const locale = useLocale();
   const direction = locale === "ar" ? 'rtl' : 'ltr'
@@ -34,8 +37,14 @@ export default function RootLayout({
           {/* Your app content */}
           <body  dir={direction} className={cn(amiri.className, 'bg-muted')}>
           {/* <LanguageSwitcher /> */}
+            {/* <nav>
+              <Link href="/login">Open modal</Link>
+            </nav> */}
+            {auth}
             {children}
             {modal}
+            
+            {/* <div>{children}</div> */}
           </body>
         </DirectionProvider>
       </NextIntlClientProvider>

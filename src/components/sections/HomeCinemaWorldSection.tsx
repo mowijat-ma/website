@@ -43,7 +43,7 @@ export default async function HomeCinemaWorldSection() {
                   // isWide && "md:col-span-2 md:row-span-1"
                 )}
               >
-                <Link href={`/cinema/${post.id}`} className="flex flex-col h-full gap-4">
+                <Link href={`/articles/${post.id}/content`}  className="flex flex-col h-full gap-4">
 
                   {/* Image Container */}
                   <div className={cn(

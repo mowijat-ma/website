@@ -59,3 +59,20 @@ export interface FontComponentProps extends React.HTMLAttributes<HTMLParagraphEl
   value?: string;
   className?: string;
 }
+
+
+export interface BreadCrumbLinksType {
+        title: string,
+        href: string
+    }
+
+
+
+
+export interface WpCategory {
+  id: Number;
+  name: String;
+  slug: String;
+  count: number;
+  description: String;
+}

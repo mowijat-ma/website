@@ -28,7 +28,7 @@ export default async function HomeTopTrendingPosts() {
           <SectionTitle value={t("title")} />
           {/* الجهة اليسرى: المقال الرئيسي ومقالات الـ topPosts */}
           <div className="">
-            <Link href={`/cinema/${mainArticle.id}/content`} key={mainArticle.id} className="group block">
+            <Link href={`/articles/${mainArticle.id}/content`} key={mainArticle.id} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
                 {/* Image Wrapper */}
@@ -70,7 +70,7 @@ export default async function HomeTopTrendingPosts() {
             <div className="mt-6 flex flex-col gap-8 md:grid md:grid-cols-3 gap-y-12 sm:gap-8">
               {wideAricles?.map((post: Post, index: number) => (
                 <div key={index} className="h-fit">
-                  <Link href="#" className="group block">
+                  <Link href={`/articles/${post.id}/content`} className="group block">
                     <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                       <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-lg bg-muted">
                         <img
@@ -107,7 +107,7 @@ export const BlogPostContainer = ({ post }: {
   post: Post
 }) => {
   return (
-    <Link href={`/cinema/${post.id}/content`} key={post.id} className="group block">
+    <Link href={`/articles/${post.id}/content`} key={post.id} className="group block">
       {/* Blog Card */}
       <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
         {/* Image Wrapper */}

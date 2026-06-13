@@ -21,23 +21,23 @@ export default async function HomeTopReadsAside({}: any) {
                 <SectionTitle >{t("title")}</SectionTitle>
               </div>
               <div className="flex flex-col gap-2">
-                {data?.slice(0, 5)?.map((item: any, i:number) => (
+                {data?.slice(0, 5)?.map((post: any, i:number) => (
                   
-                  <Link href={""} className="group py-2 grid grid-cols-3 gap-8" key={i}>
-                    <img src={item.image} className="object-cover rounded aspect-square w-full col-span-1" />
+                  <Link href={`/articles/${post.id}/content`}  className="group py-2 grid grid-cols-3 gap-8" key={i}>
+                    <img src={post.image} className="object-cover rounded aspect-square w-full col-span-1" />
                     {/* <AspectRatio className="max-w-20">
                     </AspectRatio> */}
                     <div className="col-span-2">
 
                     <h3 
-                      dangerouslySetInnerHTML={{ __html: item.title }} 
+                      dangerouslySetInnerHTML={{ __html: post.title }} 
                       className="text-base leading-snug font-semibold group-hover:text-primary transition-colors line-clamp-2" 
                       />
                     <span className="text-muted-foreground text-md mt-1 block">
-                      {item.date}
+                      {post.date}
                     </span>
                     <span className="text-primary text-md mt-1 block">
-                      {item.category}
+                      {post.category}
                     </span>
                       </div>
                   </Link>

@@ -12,7 +12,7 @@ export async function apiClient<T = unknown>(
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
   try {
-    const url = `${BASE_URL3}/${endpoint}`
+    const url = `${BASE_URL}/${endpoint}`
     const response = await fetch(url, {
       ...options,
       headers: {
