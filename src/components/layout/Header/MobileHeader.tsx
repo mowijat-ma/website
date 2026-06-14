@@ -10,9 +10,10 @@ import {
 import { SearchInput } from "@/components/ux/search-input";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {ListIcon} from "@phosphor-icons/react"
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 export default function MobileHeader({  links}: { links: any[] }) {
   const [open, setOpen] = useState(false)
   const [openSearch, setOpenSearch] = useState(true)
@@ -21,6 +22,23 @@ export default function MobileHeader({  links}: { links: any[] }) {
   const pathname = usePathname()
   const isSearchPath = pathname === "/search";
   
+  const [isVisible, setIsVisible] = useState(true);
+  
+      // مراقبة التمرير لإظهار أو إخفاء الزر
+      useEffect(() => {
+          const toggleVisibility = () => {
+            console.log(window.scrollY)
+              // يظهر الزر بعد التمرير لأسفل بمقدار 300 بكسل
+              if (window.scrollY > 70) {
+                  setIsVisible(false);
+              } else {
+                  setIsVisible(true);
+              }
+          };
+  
+          window.addEventListener("scroll", toggleVisibility);
+          return () => window.removeEventListener("scroll", toggleVisibility);
+      }, []);
   // check if this page
   return (
     <div className="md:hidden flex gap-4 bg-background- py-4 items-center justify-between">
@@ -40,6 +58,11 @@ export default function MobileHeader({  links}: { links: any[] }) {
       </Sheet>
       
       {!isSearchPath && <SearchInput />}
+      {/* <div className={`${isVisible ? "hidden": ""}`}>
+        <Image src='/logos/Vector.png' alt="logo" width={100} height={48}>
+
+        </Image>
+      </div> */}
     </div>
   );
 }

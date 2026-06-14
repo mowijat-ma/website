@@ -49,9 +49,9 @@ export default function RootLayout({
           </main> */}
       {/* <div className="flex flex-col h-full border py-2"> */}
       <div className="bg-white w-full ">
-        <LogoBar />
       </div>
       <div className="sticky top-0 bg-background z-10 shadow-sm">
+        <LogoBar />
         <Header />
         {/* <SearchInput /> */}
       </div>

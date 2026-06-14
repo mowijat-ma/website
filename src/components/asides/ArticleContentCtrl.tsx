@@ -13,28 +13,28 @@ export default function ArticleContentCtrl(){
                     <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibol  py-4 ">
                         <GoArrowRight size={22} />
-                        رجوع
+                        <span className="hidden sm:block">رجوع</span>
                     </button>
                     <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibol  py-4">
                         <FiHeart size={22} />
-                        حفظ
+                        <span className="hidden sm:block">حفظ</span>
                     </button>
                     <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibol  py-4">
                         <PiPrinter size={22} />
-                        طباعة
+                        <span className="hidden sm:block">طباعة</span>
                     </button>
                     <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibol  py-4">
                         <BiShare size={22} />
-                        ارسال
+                        <span className="hidden sm:block">ارسال</span>
                     </button>
-                    <button
+                    {/* <button
                         className="grow text-center flex flex-col justify-center items-center gap-2 font-semibol  py-4">
                         <PiLinkSimpleHorizontal size={22} />
                         ارسال
-                    </button>
+                    </button> */}
                 </div>
     </>)
 }

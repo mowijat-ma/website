@@ -44,22 +44,30 @@ export default async function PostContentPage({
         {
             title: tNavigation("home"),
             href: "/"
-        }, {
+        }, 
+        {
             title: tNavigation("articles"),
             href: "/articles"
-        }
+        },
+        {
+            title: data.category,
+            href: "/articles"
+        }, 
     ]
     return (<>
         <BreadcrumbGenerator currentPage={data.title} links={breadcrumbLinks} />
         
-        <div className="grid grid-cols-12 gap-8 " >
+        <div className="grid grid-cols-12 gap-8 direction-reverse" >
 
-            <div className="col-span-8 ">
-                <div className="rounded-lg bg-background px-8 py-8">
+            <div className="sm:col-span-8 col-span-12">
+                {/* <div className="sm:hidden">
+                    <ArticleContentCtrl />
+                </div> */}
+                <div className="rounded-lg bg-background px-8 py-4 sm:px-8 sm:py-8">
 
                     <div className=" ">
                         {/* {slug} */}
-                        <img src={data.image} alt="" className={cn("aspect-video object-cover rounded w-full")} />
+                        <img src={data.image} alt="" className={cn("aspect-square object-cover rounded w-full")} />
                     </div>
                     <div className="flex flex-col gap-2 sm:gap-4 my-4 sm:my-8">
                         <Heading2
@@ -77,15 +85,15 @@ export default async function PostContentPage({
                         </div>
                     </div>
                     {/* <Separator className="my-4 sm:my-8 max-w-[95%] mx-auto" /> */}
-                    <Article>
+                    <Article className='text-justify'>
                         <div dangerouslySetInnerHTML={{ __html: post.content }} />
                     </Article>
                 </div>
             </div>
-            <div className="col-span-4">
+            <div className="col-span-12 sm:col-span-4 border hidden sm:block">
                 <div className="sticky top-24 h-fit flex flex-col gap-8">
                     <ArticleContentCtrl />
-                    <div className="bg-background rounded-lg px-8 py-8 min-h-[50vh]">
+                    <div className="bg-background rounded-lg px-8 py-8 min-h-[50vh] hidden sm:block">
 
                     </div>
                 </div>

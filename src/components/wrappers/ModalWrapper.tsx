@@ -32,12 +32,16 @@ export default function ModalWrapper({ children }: Readonly<{ children: React.Re
         // </div>
         <Drawer open={open} onOpenChange={handleChange}>
             {/* <DrawerTrigger>Open</DrawerTrigger> */}
-            <DrawerContent>
+            <DrawerContent className="">
                 <DrawerHeader>
                     <DrawerTitle></DrawerTitle>
                     <DrawerDescription></DrawerDescription>
                 </DrawerHeader>
+                <div className="h-full overflow-y-scroll">
                 {children}
+                </div>
+                    
+
                 <DrawerFooter>
                     {/* <DrawerClose>
                         <Button variant="outline">Back</Button>

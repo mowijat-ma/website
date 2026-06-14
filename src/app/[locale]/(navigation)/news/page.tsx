@@ -156,30 +156,33 @@ export default async function NewsPage() {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <div className="grid grid-cols-12 gap-8 items-start">
-                
-                <div className="md:col-span-8 col-span-12 flex flex-col gap-8 border-mesure">
-                    <div className="bg-background px-3 sm:px-8 py-3 sm:py-8 grid- grid-cols-2- gap-8">
-
+            <div className="grid grid-cols-12 gap-8 items-start px-4">
+                <div className="col-span-12">
                         <Heading2 className="mb-4 text-primary">{t('title')}</Heading2>
                         <Description>{t('subtitle')}</Description>
-                        
+                </div>
+                <div className="col-span-12">
+                    <Link href="#" className="group w-full border p-1">
+                        <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
+                            <AspectRatio ratio={4 / 2} className="overflow-hidden rounded-lg bg-muted border">
+                                <img
+                                    src={mainArticle.image || "https://ui.shadcn.com/placeholder.svg"}
+                                    className="h-full w-full object-cover "
+                                    alt=""
+                                />
+                            </AspectRatio>
+                            <div className="flex flex-col gap-3">
+                                <Heading3 className="line-clamp-2">{mainArticle.title}</Heading3>
+                                <Description className="line-clamp-3">{mainArticle.description}</Description>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+                <div className="md:col-span-8- col-span-12 flex flex-col gap-8 border-mesure ">
+                    <div className="bg-background w-full border">
+
                         <div className="col-span-9 bg-background aspect-video- overflow-hidden rounded-lg relative h-full mt-8">
-                            <Link href="#" className="group block">
-                                <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
-                                    <AspectRatio ratio={4 / 2} className="overflow-hidden rounded-lg bg-muted border">
-                                        <img
-                                            src={mainArticle.image || "https://ui.shadcn.com/placeholder.svg"}
-                                            className="h-full w-full object-cover "
-                                            alt=""
-                                        />
-                                    </AspectRatio>
-                                    <div className="flex flex-col gap-3">
-                                        <Heading3 className="line-clamp-2">{mainArticle.title}</Heading3>
-                                        <Description className="line-clamp-3">{mainArticle.description}</Description>
-                                    </div>
-                                </div>
-                            </Link>
+                            
                         </div>
 
                     </div>
