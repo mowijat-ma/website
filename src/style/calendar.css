@@ -1,0 +1,18 @@
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner{
+}
+
+*{
+    /* border: red 2px !important ; */
+}
+
+.fc-col-header > .fc-col-header-cell-cushion{
+    font-weight: 100 !important;
+}
+
+.fc-media-screen > * {
+    border: none !important;
+}
+
+.fc-daygrid-day {
+    
+}

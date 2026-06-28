@@ -83,3 +83,16 @@ const stripHtml = (html: string) => {
     .replace(/&#8221;/g, '”')
     .replace(/&amp;/g, '&');
 };
+
+
+
+export const getSearchResultsContents = async (results: any) => {
+  let list = []
+  for (let i = 0; i < results.length; i++) {
+    const element = results[i];
+    const post = await getWpPostByIdService(element.id)
+    const item = extractWpPost(post)
+    list.push(item)
+  }
+  return list
+}

@@ -16,7 +16,7 @@ import InterviewPostContainer from "./interviewsContainerItem"
 import { InterviewPost } from "@/types"
 
 
-const InterviewsHomeCarousel = ({ interviews }: { interviews: InterviewPost[] }) => {
+const OthersInterviewsCarousel = ({ interviews }: { interviews: InterviewPost[] }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
     const [count, setCount] = React.useState(0)
@@ -75,4 +75,4 @@ const InterviewsHomeCarousel = ({ interviews }: { interviews: InterviewPost[] })
 }
 
 
-export default InterviewsHomeCarousel
+export default OthersInterviewsCarousel

@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/breadcrumb"
 import { getTranslations } from "next-intl/server"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Post, WpPost } from "@/types"
+import { BreadCrumbLinksType, Post, WpPost } from "@/types"
 import Link from "next/link"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Heading4 from "@/components/font/h4"
 import { Description } from "@/components/font/description"
 import Heading2 from "@/components/font/h2"
+import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator"
 export default async function CulturesArtsPage() {
     const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.arts_cultures"),
@@ -25,18 +26,20 @@ export default async function CulturesArtsPage() {
     const mainArticle = data[0]
     const sideArticle = data[1]
     const wideAricles = data.slice(0, data.length)
-    return (<>   
-    <Breadcrumb dir="rtl" className="mb-8 px-4">
-        <BreadcrumbList>
-            <BreadcrumbItem>
-                <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-                <BreadcrumbPage>{tNavigation("news")}</BreadcrumbPage>
-            </BreadcrumbItem>
-        </BreadcrumbList>
-    </Breadcrumb>
+    const breadcrumbLinks: BreadCrumbLinksType[] = [
+        {
+            title: tNavigation("home"),
+            href: "/"
+        },
+        // {
+        //     title: tNavigation("interviews"),
+        //     href: "/interviews"
+        // },
+
+    ]
+    return (<>
+        <BreadcrumbGenerator currentPage={tNavigation("arts")} links={breadcrumbLinks} />
+
         {/* <div className="col-span-12 sm:col-span-8  px-4 text-center sm:text-right">
                     <Heading2 className="text-primary">{t("title")}</Heading2>
                     <Heading4 className="text-primary">
@@ -49,12 +52,12 @@ export default async function CulturesArtsPage() {
             <Description>{t('subtitle')}</Description>
 
             <div
-                className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-3 md:gap-8 lg:grid-cols-3 mt-10"
+                className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-3 md:gap-8 lg:grid-cols-4 mt-10"
                 role="list"
             >
 
                 {wideAricles.map((post: Post, i: number) => (
-                    <Link href="#" key={i} className="group block">
+                    <Link href={`/articles/${post.id}/content`} key={i} className="group block">
                         {/* Blog Card */}
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                             {/* Image Wrapper */}

@@ -1,7 +1,7 @@
 
 // import SectionTitle from "../typoghraphy/title-with-bar"
 import { getHomeInterviews } from "@/api/interviews"
-import InterviewsCarousel from "../interviews/InterviewsCarousel"
+import InterviewsHomeCarousel from "../interviews/InterviewsCarousel";
 
 
 export async function HomeInterviewsSection({ }) {
@@ -12,7 +12,7 @@ export async function HomeInterviewsSection({ }) {
     // return 
     return (<>    
     <div className="bg-background p-8 rounded-lg">
-        <InterviewsCarousel interviews={interviews} />
+        <InterviewsHomeCarousel interviews={interviews} />
     </div>
     </>)
 

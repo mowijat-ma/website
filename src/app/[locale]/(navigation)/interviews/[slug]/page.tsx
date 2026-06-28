@@ -19,8 +19,15 @@ import Heading3 from "@/components/font/h3";
 import Heading2 from "@/components/font/h2";
 import Heading4 from "@/components/font/h4";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { getInterviewBySlug } from "@/api/interviews";
+import { getHomeInterviews, getInterviewBySlug } from "@/api/interviews";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Image from "next/image";
+import { Description } from "@/components/font/description";
+import { Separator } from "@/components/ui/separator";
+import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
+import { BreadCrumbLinksType } from "@/types";
+import InterviewsCarousel from "@/components/interviews/InterviewsCarousel";
+import OthersInterviewsCarousel from "@/components/interviews/OthersInterviewsCarousel";
 
 // Ensure you are destructuring params from the component props
 export default async function PostContentPage({
@@ -36,60 +43,105 @@ export default async function PostContentPage({
         getTranslations("navigation.links"),
         getInterviewBySlug(slug)
     ]);
-    
 
+    const breadcrumbLinks: BreadCrumbLinksType[] = [
+        {
+            title: tNavigation("home"),
+            href: "/"
+        },
+        {
+            title: tNavigation("interviews"),
+            href: "/interviews"
+        },
+
+    ]
+    const date = new Date()
+    const isPair = date.getSeconds() % 2 === 0
+    const [interviews] = await Promise.all([
+        getHomeInterviews()
+    ]);
+
+    // return 
     return (<>
-       <Breadcrumb dir="rtl" className="mb-8 px-4">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>{tNavigation("cinema.morrocan")}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+        <BreadcrumbGenerator currentPage={data.title} links={breadcrumbLinks} />
+
         <div className="grid grid-cols-12 gap-8  " >
-            
-            <div className="col-span-8 bg-background px-8 py-8">
-                
-                <div className="px-4 text-center sm:text-right">
-                    <Heading2 className="text-primary">{t("title")}</Heading2>
+
+            <div className="col-span-8 bg-background rounded-lg px-8 py-8">
+
+                <div className="text-center sm:text-right">
+                    {/* <Heading2 className="text-primary">{t("title")}</Heading2>
                     <Heading4 className="text-muted-foreground">
                         {t("subtitle")}
-                    </Heading4>
-                </div>      
-                <div className="">
-                    <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden">
+                    </Heading4> */}
+                    <div className="flex text-muted-foreground gap-4 mt-6">
+                        <span className="">{data.date}</span>
+                        <span className="text-primary">{data.category}</span>
+                    </div>
+                    <Heading2>{data.title}</Heading2>
+                    {/* <Description>{data.description}</Description> */}
+                    <Separator className="my-6 shadow" />
+                </div>
+                <div className="mb-10">
+                    {isPair && 
+                    <iframe className="aspect-video w-full" src="https://www.youtube.com/embed/f91K5NoTsmc?si=vyrKXMVF1R08Okp-" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    }
+                    {/* <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden">
                         <img
                             src={data?.with?.image || "https://ui.shadcn.com/placeholder.svg"}
                             alt={data.title}
                             className="object-cover w-full h-full"
                         />
-                    </AspectRatio>
+                    </AspectRatio> */}
                 </div>
-                <div className="">
-                    <Article className="mt-8">
-                        {data.content}
-                    </Article>
-                </div>
-            </div>
-            <div className="col-span-4 bg-background px-8 py-8">
                 
+                <div className="">
+                    {data.lines.map((item, i) => {
+                        if (item.type == "question") return (
+                            <div className="font-bold text-left-" key={i}>
+                                {item.content}
+                            </div>
+                        )
+                        else if (item.type == "answer") return (
+                            <div className="text-muted-foreground my-6 border-primary border-r-3 pr-3 text-justify" key={i}>
+                                {item.content}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-            
+            <div className="col-span-4 bg-background rounded-lg px-8 py-8 hidden md:block sticky top-38 h-fit">
+                <div className="">
+                    {/* <Heading4>{data.with.name_ar}</Heading4> */}
+                </div>
+                <Image src={data?.with?.image} width={100} height={100} alt="" className="w-full rounded-lg aspect-square object-cover object-top">
+                </Image>
+                <div className="flex">
+                    <Heading3 className="mt-3">{data.with.name_ar}</Heading3>
+                    <span>{ }</span>
+                </div>
+                <Description className="text-justify mt-3">
+                    {data.with.about}
+                </Description>
+                {/* <AspectRatio ratio={16 / 9}>
+                </AspectRatio> */}
+            </div>
+
+        </div>
+        <div className="bg-background p-8 rounded-lg mt-8">
+            <OthersInterviewsCarousel interviews={interviews} />
         </div>
     </>)
+    
 }
 
-export async function renderInterviewLine({line}: {line: any}) {
-    if(line.type == "question") {
+export async function renderInterviewLine({ line }: { line: any }) {
+    if (line.type == "question") {
         return <div className="mb-6">
             <Heading3 className="text-primary mb-2">{line.content}</Heading3>
         </div>
     }
-    else if(line.type == "answer") {
+    else if (line.type == "answer") {
         return <div className="mb-6">
             <Article>{line.content}</Article>
         </div>

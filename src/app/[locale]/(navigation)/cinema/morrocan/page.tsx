@@ -1,6 +1,6 @@
 
 
-import { WpPost } from "@/types";
+import { BreadCrumbLinksType, WpPost } from "@/types";
 import Link from "next/link";
 // import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
@@ -21,6 +21,7 @@ import { Description } from "@/components/font/description";
 import Heading3 from "@/components/font/h3";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import Heading2 from "@/components/font/h2";
+import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
 
 
 export default async function CinemaMorrocanPage(){
@@ -33,19 +34,21 @@ export default async function CinemaMorrocanPage(){
     const mainArticle = data[0]
     const sideArticle = data[1]
     const wideAricles = data.slice(1, data.length)
+    const breadcrumbLinks : BreadCrumbLinksType[] = [
+                {
+                    title: tNavigation("home"),
+                    href: "/"
+                }, 
+                {
+                    title: tNavigation("articles"),
+                    href: "/articles"
+                }, 
+                
+            ]
     return (
         <>
-            <Breadcrumb dir="rtl" className="mb-8 px-4">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>{tNavigation("cinema.morrocan")}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+            <BreadcrumbGenerator currentPage={tNavigation("cinema.morrocan")} links={breadcrumbLinks} />
+            
             <div className="grid grid-cols-12 gap-8 items-start">
                 
                 <div className="md:col-span-8 col-span-12 flex flex-col gap-8 border-mesure">

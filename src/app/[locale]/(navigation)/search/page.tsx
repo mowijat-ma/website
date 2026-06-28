@@ -13,6 +13,8 @@ import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
 import HomeTopReadsAside from "@/components/asides/HomeTopReadsAside";
 import RelatedArticlesAside, { RelatedArticlesAsideLoader } from "@/components/asides/RelatedArticlesAside";
 import { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 type SearchPageProps = {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -49,25 +51,30 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             <div className="grid grid-cols-12 gap-8">
                 <div className="md:col-span-8 col-span-12 gap-8 bg-background rounded mx-auto p-8 w-full">
                     <div className="">
-                        
+
                         <div className="flex flex-col gap-4 w-full">
                             <Description>{`${t('subtitle')} : ${searchQuery}`}</Description>
                             <SearchInput />
 
-                            
+                            {data.map((item, i) => (
+
+                                // <AccordionItem value={item.title} key={item.id}>
+                                //     <AccordionTrigger >
+                                //     </AccordionTrigger>
+                                //     <AccordionContent className="">
+                                //         <Link href={`/articles/${item.id}/content`} className="">
+                                //         </Link>
+                                //     </AccordionContent>
+                                // </AccordionItem>
+                                <Link href={`/articles/${item.id}/content`} className="py-2 border-b group" key={i}>
+                                            <Heading4 className="group-hover:text-primary grow text-start">{item.title}</Heading4>
+                                            <Description dangerouslySetInnerHTML={{ __html: item.description }} className="no-underline! line-clamp-3"></Description>
+
+                                </Link>
+                            ))}
+
 
                             <Accordion type="single" collapsible defaultValue={data[0]?.title || ""} className="w-full">
-                                {data.map((item) => (
-                                    
-                                    <AccordionItem value={item.title} key={item.id}>
-                                        <AccordionTrigger >
-                                            <Heading4 className="group-hover:text-primary grow text-start">{item.title}</Heading4>
-                                        </AccordionTrigger>
-                                        <AccordionContent className="">
-                                            <Description>{item.title} {item.title} {item.title}{item.title}</Description>
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                ))}
                             </Accordion>
                             { }
                         </div>

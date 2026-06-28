@@ -10,15 +10,15 @@ import PostDescription from "../font/description";
 
 
 
-export default async function SameAuthorSection() {
+export default async function ArticlesCinemaArabe() {
 
 
   const [t, data] = await Promise.all([
-    getTranslations("sections.same_author"),
+    getTranslations("sections.cinemamorrocan"),
     getCinemaMorrocanWpPosts()
   ])
   return (
-    <section className="mx-auto sm:py-10- py-8 px-8  bg-background rounded-lg" dir="rtl">
+    <section className="mx-auto sm:py-10- py-8- border-mesure" dir="rtl">
       <div className="bg-background flex justify-between items-center">
         <SectionTitle value={t('title')} />
         {/* <Link href={""}>المزيد</Link> */}
@@ -31,7 +31,7 @@ export default async function SameAuthorSection() {
           role="list"
         >
           {data.map((post: Post, i: number) => (
-            <Link href={`/articles/${post.id}/content`} key={i} className="group block">
+            <Link href={`/articles/${post.id}/content`}  key={i} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                 {/* Image Wrapper */}
@@ -51,7 +51,7 @@ export default async function SameAuthorSection() {
                 <div className="flex flex-col gap-3">
 
                   <PostTitle>{post.title}</PostTitle>
-                  <PostDescription>{post.description}</PostDescription>
+                  {/* <PostDescription>{post.description}</PostDescription> */}
                 </div>
               </div>
             </Link>

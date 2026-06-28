@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover"
 import { Post } from "@/types"
 import { searchWpPosts } from "@/api/posts"
+import { cn } from "@/lib/utils"
 
 
 export function SearchInput() {
@@ -93,7 +94,10 @@ export function SearchInput() {
                 onChange={OnUpdateQuery}
                 onFocus={() => query.length > 0 && setOpen(true)}
             />
-            <Search className="h-4 w-4 text-primary" />
+            <Search className={cn(
+                "h-6 w-6 p-1 rounded-full",
+                query !== "" ? "text-primary bg-background": "text-muted-foreground"
+             )} />
             </form>
         </div>
         </>

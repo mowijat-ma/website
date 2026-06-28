@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/apiclient"
-import { extractWpPost, extractWpPosts, getWpPostByIdService, getWpPostsService } from "@/services/post.services"
+import { extractWpPost, extractWpPosts, getSearchResultsContents, getWpPostByIdService, getWpPostsService } from "@/services/post.services"
 // import { extractWpPost, extractWpPosts } from "@/services/post.services"
 // import { WpPost } from "@/types"
 
@@ -36,7 +36,8 @@ export const searchWpPosts = async (query: string, page = 1) => {
       method: 'GET',
     })
     // const data = extractWpPosts(await res)
-    return res;
+    const data = await getSearchResultsContents(await res)
+    return data;
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to fetch posts"

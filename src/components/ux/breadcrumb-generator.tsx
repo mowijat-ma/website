@@ -12,15 +12,15 @@ export default async function BreadcrumbGenerator({currentPage, links}:{
                 {links && links.map((item, i)=>(
                     
                         <BreadcrumbItem key={i} >
-                                <BreadcrumbLink href={item.href} >{item.title}</BreadcrumbLink>
-                            <BreadcrumbSeparator />
+                                <BreadcrumbLink href={item.href} className="text-primary">{item.title}</BreadcrumbLink>
+                            <BreadcrumbSeparator className="text-primary" />
                         </BreadcrumbItem>
                    
                    
                 ))}
                 {/* <Breadcr umbSeparator /> */}
                 <BreadcrumbItem>
-                    <BreadcrumbPage className="line-clamp-1 text-nowrap text-ellipsis">{currentPage}</BreadcrumbPage>
+                    <BreadcrumbPage className="line-clamp-1 text-nowrap text-ellipsis text-muted-foreground">{currentPage}</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
