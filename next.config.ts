@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     images:{
         remotePatterns: [new URL('https://mowijat.wordpress.com')]
+    },
+    experimental:{
+        typedRoutes: true
     }
 };
  
