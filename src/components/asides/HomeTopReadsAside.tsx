@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator";
 import { WpPost } from "@/types";
 // import { getWpMoreReads } from "@/app/api/posts";
 import { getTranslations } from "next-intl/server";
-import { getWpMoreReads } from "@/api/posts";
+import { getWpMoreReads } from "@/api-services/posts";
 import SectionTitle from "../font/section-title";
 
 export default async function HomeTopReadsAside({}: any) {
@@ -23,7 +23,7 @@ export default async function HomeTopReadsAside({}: any) {
               <div className="flex flex-col gap-2">
                 {data?.slice(0, 5)?.map((post: any, i:number) => (
                   
-                  <Link href={`/articles/${post.id}/content`}  className="group py-2 grid grid-cols-3 gap-8" key={i}>
+                  <Link href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}  className="group py-2 grid grid-cols-3 gap-8" key={i}>
                     <img src={post.image} className="object-cover rounded aspect-square w-full col-span-1" />
                     {/* <AspectRatio className="max-w-20">
                     </AspectRatio> */}

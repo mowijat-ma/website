@@ -5,7 +5,7 @@ import { Card } from "../ui/card";
 import { ar } from "date-fns/locale";
 import SectionTitle from "../font/section-title";
 import CarouselCalendar from "../calendar/carousel.calendar";
-import { getEvents } from "@/api/events";
+import { getEvents } from "@/api-services/events";
 import { getTranslations } from "next-intl/server";
 // import TitleWithBar from "../typoghraphy/title-with-bar";
 

@@ -1,4 +1,4 @@
-import { getWpCategories } from "@/api/categories";
+import { getWpCategories } from "@/api-services/categories";
 import ArticlesArts from "@/components/sections/ArticlesArts";
 import ArticlesCinemaArabe from "@/components/sections/ArticlesCinemaArabe";
 import ArticlesCinemaMorrocan from "@/components/sections/ArticlesCinemaMorrocan";
@@ -84,26 +84,26 @@ export default async function ArticlesPage() {
 }
 
 
-const renderLinkCard = ({ link }: { link: WpCategory }) => {
-    return (
-        <Link href="" className="relative bg-background- bg-slate-100/50 rounded-full border p-4 col-span-2 text-center w-full  h-full flex justify-between items-center">
-            <div className="">
-                <div className="font-bold">
-                    {link.name} <span className="text-primary">{`(${link.count})`}</span>
-                </div>
-                <span className="text-xs text-muted-foreground">
+// const renderLinkCard = ({ link }: { link: WpCategory }) => {
+//     return (
+//         <Link href="" className="relative bg-background- bg-slate-100/50 rounded-full border p-4 col-span-2 text-center w-full  h-full flex justify-between items-center">
+//             <div className="">
+//                 <div className="font-bold">
+//                     {link.name} <span className="text-primary">{`(${link.count})`}</span>
+//                 </div>
+//                 <span className="text-xs text-muted-foreground">
 
-                    {link.description}
-                </span>
-            </div>
+//                     {link.description}
+//                 </span>
+//             </div>
 
-            <span className="hidden -top-2 -left-2 w-6 h-6 border rounded-full text-xs bg-primary text-white sm:flex items-center justify-center">
-                {link.count > 99 ? '+99' : link.count}
-            </span>
-            {/* {JSON.stringify(link.)} */}
+//             <span className="hidden -top-2 -left-2 w-6 h-6 border rounded-full text-xs bg-primary text-white sm:flex items-center justify-center">
+//                 {link.count > 99 ? '+99' : link.count}
+//             </span>
+//             {/* {JSON.stringify(link.)} */}
 
-            <FaAngleLeft className="text-primary" />
-        </Link>
+//             <FaAngleLeft className="text-primary" />
+//         </Link>
 
-    )
-}
+//     )
+// }

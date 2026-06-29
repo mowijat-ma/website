@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BlogPost } from "@/types";
 import { useTranslations } from "next-intl"
 import CinemaWorldPage from "./world/page";
-import { getHomeTopTrendingPosts } from "@/api/posts";
+import { getHomeTopTrendingPosts } from "@/api-services/posts";
 
 export default async function CinemaPage() {
     // const t = useTranslations()

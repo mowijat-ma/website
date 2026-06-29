@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 import SectionTitle from "../font/section-title";
-import { getCinemaMorrocanWpPosts } from "@/api/posts";
+import { getCinemaMorrocanWpPosts } from "@/api-services/posts";
 import PostTitle from "../font/title";
 import PostDescription from "../font/description";
 

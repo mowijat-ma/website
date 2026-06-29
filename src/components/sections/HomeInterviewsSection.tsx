@@ -1,6 +1,6 @@
 
 // import SectionTitle from "../typoghraphy/title-with-bar"
-import { getHomeInterviews } from "@/api/interviews"
+import { getHomeInterviews } from "@/api-services/interviews"
 import InterviewsHomeCarousel from "../interviews/InterviewsCarousel";
 
 

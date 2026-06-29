@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 import SectionTitle from "../font/section-title";
-import { getCinemaArabeWpPosts } from "@/api/posts";
+import { getCinemaArabeWpPosts } from "@/api-services/posts";
 
 
 export default async function HomeCinemaArabeSection() {
@@ -36,7 +36,7 @@ export default async function HomeCinemaArabeSection() {
                   role="list"
                 >
                   {data.map((post: WpPost, i) => (
-                    <Link href={`/articles/${post.id}/content`}  key={i} className="group block">
+                    <Link href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} key={i} className="group block">
                       {/* Blog Card */}
                       <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                         {/* Image Wrapper */}

@@ -1,5 +1,5 @@
 import './style.css'
-import { getWpPostById } from "@/api/posts";
+import { getWpPostById } from "@/api-services/posts";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import Article from "@/components/font/body";

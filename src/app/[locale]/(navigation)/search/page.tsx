@@ -1,4 +1,4 @@
-import { searchWpPosts } from "@/api/posts";
+import { searchWpPosts } from "@/api-services/posts";
 import { Description } from "@/components/font/description";
 import Heading4 from "@/components/font/h4";
 import { getTranslations } from "next-intl/server";
@@ -56,7 +56,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                             <Description>{`${t('subtitle')} : ${searchQuery}`}</Description>
                             <SearchInput />
 
-                            {data.map((item, i) => (
+                            {data.map((post, i) => (
 
                                 // <AccordionItem value={item.title} key={item.id}>
                                 //     <AccordionTrigger >
@@ -66,9 +66,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                 //         </Link>
                                 //     </AccordionContent>
                                 // </AccordionItem>
-                                <Link href={`/articles/${item.id}/content`} className="py-2 border-b group" key={i}>
-                                            <Heading4 className="group-hover:text-primary grow text-start">{item.title}</Heading4>
-                                            <Description dangerouslySetInnerHTML={{ __html: item.description }} className="no-underline! line-clamp-3"></Description>
+                                <Link href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} className="py-2 border-b group" key={i}>
+                                            <Heading4 className="group-hover:text-primary grow text-start">{post.title}</Heading4>
+                                            <Description dangerouslySetInnerHTML={{ __html: post.description }} className="no-underline! line-clamp-3"></Description>
 
                                 </Link>
                             ))}

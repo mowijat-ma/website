@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator";
 import { WpPost } from "@/types";
 // import { getWpMoreReads } from "@/app/api/posts";
 import { getTranslations } from "next-intl/server";
-import { getWpMoreReads } from "@/api/posts";
+import { getWpMoreReads } from "@/api-services/posts";
 import SectionTitle from "../font/section-title";
 
 export default async function RelatedArticlesAside({}: any) {
@@ -23,7 +23,11 @@ export default async function RelatedArticlesAside({}: any) {
               <div className="flex flex-col gap-2">
                 {data?.slice(0, 5)?.map((item: any, i:number) => (
                   
-                  <Link href={`/cinema/${item.id}/content`} className="group py-2 grid grid-cols-2 gap-8" key={i}>
+                  <Link 
+                  href={{pathname: 'href={`/cinema/[id]/content`}', query: {
+                    id: item.id
+                  }}}
+                  className="group py-2 grid grid-cols-2 gap-8" key={i}>
                     {/* <img src={item.image} className="object-cover rounded aspect-square w-full col-span-1" /> */}
                     {/* <AspectRatio className="max-w-20">
                     </AspectRatio> */}

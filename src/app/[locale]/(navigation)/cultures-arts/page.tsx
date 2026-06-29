@@ -1,4 +1,4 @@
-import { getNewsPagePosts } from "@/api/news"
+import { getNewsPagePosts } from "@/api-services/news"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -57,7 +57,11 @@ export default async function CulturesArtsPage() {
             >
 
                 {wideAricles.map((post: Post, i: number) => (
-                    <Link href={`/articles/${post.id}/content`} key={i} className="group block">
+                    <Link
+                        href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                        key={i}
+                        className="group block"
+                    >
                         {/* Blog Card */}
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                             {/* Image Wrapper */}

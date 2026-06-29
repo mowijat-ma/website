@@ -4,10 +4,10 @@ import Link from "next/link";
 // import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 // import SectionTitle from "../font/section-title";
-import { getCinemaArabeWpPosts } from "@/api/posts";
+import { getCinemaArabeWpPosts } from "@/api-services/posts";
 import SectionTitle from "@/components/font/section-title";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { getNewsPagePosts } from "@/api/news";
+import { getNewsPagePosts } from "@/api-services/news";
 import Heading1 from "@/components/font/h1";
 import Heading2 from "@/components/font/h2";
 import {

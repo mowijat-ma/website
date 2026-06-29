@@ -1,7 +1,7 @@
 import { Post } from "@/types"
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
-import { getHomeTopNewsPosts } from "@/api/posts"
+import { getHomeTopNewsPosts } from "@/api-services/posts"
 import { Description } from "../font/description"
 import SectionTitle from "../font/section-title"
 import Heading4 from "../font/h4"
@@ -22,7 +22,7 @@ export default async function NewsSection() {
 
             <div className="flex flex-col gap-8">
                 {news.map((post: Post) => (
-                    <Link key={post.id} href={`/news/${post.id}`}>
+                    <Link key={post.id} href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}>
                         <article className="group relative grid grid-cols-3 gap-8 items-start border-mesure">
 
                             <div className="hidden sm:flex w-full shrink-0 bg-muted h-full rounded-lg overflow-hidden border-mesure col-spa">

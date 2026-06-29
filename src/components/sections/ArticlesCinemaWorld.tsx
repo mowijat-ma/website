@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 import SectionTitle from "../font/section-title";
-import { getCinemaMorrocanWpPosts } from "@/api/posts";
+import { getCinemaMorrocanWpPosts } from "@/api-services/posts";
 import PostTitle from "../font/title";
 import PostDescription from "../font/description";
 
@@ -31,7 +31,7 @@ export default async function ArticlesCinemaWorld() {
           role="list"
         >
           {data.map((post: Post, i: number) => (
-            <Link href={`/articles/${post.id}/content`}  key={i} className="group block">
+            <Link href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}  key={i} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                 {/* Image Wrapper */}

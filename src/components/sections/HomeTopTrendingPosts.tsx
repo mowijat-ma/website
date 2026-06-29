@@ -1,4 +1,4 @@
-import { getFirstWpPost, getHomeTopTrendingPosts } from "@/api/posts";
+import { getFirstWpPost, getHomeTopTrendingPosts } from "@/api-services/posts";
 import { Post, WpPost } from "@/types";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -28,7 +28,11 @@ export default async function HomeTopTrendingPosts() {
           <SectionTitle value={t("title")} />
           {/* الجهة اليسرى: المقال الرئيسي ومقالات الـ topPosts */}
           <div className="">
-            <Link href={`/articles/${mainArticle.id}/content`} key={mainArticle.id} className="group block">
+            <Link 
+              // href={`/articles/${mainArticle.id}/content`}
+              href={{ pathname: "/articles/[id]/content", query: { id: mainArticle.id } }}
+              
+              key={mainArticle.id} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
                 {/* Image Wrapper */}
@@ -70,7 +74,11 @@ export default async function HomeTopTrendingPosts() {
             <div className="mt-6 flex flex-col gap-8 md:grid md:grid-cols-3 gap-y-12 sm:gap-8">
               {wideAricles?.map((post: Post, index: number) => (
                 <div key={index} className="h-fit">
-                  <Link href={`/articles/${post.id}/content`} className="group block">
+                  <Link 
+                  href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                  
+                  // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                  className="group block">
                     <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                       <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-lg bg-muted">
                         <img
@@ -107,7 +115,11 @@ export const BlogPostContainer = ({ post }: {
   post: Post
 }) => {
   return (
-    <Link href={`/articles/${post.id}/content`} key={post.id} className="group block">
+    <Link 
+    // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} 
+    href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+
+    key={post.id} className="group block">
       {/* Blog Card */}
       <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
         {/* Image Wrapper */}

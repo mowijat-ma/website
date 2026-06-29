@@ -6,7 +6,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 // import SectionTitle from "../font/section-title";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { getNewsPagePosts } from "@/api/news";
+import { getNewsPagePosts } from "@/api-services/news";
 import {
     Pagination,
     PaginationContent,
