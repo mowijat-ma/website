@@ -19,10 +19,19 @@ export default async function HomeTopTrendingPosts() {
 
   const mainArticle = data[0]
   const wideAricles = data.slice(1, 4)
-
+  // if (!mainArticle) {
+  //   return (
+  //     <div className="flex flex-col gap-8 rounded-lg bg-background p-8">
+  //       <SectionTitle value={t("title")} />
+  //       <p className="text-muted-foreground text-base leading-normal">
+  //         {t("noPosts")}
+  //       </p>
+  //     </div>
+  //   )
+  // }
   return (
     <>
-      <section className="flex flex-col gap-8 rounded bg-background p-8">
+      <section className="flex flex-col gap-8 rounded-lg bg-background p-8">
         {/* الحاوية الرئيسية للشبكة */}
         <div className=""> {/* أضفنا items-start لضمان عمل sticky */}
           <SectionTitle value={t("title")} />
@@ -30,15 +39,15 @@ export default async function HomeTopTrendingPosts() {
           <div className="">
             <Link 
               // href={`/articles/${mainArticle.id}/content`}
-              href={{ pathname: "/articles/[id]/content", query: { id: mainArticle.id } }}
-              
+              // href={{ pathname: "/articles/[id]/content", query: { id: mainArticle.id } }}
+              href="#"
               key={mainArticle.id} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
                 {/* Image Wrapper */}
                 <AspectRatio
                   ratio={5 / 3}
-                  className="overflow-hidden rounded"
+                  className="overflow-hidden rounded-lg"
                 >
                   <img
                     src={
@@ -75,12 +84,12 @@ export default async function HomeTopTrendingPosts() {
               {wideAricles?.map((post: Post, index: number) => (
                 <div key={index} className="h-fit">
                   <Link 
-                  href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
-                  
+                  // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                  href="#"
                   // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
                   className="group block">
                     <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
-                      <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-lg bg-muted">
+                      <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-muted">
                         <img
                           src={post.image || "https://ui.shadcn.com/placeholder.svg"}
                           className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"

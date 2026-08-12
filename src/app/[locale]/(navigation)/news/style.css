@@ -1,0 +1,15 @@
+.fc {}
+
+.fc-media-screen{} 
+.fc-direction-rtl {}
+.fc-theme-standard{}
+
+.fc-scroller .fc-scroller-liquid-absolute {
+    height: 100% !important;
+    /* display: flex; */
+    position: relative;
+}
+
+.fc-dayGridMonth-view .fc-view .fc-daygrid{
+    height: 100% !important;
+}

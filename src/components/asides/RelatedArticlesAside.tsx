@@ -24,9 +24,10 @@ export default async function RelatedArticlesAside({}: any) {
                 {data?.slice(0, 5)?.map((item: any, i:number) => (
                   
                   <Link 
-                  href={{pathname: 'href={`/cinema/[id]/content`}', query: {
-                    id: item.id
-                  }}}
+                  // href={{pathname: 'href={`/cinema/[id]/content`}', query: {
+                  //   id: item.id
+                  // }}}
+                  href="#"
                   className="group py-2 grid grid-cols-2 gap-8" key={i}>
                     {/* <img src={item.image} className="object-cover rounded aspect-square w-full col-span-1" /> */}
                     {/* <AspectRatio className="max-w-20">

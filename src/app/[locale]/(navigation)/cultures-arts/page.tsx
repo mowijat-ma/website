@@ -16,12 +16,13 @@ import Heading4 from "@/components/font/h4"
 import { Description } from "@/components/font/description"
 import Heading2 from "@/components/font/h2"
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator"
+import { getCulturesArtsArticles } from "@/api-services/posts"
 export default async function CulturesArtsPage() {
     const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.arts_cultures"),
         getTranslations("ui"),
         getTranslations("navigation.links"),
-        getNewsPagePosts()
+        getCulturesArtsArticles()
     ])
     const mainArticle = data[0]
     const sideArticle = data[1]
@@ -56,9 +57,9 @@ export default async function CulturesArtsPage() {
                 role="list"
             >
 
-                {wideAricles.map((post: Post, i: number) => (
+                {data.map((post: Post, i: number) => (
                     <Link
-                        href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                        href={`/articles/${String(post.id)}/content`}
                         key={i}
                         className="group block"
                     >

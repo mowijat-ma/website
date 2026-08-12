@@ -13,10 +13,10 @@ import { useTranslations } from "next-intl"
 // import SectionTitle from "../typoghraphy/title-with-bar"
 import SectionTitle from "../font/section-title"
 import InterviewPostContainer from "./interviewsContainerItem"
-import { InterviewPost } from "@/types"
+import { InterviewPost, Post } from "@/types"
 
 
-const OthersInterviewsCarousel = ({ interviews }: { interviews: InterviewPost[] }) => {
+const OthersInterviewsCarousel = ({ interviews }: { interviews: Post[] }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
     const [count, setCount] = React.useState(0)

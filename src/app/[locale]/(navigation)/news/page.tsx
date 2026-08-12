@@ -4,31 +4,19 @@ import Link from "next/link";
 // import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 // import SectionTitle from "../font/section-title";
-import { getCinemaArabeWpPosts } from "@/api-services/posts";
-import SectionTitle from "@/components/font/section-title";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getNewsPagePosts } from "@/api-services/news";
-import Heading1 from "@/components/font/h1";
 import Heading2 from "@/components/font/h2";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
 import Heading4 from "@/components/font/h4";
 import { Description } from "@/components/font/description";
 import Heading3 from "@/components/font/h3";
-import { Calendar } from "@/components/ui/calendar";
 import CalendarAside from "@/components/asides/CalendarAside";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Heading } from "lucide-react";
-import { Metadata } from 'next';
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
+import './style.css'
+import { getHomeEvents } from "@/api-services/events";
 type Props = { params: Promise<{ slug: string }> };
+
 
 // export async function generateMetadata({ params }: Props): Promise<Metadata> {
 //   const { slug } = await params;
@@ -44,11 +32,12 @@ type Props = { params: Promise<{ slug: string }> };
 // }
 export default async function NewsPage() {
 
-    const [t, ui, tNavigation, data] = await Promise.all([
+    const [t, ui, tNavigation, data, events] = await Promise.all([
         getTranslations("pages.news"),
         getTranslations("ui"),
         getTranslations("navigation.links"),
-        getNewsPagePosts()
+        getNewsPagePosts(),
+        getHomeEvents()
     ])
     const mainArticle = data[0]
     const sideArticle = data[1]
@@ -225,100 +214,31 @@ export default async function NewsPage() {
                         </section>
                     </div>
                 </div>
-                <div className="col-span-4 bg-background p-4">
-                    <CalendarAside />
+                <div className="col-span-4 rounded-xl bg-background p-4 border-mesure hidden md:block sticky top-24 h-fit">
+                    <Heading2 className="mb-4 text-primary">{t('lastEvents.title')}</Heading2>
+                    {/* <CalendarAside /> */}
+                    {events.length > 0 && (
+                        <div className="">
+                            {events.map((event: any, i: number) => (
+                                <div key={i} className="rounded-lg mb-4 relative">
+                                    <img src={event.image} alt={event.title} className="w-full h-32 rounded- object-cover" />
+                                    <div className="p-4 absolute top-0 left-0  w-full h-full bg-black/40 text-white flex flex-col justify-end">
+                                        <Heading4 className="">{event.title}</Heading4>
+                                        <Description className="text-white!">{event.location}</Description>
+                                        <Description className="mt-2 text-white!">{event.description}</Description>
+                                        <Description className="text-white!">عدد أيام المتبقية: {event.restDays}</Description>
+                                    </div>
+                                    {/* <Description>{event.startDate} - {event.endDate}</Description> */}
+                                    {/* <Description>{event.startDate}</Description> */}
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
                 {/* Sidebar */}
             </div>
         </>
     )
-    return (
-        <>
-            <Breadcrumb dir="rtl" className="mb-8 px-4">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>{tNavigation("news")}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-            <div className="grid grid-cols-12 gap-8 items-start px-4">
-                <div className="col-span-12">
-                        <Heading2 className="mb-4 text-primary">{t('title')}</Heading2>
-                        <Description>{t('subtitle')}</Description>
-                </div>
-                <div className="col-span-12">
-                    <Link href="#" className="group w-full border p-1">
-                        <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
-                            <AspectRatio ratio={4 / 2} className="overflow-hidden rounded-lg bg-muted border">
-                                <img
-                                    src={mainArticle.image || "https://ui.shadcn.com/placeholder.svg"}
-                                    className="h-full w-full object-cover "
-                                    alt=""
-                                />
-                            </AspectRatio>
-                            <div className="flex flex-col gap-3">
-                                <Heading3 className="line-clamp-2">{mainArticle.title}</Heading3>
-                                <Description className="line-clamp-3">{mainArticle.description}</Description>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-                <div className="md:col-span-8- col-span-12 flex flex-col gap-8 border-mesure ">
-                    <div className="bg-background w-full border">
-
-                        <div className="col-span-9 bg-background aspect-video- overflow-hidden rounded-lg relative h-full mt-8">
-                            
-                        </div>
-
-                    </div>
-                    <div className="mx-auto px-3 sm:px-8 py-3 sm:py-8 bg-background border-mesure-" dir="rtl">
-
-                        <section>
-
-                            <div
-                                className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-3 md:gap-8 lg:grid-cols-3"
-                                role="list"
-                            >
-                                {wideAricles.map((post: WpPost, i: number) => (
-                                    <Link href="#" key={i} className="group block">
-                                        {/* Blog Card */}
-                                        <div className="flex flex-col gap-4 rounded-md transition-all duration-200">
-                                            {/* Image Wrapper */}
-                                            <AspectRatio
-                                                ratio={4 / 3}
-                                                className="overflow-hidden rounded-sm bg-muted"
-                                            >
-                                                <img
-                                                    src={post.image || "https://ui.shadcn.com/placeholder.svg"}
-                                                    alt={`${post.title} thumbnail`}
-                                                    // fill
-                                                    className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                                                />
-                                            </AspectRatio>
-
-                                            {/* Post Content */}
-                                            <div className="flex flex-col gap-3">
-
-                                                <Heading4 className="line-clamp-2">{sideArticle.title}</Heading4>
-                                                <Description className="line-clamp-2">{sideArticle.description}</Description>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                            
-                        </section>
-                    </div>
-                </div>
-                {/* Sidebar */}
-                <aside className="col-span-4 hidden md:block sticky top-24 h-fit border-mesure">
-                    <CalendarAside />
-                </aside>
-            </div>
-        </>
-    )
+    
+    
 }

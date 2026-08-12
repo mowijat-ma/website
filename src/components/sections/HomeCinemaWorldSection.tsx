@@ -43,7 +43,10 @@ export default async function HomeCinemaWorldSection() {
                   // isWide && "md:col-span-2 md:row-span-1"
                 )}
               >
-                <Link href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}  className="flex flex-col h-full gap-4">
+                <Link 
+                href="#" 
+                // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} 
+                 className="flex flex-col h-full gap-4">
 
                   {/* Image Container */}
                   <div className={cn(

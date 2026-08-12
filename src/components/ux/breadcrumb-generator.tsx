@@ -7,7 +7,7 @@ export default async function BreadcrumbGenerator({currentPage, links}:{
 }){
      
     return (<>
-    <Breadcrumb dir="rtl" className="my-4 sm:mb-8 sm:mt-0 px-8 sm:px-4">
+    <Breadcrumb dir="rtl" className="my-4 sm:mb-8 sm:mt-0 px-8 sm:px-4 print:hidden">
             <BreadcrumbList className="flex-nowrap max-w-[90vw] overflow-hidden">
                 {links && links.map((item, i)=>(
                     

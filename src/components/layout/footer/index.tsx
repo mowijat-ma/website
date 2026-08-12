@@ -24,13 +24,12 @@ const Footer = () => {
   const links = FOOTER_LINKS || []
 
     return (<>
-      <section className=" bg-white border-t border-mesure">
+      <section className=" bg-white border-t border-mesure print:hidden">
         <footer className="border-mesure lg:max-w-6xl px-4 py-8 w-full mx-auto">
           {/* <Footer2 menuItems={menuItems} tagline={t('footer.tagline')} /> */}
           <div className="border-mesure">
           <div className="grid md:grid-cols-12 gap-8 text-center sm:text-start ">
-{/* {JSON.stringify(menuItems)}
-{menuItems.length} */}
+
             {links?.length > 0 && links.map((section, sectionIdx) => (
               <div key={sectionIdx} className="col-span-4 flex flex-col border-mesure">
                 <h3 className="mb-4 font-bold">{t(section.title)}</h3>
@@ -78,6 +77,15 @@ const Footer = () => {
         </div>
         </footer>
       </section>
+      <div className="mx-auto">
+        <Logo url="/" className="flex items-center gap-2 w-full border-mesure  max-w-48">
+        <LogoImage
+          src={'/logos/logo_light_1.png'}
+          alt={'logo.alt'}
+          className="w-full"
+        />
+      </Logo>
+      </div>
     </>)
 }
 

@@ -45,6 +45,7 @@ export default async function CinemaMorrocanPage(){
                 }, 
                 
             ]
+            
     return (
         <>
             <BreadcrumbGenerator currentPage={tNavigation("cinema.morrocan")} links={breadcrumbLinks} />

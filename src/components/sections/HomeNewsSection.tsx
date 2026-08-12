@@ -21,8 +21,11 @@ export default async function NewsSection() {
             </div>
 
             <div className="flex flex-col gap-8">
-                {news.map((post: Post) => (
-                    <Link key={post.id} href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}>
+                {news && news.map((post: Post) => (
+                    <Link key={post.id} 
+                    href="#"
+                    // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                    >
                         <article className="group relative grid grid-cols-3 gap-8 items-start border-mesure">
 
                             <div className="hidden sm:flex w-full shrink-0 bg-muted h-full rounded-lg overflow-hidden border-mesure col-spa">

@@ -1,15 +1,12 @@
-import { getNewsPagePosts } from "@/api-services/news";
 import Heading2 from "@/components/font/h2";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbEllipsis, BreadcrumbPage } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
 import { getHomeInterviews } from "@/api-services/interviews";
-import Heading4 from "@/components/font/h4";
-import { Post } from "@/types";
+import { BreadCrumbLinksType } from "@/types";
 import { Description } from "@/components/font/description";
+import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
 
 export default async function CinemaArabePage() {
     const [t, ui, tNavigation, data] = await Promise.all([
@@ -22,19 +19,17 @@ export default async function CinemaArabePage() {
     const sideArticle = data[1]
     const wideAricles = data.slice(0, data.length)
 
+    const breadcrumbLinks: BreadCrumbLinksType[] = [
+        {
+            title: tNavigation("home"),
+            href: "/"
+        },
 
+
+    ]
     return (<>
-        <Breadcrumb dir="rtl" className="mb-8 px-4">
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <BreadcrumbPage>{tNavigation("interviews")}</BreadcrumbPage>
-                </BreadcrumbItem>
-            </BreadcrumbList>
-        </Breadcrumb>
+        <BreadcrumbGenerator currentPage={tNavigation("interviews")} links={breadcrumbLinks} />
+
         {/* <div className="col-span-12 sm:col-span-8  px-4 text-center sm:text-right">
                     <Heading2 className="text-primary">{t("title")}</Heading2>
                     <Heading4 className="text-primary">
@@ -52,13 +47,13 @@ export default async function CinemaArabePage() {
             >
 
                 {wideAricles.map((interview: any, i: number) => (
-                    <Link key={i} 
-                    
-                    // href={`/interviews/${interview.id}`}
-                    //  href={{pathname: '/intevriew/[id]/content', query: {id, interview.id}}}
-                    href={{ pathname: "/interviews/[id]", query: { id: interview.id } }}
+                    <Link key={i}
 
-                     className="group block h-full relative ">
+                        href={`/interviews/${interview.id}/content` || ''}
+                        //  href={{pathname: '/intevriew/[id]/content', query: {id, interview.id}}}
+                        // href={{ pathname: "/interviews/[id]", query: { id: interview.id } }}
+
+                        className="group block h-full relative ">
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200 overflow-hidden">
                             {/* Image Wrapper */}
                             <AspectRatio
@@ -66,7 +61,7 @@ export default async function CinemaArabePage() {
                                 className="overflow-hidden rounded-xl bg-muted "
                             >
                                 <img
-                                    src={interview.with?.image || "https://ui.shadcn.com/placeholder.svg"}
+                                    src={interview.image || "https://ui.shadcn.com/placeholder.svg"}
                                     alt={interview.title}
                                     style={{ boxShadow: "inset 0px -29px 48px 0px #696969" }}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 "

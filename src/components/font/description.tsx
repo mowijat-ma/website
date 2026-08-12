@@ -10,7 +10,7 @@ export default function PostDescription({className, ...props }: PostDescriptionP
   return (
     <p 
       className={
-        cn(`text-muted-foreground! text-base leading-normal line-clamp-2`, className)
+        cn(`text-muted-foreground text-base leading-normal line-clamp-2`, className)
       } 
       {...props}
     >
@@ -22,7 +22,7 @@ export const Description = ({className, ...props}: {className?: string} & React.
   return (
     <p className={cn(
       className,
-      "text-muted-foreground! text-base leading-normal",
+      "text-muted-foreground text-base leading-normal",
     )} {...props}>
       {props.children}
     </p>
