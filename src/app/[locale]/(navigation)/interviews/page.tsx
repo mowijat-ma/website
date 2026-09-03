@@ -7,6 +7,7 @@ import { getHomeInterviews } from "@/api-services/interviews";
 import { BreadCrumbLinksType } from "@/types";
 import { Description } from "@/components/font/description";
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
+import { Route } from "next";
 
 export default async function CinemaArabePage() {
     const [t, ui, tNavigation, data] = await Promise.all([
@@ -49,7 +50,7 @@ export default async function CinemaArabePage() {
                 {wideAricles.map((interview: any, i: number) => (
                     <Link key={i}
 
-                        href={`/interviews/${interview.id}/content` || ''}
+                        href={`/interviews/${interview.id}/content` as Route}
                         //  href={{pathname: '/intevriew/[id]/content', query: {id, interview.id}}}
                         // href={{ pathname: "/interviews/[id]", query: { id: interview.id } }}
 

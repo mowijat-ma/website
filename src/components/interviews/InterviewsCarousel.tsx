@@ -12,13 +12,14 @@ import {
 import { useTranslations } from "next-intl"
 // import SectionTitle from "../typoghraphy/title-with-bar"
 import SectionTitle from "../font/section-title"
-import { InterviewPost, WpPost } from "@/types"
+import { InterviewPost, Post, WpPost } from "@/types"
 import { Link } from "@/i18n/routing"
 import { AspectRatio } from "../ui/aspect-ratio"
 import { cn } from "@/lib/utils"
+import { Route } from "next"
 
 
-const InterviewsHomeCarousel = ({ interviews }: { interviews: WpPost[] }) => {
+const InterviewsHomeCarousel = ({ interviews }: { interviews: Post[] }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
     const [count, setCount] = React.useState(0)
@@ -61,11 +62,14 @@ const InterviewsHomeCarousel = ({ interviews }: { interviews: WpPost[] }) => {
                 </div>
 
                 {/* Fixed: Use CarouselContent and CarouselItem for logic to work */}
-                <CarouselContent className="-ml-4">
+                <CarouselContent className="-ml-4 mt-4">
                     {interviews.map((interview, i) => (
                         <CarouselItem key={interview.id} className="pl-8 md:basis-1/2 lg:basis-1/3">
                             <div className="h-full">
-                                <Link href={`/interviews/${interview.id}`} className="group block h-full relative ">
+                                <Link 
+                                href= "/"
+                                // href={`/interviews/${String(interview.id)}/content` as Route}
+                                className="group block h-full relative">
                                     <div className="flex flex-col gap-4 rounded-xl transition-all duration-200 overflow-hidden">
                                         {/* Image Wrapper */}
                                         <AspectRatio
@@ -87,7 +91,8 @@ const InterviewsHomeCarousel = ({ interviews }: { interviews: WpPost[] }) => {
                                             // "translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 bg-gradient-to-t from-black/80 to-transparent",
                                             "px-4 p-4 absolute bottom-0 left-0 right-0",
                                             "bg-gradient-to-t from-black/80 to-transparent",
-                                            "rounded-lg"
+                                            "rounded-lg",
+                                            "hidden group-hover:flex flex-col gap-2 transition-all duration-300 z-20 text-white"
                                         )}>
 
                                             <h3
@@ -96,7 +101,7 @@ const InterviewsHomeCarousel = ({ interviews }: { interviews: WpPost[] }) => {
                                                 {interview.title}
                                             </h3>
                                             <p className="text-muted-foreground text-lg line-clamp-2">
-                                                {interview.with?.name_ar}
+                                                {interview?.description || ""}
                                             </p>
                                         </div>
                                     </div>

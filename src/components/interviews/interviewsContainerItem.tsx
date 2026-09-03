@@ -2,10 +2,11 @@ import Link from "next/link"
 import { AspectRatio } from "../ui/aspect-ratio"
 import { cn } from "@/lib/utils"
 import { InterviewPost, Post, WpPost } from "@/types"
+import { Route } from "next"
 
  const InterviewPostContainer = ({ post }: { post: Post }) => {
     return (
-        <Link href={`/interviews/${String(post.id)}/content`} className="group block h-full relative ">
+        <Link href={`/interviews/${String(post.id)}/content` as Route} className="group block h-full relative ">
             <div className="flex flex-col gap-4 rounded-xl transition-all duration-200 overflow-hidden">
                 {/* Image Wrapper */}
                 <AspectRatio

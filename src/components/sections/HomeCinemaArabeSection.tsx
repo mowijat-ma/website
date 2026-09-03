@@ -35,7 +35,7 @@ export default async function HomeCinemaArabeSection() {
                   className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8 lg:grid-cols-4"
                   role="list"
                 >
-                  {data.map((post: WpPost, i) => (
+                  {data.map((post: WpPost, i: number) => (
                     <Link 
                     
                     href="#"

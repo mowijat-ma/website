@@ -35,6 +35,7 @@ import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { usePathname } from "next/navigation";
 import { SearchInput } from "@/components/ux/search-input";
+import { Route } from "next";
 // import { searchWpPosts } from "@/app/api/posts";
 // import { LayoutSearch } from "./custom/search-input";
 interface MenuItem {
@@ -76,7 +77,7 @@ const renderMenuItem = (item: MenuItem) => {
   return (
     <Link
       // href={item.href}
-      href={item.href || ''}
+      href={item.href as Route}
       key={item.title}
       className={cn(
         "font- group inline-flex items-center justify-center text-lg transition-colors border-b-[3px] py-4 px-3 font",

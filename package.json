@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check-all": "npm run type-check && npm run lint",
+    "type-check": "tsc --noEmit",
+    "prebuild": "npm run check-all"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.20",

@@ -17,6 +17,7 @@ import { Description } from "@/components/font/description"
 import Heading2 from "@/components/font/h2"
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator"
 import { getCulturesArtsArticles } from "@/api-services/posts"
+import { Route } from "next"
 export default async function CulturesArtsPage() {
     const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.arts_cultures"),
@@ -59,7 +60,7 @@ export default async function CulturesArtsPage() {
 
                 {data.map((post: Post, i: number) => (
                     <Link
-                        href={`/articles/${String(post.id)}/content`}
+                        href={`/articles/${post.id}/content` as Route}
                         key={i}
                         className="group block"
                     >

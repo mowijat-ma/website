@@ -22,7 +22,9 @@ export default async function HomeCalendarSection() {
         getHomeEvents()
 
     ])
-
+    if (!events || events.length === 0) {
+        return null; // Return null if there are no events to display
+    }
     return (
         <section className="bg-background relative p-8 ">
             <SectionTitle value={t('title')} />

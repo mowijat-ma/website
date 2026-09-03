@@ -10,6 +10,7 @@ import { FaRegRectangleList } from "react-icons/fa6";
 import { cn } from "@/lib/utils"; // Standard shadcn utility
 import { HouseIcon , NewspaperIcon , ArticleIcon , CalendarDotsIcon, MagnifyingGlassIcon, LightningIcon } from "@phosphor-icons/react";
 import { TfiMicrophone } from "react-icons/tfi";
+import { Route } from "next";
 
 export default function MobileNavigation() {
   const t = useTranslations('navigation.links');
@@ -59,7 +60,7 @@ export default function MobileNavigation() {
                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));              return (
                 <Link
                   key={link.id}
-                  href={link.href}
+                  href={link.href as Route}
                   className={cn(
                     "flex flex-col flex-1 items-center justify-center gap-1 transition-all duration-200 py-3",
                     isActive 
