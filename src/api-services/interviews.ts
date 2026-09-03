@@ -1,5 +1,7 @@
-import { INTERVIEWS_CATEGORY, NEWS_CATEGORY } from "@/data/constant"
+import { INTERVIEWS_CATEGORY } from "@/data/constant"
+import { apiClient } from "@/lib/apiclient"
 import { extractWpPost, extractWpPosts } from "@/services/post.services"
+import type { WordPressPost } from "@/types/wp.types"
 
 // export const getHomeInterviews = async () => {
 //     const data = [
@@ -52,8 +54,8 @@ import { extractWpPost, extractWpPosts } from "@/services/post.services"
 // }
 export const getHomeInterviews = async () => {
     try {
-        const res = await fetch(`${process.env.BASE_URL}/posts?categories=${INTERVIEWS_CATEGORY.id}&per_page=6`)
-        const data = await res.json()
+        const { res } = await apiClient<WordPressPost[]>(`posts?categories=${INTERVIEWS_CATEGORY.id}&per_page=6`)
+        const data = await res
         return data.map((post: any) => extractWpPost(post))
     } catch (error) {
         console.error('Error fetching home interviews:', error)
@@ -65,8 +67,8 @@ export const getHomeInterviews = async () => {
 
 export const getInterviewBySlug = async (slug: string) => {
     try {
-    const res = await fetch(`${process.env.BASE_URL}/posts/${slug}`)
-    const interview = await res.json()
+    const { res } = await apiClient(`posts/${slug}`)
+    const interview = await res
     const data = extractWpPost(interview)
     console.log(' data:', data)
     return data

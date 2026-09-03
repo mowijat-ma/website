@@ -96,8 +96,8 @@ export const getCinemaWorldWpPostsHome = async () => {
     // // const data = extractWpPosts(res)
     // const data = extractWpPosts(await res)
     // return data?.slice(0, 5);
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${CINEMA_WORLD_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient<WordPressPost[]>(`posts?categories=${CINEMA_WORLD_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     return data?.slice(0, 5);
   } catch (error) {
     throw new Error(
@@ -111,8 +111,8 @@ export const getCinemaMorrocanWpPosts = async () => {
     //   method: 'GET',
     // })
     // const data = extractWpPosts(res)
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${CINEMA_MORROCAN_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient<WordPressPost[]>(`posts?categories=${CINEMA_MORROCAN_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     return data?.slice(0, 5);
   } catch (error) {
     throw new Error(
@@ -128,8 +128,8 @@ export const getCinemaArabeWpPosts = async () => {
     // // const data = extractWpPosts(res)
     // const data = extractWpPosts(await res)
     // return [data[4], data[3], data[2], data[1]]
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${CINEMA_ARABE_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient<WordPressPost[]>(`posts?categories=${CINEMA_ARABE_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     return data?.slice(0, 5);
   } catch (error) {
     throw new Error(
@@ -189,8 +189,8 @@ export const getHomeTopTrendingPosts = async () => {
   // console.log('HomeTopTrendingPosts data:', data)
   // return data
   try {
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${LAST_POSTS_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient<WordPressPost[]>(`posts?categories=${LAST_POSTS_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     console.log('HomeTopTrendingPosts data:', data)
     return data
   } catch (error) {
@@ -204,8 +204,8 @@ export const getHomeTopTrendingPosts = async () => {
 // getHomeTopReadsPosts
 export const getHomeTopReadsPosts = async () => {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${LAST_POSTS_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient<WordPressPost[]>(`posts?categories=${LAST_POSTS_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     console.log('HomeTopTrendingPosts data:', data)
     return data
   } catch (error) {
@@ -252,8 +252,8 @@ export const getHomeTopNewsPosts = async () => {
   // console.log('HomeTopTrendingPosts data:', data)
   // return data
   try {
-      const res = await fetch(`${process.env.BASE_URL}/posts?categories=${NEWS_CATEGORY.id}`)
-      const data = extractWpPosts(await res.json())
+      const { res } = await apiClient<WordPressPost[]>(`posts?categories=${NEWS_CATEGORY.id}`)
+      const data = extractWpPosts(await res)
       return data.slice(0, 5)
     } catch (error) {
       console.error('Error fetching news page posts:', error)

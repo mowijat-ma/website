@@ -35,8 +35,8 @@ export const getNewsPagePosts = async () => {
   //   )
   // }
   try {
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${NEWS_CATEGORY.id}`)
-    const data = extractWpPosts(await res.json())
+    const { res } = await apiClient(`posts?categories=${NEWS_CATEGORY.id}`)
+    const data = extractWpPosts(await res)
     console.log('NewsPagePosts data:', data)
     return data
   } catch (error) {

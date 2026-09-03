@@ -1,5 +1,5 @@
 import { CalendarEventProps } from "@/types"
-import { Server } from "tls"
+import { apiClient } from "@/lib/apiclient"
 
 export const getEvents = async (): Promise<CalendarEventProps[]> => {
   try {
@@ -29,11 +29,8 @@ export const getEvents = async (): Promise<CalendarEventProps[]> => {
 export const getHomeEvents = async () => {
   
     try {
-    const res = await fetch(`http://localhost/wordpress/mowijat/wp-json/tribe/events/v1/events`)
-    // const data = extractWpPosts(await res.json())
-    // console.log('HomeTopTrendingPosts data:', data)
-    // return data
-    const resdata= await res.json()
+    const { res } = await apiClient<{ events: unknown[] }>(`tribe/events/v1/events`)
+    const resdata = await res
     const data = extractWpEvents(resdata.events)
     console.log('events data:', resdata)
     console.log('events data:', data)
