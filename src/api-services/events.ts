@@ -1,5 +1,5 @@
 import { CalendarEventProps } from "@/types"
-import { apiClient } from "@/lib/apiclient"
+import { apiClient, EVENTS_API_BASE_URL } from "@/lib/apiclient"
 
 export const getEvents = async (): Promise<CalendarEventProps[]> => {
   try {
@@ -29,17 +29,13 @@ export const getEvents = async (): Promise<CalendarEventProps[]> => {
 export const getHomeEvents = async () => {
   
     try {
-    const { res } = await apiClient<{ events: unknown[] }>(`tribe/events/v1/events`)
+    const { res } = await apiClient<{ events: unknown[] }>(`tribe/events/v1/events`, {}, EVENTS_API_BASE_URL)
     const resdata = await res
     const data = extractWpEvents(resdata.events)
-    console.log('events data:', resdata)
-    console.log('events data:', data)
     return data
   } catch (error) {
-    console.error('Error fetching news page posts:', error)
-    throw new Error(
-      error instanceof Error ? error.message : "Failed to fetch posts"
-    )
+    console.error('Error fetching home events:', error)
+    return getEvents()
   }
   }
 
