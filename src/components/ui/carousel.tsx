@@ -235,7 +235,7 @@ function CarouselNext({
 
 function CustomCarouselPrevious({
   className,
-  variant = "iconOutline",
+  // variant = "iconOutline",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -243,8 +243,9 @@ function CustomCarouselPrevious({
 
   return (
     <Button
+      variant="ghost"
       data-slot="carousel-previous"
-      variant={variant}
+      // variant={variant}
       size={size}
       className={cn(
         "size-8",
@@ -264,7 +265,7 @@ function CustomCarouselPrevious({
 
 function CustomCarouselNext({
   className,
-  variant = "iconOutline",
+  // variant = "iconOutline",
   size = "icon",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -272,8 +273,10 @@ function CustomCarouselNext({
 
   return (
     <Button
+      variant="ghost"
+
       data-slot="carousel-next"
-      variant={variant}
+      // variant={variant}
       size={size}
       className={cn(
         "size-8",

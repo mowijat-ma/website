@@ -1,15 +1,13 @@
-import { getNewsPagePosts } from "@/api/news";
 import Heading2 from "@/components/font/h2";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbEllipsis, BreadcrumbPage } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
-import { getHomeInterviews } from "@/api/interviews";
-import Heading4 from "@/components/font/h4";
-import { Post } from "@/types";
+import { getHomeInterviews } from "@/api-services/interviews";
+import { BreadCrumbLinksType } from "@/types";
 import { Description } from "@/components/font/description";
+import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
+import { Route } from "next";
 
 export default async function CinemaArabePage() {
     const [t, ui, tNavigation, data] = await Promise.all([
@@ -22,19 +20,17 @@ export default async function CinemaArabePage() {
     const sideArticle = data[1]
     const wideAricles = data.slice(0, data.length)
 
+    const breadcrumbLinks: BreadCrumbLinksType[] = [
+        {
+            title: tNavigation("home"),
+            href: "/"
+        },
 
+
+    ]
     return (<>
-        <Breadcrumb dir="rtl" className="mb-8 px-4">
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <BreadcrumbPage>{tNavigation("interviews")}</BreadcrumbPage>
-                </BreadcrumbItem>
-            </BreadcrumbList>
-        </Breadcrumb>
+        <BreadcrumbGenerator currentPage={tNavigation("interviews")} links={breadcrumbLinks} />
+
         {/* <div className="col-span-12 sm:col-span-8  px-4 text-center sm:text-right">
                     <Heading2 className="text-primary">{t("title")}</Heading2>
                     <Heading4 className="text-primary">
@@ -52,7 +48,13 @@ export default async function CinemaArabePage() {
             >
 
                 {wideAricles.map((interview: any, i: number) => (
-                    <Link key={i} href={`/interviews/${interview.id}`} className="group block h-full relative ">
+                    <Link key={i}
+
+                        href={`/interviews/${interview.id}/content` as Route}
+                        //  href={{pathname: '/intevriew/[id]/content', query: {id, interview.id}}}
+                        // href={{ pathname: "/interviews/[id]", query: { id: interview.id } }}
+
+                        className="group block h-full relative ">
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200 overflow-hidden">
                             {/* Image Wrapper */}
                             <AspectRatio
@@ -60,7 +62,7 @@ export default async function CinemaArabePage() {
                                 className="overflow-hidden rounded-xl bg-muted "
                             >
                                 <img
-                                    src={interview.with?.image || "https://ui.shadcn.com/placeholder.svg"}
+                                    src={interview.image || "https://ui.shadcn.com/placeholder.svg"}
                                     alt={interview.title}
                                     style={{ boxShadow: "inset 0px -29px 48px 0px #696969" }}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 "
@@ -95,63 +97,63 @@ export default async function CinemaArabePage() {
     </>)
 
 
-    return (<>
-        <Breadcrumb dir="rtl" className="mb-8 px-4">
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                    <BreadcrumbPage>{tNavigation("cinema.morrocan")}</BreadcrumbPage>
-                </BreadcrumbItem>
-            </BreadcrumbList>
-        </Breadcrumb>
+    // return (<>
+    //     <Breadcrumb dir="rtl" className="mb-8 px-4">
+    //         <BreadcrumbList>
+    //             <BreadcrumbItem>
+    //                 <BreadcrumbLink href="/">{tNavigation("home")}</BreadcrumbLink>
+    //             </BreadcrumbItem>
+    //             <BreadcrumbSeparator />
+    //             <BreadcrumbItem>
+    //                 <BreadcrumbPage>{tNavigation("cinema.morrocan")}</BreadcrumbPage>
+    //             </BreadcrumbItem>
+    //         </BreadcrumbList>
+    //     </Breadcrumb>
 
-        <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-12 bg-background p-8 grid grid-cols-12 gap-8">
-                {/* <h1 className="text-4xl font-bold mb-4"></h1> */}
-                <div className="col-span-12">
-                    <Heading2 className="text-primary">{t("title")}</Heading2>
-                    <Heading4 className="text-primary">
-                        {t("subtitle")}
-                    </Heading4>
-                </div>
-                {/* <Heading2 className="mb-4"></Heading2> */}
-                {data.map((interview: any) => (
-                    <Link key={interview.id} href={`/interviews/${interview.id}`} className="group block h-full relative col-span-3">
-                        <AspectRatio ratio={16 / 12} className="rounded-lg overflow-hidden">
-                            <img
-                                src={interview?.with?.image}
-                                alt={interview.title}
-                                className={cn("object-cover w-full h-full group-hover:scale-105 transition-transform duration-300", interview.id === mainArticle.id ? "col-span-8" : "col-span-4")}
-                            />
-                        </AspectRatio>
-                        <div className="p-4">
-                            <p className="text-sm">{interview?.with?.name_ar}</p>
-                            <h3 className="text-lg font-bold">{interview.title}</h3>
-                        </div>
-                        {/* <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" /> */}
-                    </Link>
-                ))}
-                {data.map((interview: any) => (
-                    <Link key={interview.id} href={`/interviews/${interview.id}`} className="group block h-full relative col-span-3">
-                        <AspectRatio ratio={16 / 12} className="rounded-lg overflow-hidden">
-                            <img
-                                src={interview?.with?.image}
-                                alt={interview.title}
-                                className={cn("object-cover w-full h-full group-hover:scale-105 transition-transform duration-300", interview.id === mainArticle.id ? "col-span-8" : "col-span-4")}
-                            />
-                        </AspectRatio>
-                        <div className="p-4">
-                            <p className="text-sm">{interview?.with?.name_ar}</p>
-                            <h3 className="text-lg font-bold">{interview.title}</h3>
-                        </div>
-                        {/* <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" /> */}
-                    </Link>
-                ))}
-            </div>
-        </div>
+    //     <div className="grid grid-cols-12 gap-8">
+    //         <div className="col-span-12 bg-background p-8 grid grid-cols-12 gap-8">
+    //             {/* <h1 className="text-4xl font-bold mb-4"></h1> */}
+    //             <div className="col-span-12">
+    //                 <Heading2 className="text-primary">{t("title")}</Heading2>
+    //                 <Heading4 className="text-primary">
+    //                     {t("subtitle")}
+    //                 </Heading4>
+    //             </div>
+    //             {/* <Heading2 className="mb-4"></Heading2> */}
+    //             {data.map((interview: any) => (
+    //                 <Link key={interview.id} href={`/interviews/${interview.id}`} className="group block h-full relative col-span-3">
+    //                     <AspectRatio ratio={16 / 12} className="rounded-lg overflow-hidden">
+    //                         <img
+    //                             src={interview?.with?.image}
+    //                             alt={interview.title}
+    //                             className={cn("object-cover w-full h-full group-hover:scale-105 transition-transform duration-300", interview.id === mainArticle.id ? "col-span-8" : "col-span-4")}
+    //                         />
+    //                     </AspectRatio>
+    //                     <div className="p-4">
+    //                         <p className="text-sm">{interview?.with?.name_ar}</p>
+    //                         <h3 className="text-lg font-bold">{interview.title}</h3>
+    //                     </div>
+    //                     {/* <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" /> */}
+    //                 </Link>
+    //             ))}
+    //             {data.map((interview: any) => (
+    //                 <Link key={interview.id} href={`/interviews/${interview.id}`} className="group block h-full relative col-span-3">
+    //                     <AspectRatio ratio={16 / 12} className="rounded-lg overflow-hidden">
+    //                         <img
+    //                             src={interview?.with?.image}
+    //                             alt={interview.title}
+    //                             className={cn("object-cover w-full h-full group-hover:scale-105 transition-transform duration-300", interview.id === mainArticle.id ? "col-span-8" : "col-span-4")}
+    //                         />
+    //                     </AspectRatio>
+    //                     <div className="p-4">
+    //                         <p className="text-sm">{interview?.with?.name_ar}</p>
+    //                         <h3 className="text-lg font-bold">{interview.title}</h3>
+    //                     </div>
+    //                     {/* <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" /> */}
+    //                 </Link>
+    //             ))}
+    //         </div>
+    //     </div>
 
-    </>)
+    // </>)
 }

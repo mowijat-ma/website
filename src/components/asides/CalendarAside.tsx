@@ -47,7 +47,7 @@ export default function CalendarAside() {
   // />
   //   )
   return (
-    <div className="bg-background p-4 rounded-">
+    <div className="bg-background p-4 rounded ">
       {/* <SectionTitle value="التقويم" /> */}
       <div className="flex gap-4 items-center">
         <Button variant="ghost" onClick={goBack} className="">

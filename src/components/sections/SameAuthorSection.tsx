@@ -4,9 +4,10 @@ import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getTranslations } from "next-intl/server";
 import SectionTitle from "../font/section-title";
-import { getCinemaMorrocanWpPosts } from "@/api/posts";
+import { getCinemaMorrocanWpPosts } from "@/api-services/posts";
 import PostTitle from "../font/title";
 import PostDescription from "../font/description";
+import { Route } from "next";
 
 
 
@@ -31,7 +32,7 @@ export default async function SameAuthorSection() {
           role="list"
         >
           {data.map((post: Post, i: number) => (
-            <Link href={`/articles/${post.id}/content`} key={i} className="group block">
+            <Link href={`/articles/${post.id}/content` as Route} key={i} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                 {/* Image Wrapper */}

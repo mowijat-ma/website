@@ -1,4 +1,5 @@
 import { CalendarEventProps } from "@/types"
+import { Server } from "tls"
 
 export const getEvents = async (): Promise<CalendarEventProps[]> => {
   try {
@@ -23,4 +24,70 @@ export const getEvents = async (): Promise<CalendarEventProps[]> => {
       error instanceof Error ? error.message : "Failed to fetch posts"
     )
   }
+}
+
+export const getHomeEvents = async () => {
+  
+    try {
+    const res = await fetch(`http://localhost/wordpress/mowijat/wp-json/tribe/events/v1/events`)
+    // const data = extractWpPosts(await res.json())
+    // console.log('HomeTopTrendingPosts data:', data)
+    // return data
+    const resdata= await res.json()
+    const data = extractWpEvents(resdata.events)
+    console.log('events data:', resdata)
+    console.log('events data:', data)
+    return data
+  } catch (error) {
+    console.error('Error fetching news page posts:', error)
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to fetch posts"
+    )
+  }
+  }
+
+interface WpEvent {
+  id: number;
+  title: string;
+  start_date: string;
+  end_date: string;
+  venue: {
+    city: string;
+  };
+  image: {
+    url: string;
+  };
+}
+const extractWpEvents = (data: any): CalendarEventProps[] => {
+  if (!data || !Array.isArray(data)) {
+    return [];
+  }
+
+  return data.map((event: WpEvent) => ({
+    id: event.id,
+    title: event.title,
+    startDate: event.start_date,
+    endDate: event.end_date,
+    location: event.venue?.city || "",
+    restDays: getRemainingDays(event.start_date),
+    image: event.image?.url || "",
+  }));
+    
+  } 
+
+
+// app/countdown/page.tsx
+
+function getRemainingDays(targetDateStr: string): number {
+  const target = new Date(targetDateStr);
+  const now = new Date();
+
+  // Normalize time to midnight to calculate full days accurately
+  target.setHours(0, 0, 0, 0);
+  now.setHours(0, 0, 0, 0);
+
+  const diffInMs = target.getTime() - now.getTime();
+  const msInDay = 1000 * 60 * 60 * 24;
+
+  return Math.ceil(diffInMs / msInDay);
 }

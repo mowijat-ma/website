@@ -49,4 +49,15 @@ body {
 }
 
 
-
+.wp-block-gallery .blocks-gallery-item img {
+  }
+.wp-block-gallery-is-layout-flex{
+  display: flex;
+  gap: 14px;
+}
+figure.wp-block-image {
+  HEIGHT: 100% !important;
+}
+.wp-block-image .size-large{
+  height: 100% !important;
+}

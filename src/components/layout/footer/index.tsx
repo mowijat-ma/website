@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator"
 // import { Fo } from "@/data/navigation"
 import { IconContext } from "react-icons"
 import { FOOTER_LINKS } from "@/data/navigation"
+import { Route } from "next"
 
 interface FooterLink {
   id?: number
@@ -24,13 +25,12 @@ const Footer = () => {
   const links = FOOTER_LINKS || []
 
     return (<>
-      <section className=" bg-white border-t border-mesure">
+      <section className=" bg-white border-t border-mesure print:hidden">
         <footer className="border-mesure lg:max-w-6xl px-4 py-8 w-full mx-auto">
           {/* <Footer2 menuItems={menuItems} tagline={t('footer.tagline')} /> */}
           <div className="border-mesure">
           <div className="grid md:grid-cols-12 gap-8 text-center sm:text-start ">
-{/* {JSON.stringify(menuItems)}
-{menuItems.length} */}
+
             {links?.length > 0 && links.map((section, sectionIdx) => (
               <div key={sectionIdx} className="col-span-4 flex flex-col border-mesure">
                 <h3 className="mb-4 font-bold">{t(section.title)}</h3>
@@ -40,7 +40,7 @@ const Footer = () => {
                       key={linkIdx}
                       className="font-medium group w-full"
                     >
-                      <Link href={link.href} className="group-hover:text-primary group-hover:underline">
+                      <Link href={link.href as Route} className="group-hover:text-primary group-hover:underline">
                         {t(link.title)}
                       </Link>
                     </li>
@@ -60,7 +60,7 @@ const Footer = () => {
               <div className="flex gap-2 justify-end">
 
                   {socialLinks.map(link=>(
-                    <Link key={link.id} href={link.href} target="_blank" rel="noopener noreferrer">
+                    <Link key={link.id} href={link.href as Route} target="_blank" rel="noopener noreferrer">
                       <link.icon  size='25' className="text-primary"  />
                     </Link>
                   ))}
@@ -78,6 +78,15 @@ const Footer = () => {
         </div>
         </footer>
       </section>
+      {/* <div className="mx-auto">
+        <Logo url="/" className="flex items-center gap-2 w-full border-mesure  max-w-48">
+        <LogoImage
+          src={'/logos/logo_light_1.png'}
+          alt={'logo.alt'}
+          className="w-full"
+        />
+      </Logo>
+      </div> */}
     </>)
 }
 

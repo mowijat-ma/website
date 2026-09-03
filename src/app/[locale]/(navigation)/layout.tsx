@@ -50,7 +50,7 @@ export default function RootLayout({
       {/* <div className="flex flex-col h-full border py-2"> */}
       <div className="bg-white w-full ">
       </div>
-      <div className="sticky top-0 bg-background z-10 shadow-sm">
+      <div className="sticky top-0 bg-background z-10 shadow-sm print:relative print:top-0 print:left-0 print:right-0 print:z-50 print:shadow-none">
         <LogoBar />
         <Header />
         {/* <SearchInput /> */}

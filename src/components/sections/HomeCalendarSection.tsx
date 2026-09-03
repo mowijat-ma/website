@@ -5,23 +5,39 @@ import { Card } from "../ui/card";
 import { ar } from "date-fns/locale";
 import SectionTitle from "../font/section-title";
 import CarouselCalendar from "../calendar/carousel.calendar";
-import { getEvents } from "@/api/events";
+import { getEvents, getHomeEvents } from "@/api-services/events";
 import { getTranslations } from "next-intl/server";
 // import TitleWithBar from "../typoghraphy/title-with-bar";
+interface HomeCalendarSectionProps {
+    title?: string;
+    img?: string;
 
+}
 export default async function HomeCalendarSection() {
 
     // const t = useTranslations('sections.calendar')
-    const [t, data] = await Promise.all([
+    const [t, data, events] = await Promise.all([
         getTranslations('sections.calendar'),
-        getEvents()
-    ])
+        getEvents(),
+        getHomeEvents()
 
+    ])
+    if (!events || events.length === 0) {
+        return null; // Return null if there are no events to display
+    }
     return (
         <section className="bg-background relative p-8 ">
             <SectionTitle value={t('title')} />
-            <CarouselCalendar events={data} />
-
+            <CarouselCalendar events={events} />
+            {/* {events.map((event: any) => (
+                <div key={event.id}>
+                    <img src={event.image} alt={event.title} />
+                    <p>{event.title}</p>
+                    <p>{event.startDate}</p>
+                    <p>{event.location}</p>
+                </div>
+            ))} */}
+            {/* {JSON.stringify(events)} */}
         </section>
     );
 }

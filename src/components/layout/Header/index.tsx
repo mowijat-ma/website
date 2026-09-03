@@ -20,7 +20,7 @@ const Header = () => {
   const t = useTranslations('layout.navLinks')
   
 
-  return <header className="lg:max-w-6xl w-full mx-auto bg-background px-4 border-mesure">
+  return <header className="lg:max-w-6xl w-full mx-auto bg-background px-4 border-mesure print:hidden">
   {/* <Navbar1 menu={links} /> */}
   {/* <LogoBar /> */}
     {/* <Separator className="my-2" /> */}

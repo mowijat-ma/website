@@ -1,4 +1,4 @@
-import { searchWpPosts } from "@/api/posts";
+import { searchWpPosts } from "@/api-services/posts";
 import { Description } from "@/components/font/description";
 import Heading4 from "@/components/font/h4";
 import { getTranslations } from "next-intl/server";
@@ -15,6 +15,7 @@ import RelatedArticlesAside, { RelatedArticlesAsideLoader } from "@/components/a
 import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 type SearchPageProps = {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -44,6 +45,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             href: "/"
         }
     ]
+    // const response = await fetch('/fr/api/posts');
+    // const data1 = await response.json();
+    // console.log('data1', data1)
     return (
         <>
             <BreadcrumbGenerator currentPage={tNavigation("search")} links={breadcrumbLinks} />
@@ -56,7 +60,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                             <Description>{`${t('subtitle')} : ${searchQuery}`}</Description>
                             <SearchInput />
 
-                            {data.map((item, i) => (
+                            {data.map((post, i) => (
 
                                 // <AccordionItem value={item.title} key={item.id}>
                                 //     <AccordionTrigger >
@@ -66,16 +70,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                 //         </Link>
                                 //     </AccordionContent>
                                 // </AccordionItem>
-                                <Link href={`/articles/${item.id}/content`} className="py-2 border-b group" key={i}>
-                                            <Heading4 className="group-hover:text-primary grow text-start">{item.title}</Heading4>
-                                            <Description dangerouslySetInnerHTML={{ __html: item.description }} className="no-underline! line-clamp-3"></Description>
+                                <Link 
+                                href="#"
+                                // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} 
+                                className={cn("py-2 group", 
+                                    i == data.length -1 ? "" : "border-b")}
+                                    key={i}>
+                                            <Heading4 className="group-hover:text-primary grow text-start">{post.title}</Heading4>
+                                            <Description dangerouslySetInnerHTML={{ __html: post.description }} className="no-underline! line-clamp-3"></Description>
 
                                 </Link>
                             ))}
 
 
-                            <Accordion type="single" collapsible defaultValue={data[0]?.title || ""} className="w-full">
-                            </Accordion>
+                            {/* <Accordion type="single" collapsible defaultValue={data[0]?.title || ""} className="w-full">
+                            </Accordion> */}
                             { }
                         </div>
 

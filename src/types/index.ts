@@ -70,9 +70,9 @@ export interface BreadCrumbLinksType {
 
 
 export interface WpCategory {
-  id: Number;
-  name: String;
-  slug: String;
+  id: number;
+  name: string;
+  slug: string;
   count: number;
-  description: String;
+  description: string;
 }

@@ -1,4 +1,4 @@
-import { getNewsPagePosts } from "@/api/news"
+import { getNewsPagePosts } from "@/api-services/news"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -16,12 +16,14 @@ import Heading4 from "@/components/font/h4"
 import { Description } from "@/components/font/description"
 import Heading2 from "@/components/font/h2"
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator"
+import { getCulturesArtsArticles } from "@/api-services/posts"
+import { Route } from "next"
 export default async function CulturesArtsPage() {
     const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.arts_cultures"),
         getTranslations("ui"),
         getTranslations("navigation.links"),
-        getNewsPagePosts()
+        getCulturesArtsArticles()
     ])
     const mainArticle = data[0]
     const sideArticle = data[1]
@@ -56,8 +58,12 @@ export default async function CulturesArtsPage() {
                 role="list"
             >
 
-                {wideAricles.map((post: Post, i: number) => (
-                    <Link href={`/articles/${post.id}/content`} key={i} className="group block">
+                {data.map((post: Post, i: number) => (
+                    <Link
+                        href={`/articles/${post.id}/content` as Route}
+                        key={i}
+                        className="group block"
+                    >
                         {/* Blog Card */}
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
                             {/* Image Wrapper */}

@@ -1,5 +1,5 @@
 import './style.css'
-import { getWpPostById } from "@/api/posts";
+import { getWpPostById } from "@/api-services/posts";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import Article from "@/components/font/body";
@@ -59,7 +59,7 @@ export default async function PostContentPage({
         
         <div className="grid grid-cols-12 gap-8 direction-reverse" >
 
-            <div className="sm:col-span-8 col-span-12">
+            <div className="sm:col-span-8 col-span-12 print:col-span-12">
                 {/* <div className="sm:hidden">
                     <ArticleContentCtrl />
                 </div> */}
@@ -90,10 +90,10 @@ export default async function PostContentPage({
                     </Article>
                 </div>
             </div>
-            <div className="col-span-12 sm:col-span-4 hidden sm:block">
-                <div className="sticky top-24 h-fit flex flex-col gap-8">
-                    <ArticleContentCtrl />
-                    <div className="bg-background rounded-lg px-8 py-8 min-h-[50vh] hidden sm:block">
+            <div className="col-span-12 sm:col-span-4 hidden print:hidde, sm:block">
+                <div className="sticky top-38 h-fit flex flex-col gap-8 print:hidden">
+                    <ArticleContentCtrl article={data}/>
+                    {/* <div className="bg-background rounded-lg px-8 py-8 min-h-[50vh] hidden sm:block">
                         <aside className="w-full 0">
                             <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-2 font-sans">
                                 إعلان ممول
@@ -116,10 +116,10 @@ export default async function PostContentPage({
                                 </div>
                             </a>
                         </aside>
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            <div className="col-span-12">
+            <div className="col-span-12 print:hidden">
                 <SameAuthorSection />
             </div>
         </div>

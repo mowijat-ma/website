@@ -27,7 +27,7 @@ export default function MobileHeader({  links}: { links: any[] }) {
       // مراقبة التمرير لإظهار أو إخفاء الزر
       useEffect(() => {
           const toggleVisibility = () => {
-            console.log(window.scrollY)
+            // console.log(window.scrollY)
               // يظهر الزر بعد التمرير لأسفل بمقدار 300 بكسل
               if (window.scrollY > 70) {
                   setIsVisible(false);
@@ -41,7 +41,7 @@ export default function MobileHeader({  links}: { links: any[] }) {
       }, []);
   // check if this page
   return (
-    <div className="md:hidden flex gap-4 bg-background- py-4 items-center justify-between">
+    <div className="md:hidden flex gap-4 bg-background-t py-4 items-center justify-between">
       <Sheet >
         <SheetTrigger asChild onClick={() => setOpen(!open)}>
           <button  className="border-none ">

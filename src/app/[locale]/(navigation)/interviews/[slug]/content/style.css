@@ -1,0 +1,65 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+/* @layer base {
+  * {
+    @apply border-border;
+  }
+  } */
+  
+  /* body {
+    @apply bg-background text-foreground;
+    @apply font-ui leading-relaxed;
+  }
+  article{
+    @apply text-lg text-primary !important;
+  }
+  .wp-block-paragraph{
+    @apply text-muted-foreground;
+  } */
+
+
+  /*  */
+  /* .wp-block-paragraph {
+    color: #4e4e4e;
+    text-align: justify;
+    line-height: 40px;
+}
+
+.wp-block-image.size-large img{
+  aspect-ratio: 2/3; 
+  height: 50vh;
+  object-fit: cover;
+  margin: 10px;
+  width: 100%;
+  border-radius: 10px;
+} */
+/* 
+body {
+  background-color: var(--background) !important;
+} */
+
+
+
+.tiled-gallery__gallery > .tiled-gallery__row {
+  padding: 14px 0;
+  display: flex;
+  gap: 14px
+}
+
+
+
+.wp-block-quote {
+  border-right: 3px solid var(--primary);
+  /* padding-right: 1rem; */
+  margin-right: 0;
+  /* font-style: italic; */
+}
+blockquote{
+  /* font-style: italic; */
+}
+.wp-block-paragraph {
+  margin-bottom: 2rem;
+  padding-right: 1rem;
+}

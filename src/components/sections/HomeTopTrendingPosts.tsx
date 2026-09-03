@@ -1,4 +1,4 @@
-import { getFirstWpPost, getHomeTopTrendingPosts } from "@/api/posts";
+import { getFirstWpPost, getHomeTopTrendingPosts } from "@/api-services/posts";
 import { Post, WpPost } from "@/types";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -19,22 +19,35 @@ export default async function HomeTopTrendingPosts() {
 
   const mainArticle = data[0]
   const wideAricles = data.slice(1, 4)
-
+  // if (!mainArticle) {
+  //   return (
+  //     <div className="flex flex-col gap-8 rounded-lg bg-background p-8">
+  //       <SectionTitle value={t("title")} />
+  //       <p className="text-muted-foreground text-base leading-normal">
+  //         {t("noPosts")}
+  //       </p>
+  //     </div>
+  //   )
+  // }
   return (
     <>
-      <section className="flex flex-col gap-8 rounded bg-background p-8">
+      <section className="flex flex-col gap-8 rounded-lg bg-background p-8">
         {/* الحاوية الرئيسية للشبكة */}
         <div className=""> {/* أضفنا items-start لضمان عمل sticky */}
           <SectionTitle value={t("title")} />
           {/* الجهة اليسرى: المقال الرئيسي ومقالات الـ topPosts */}
           <div className="">
-            <Link href={`/articles/${mainArticle.id}/content`} key={mainArticle.id} className="group block">
+            <Link 
+              // href={`/articles/${mainArticle.id}/content`}
+              // href={{ pathname: "/articles/[id]/content", query: { id: mainArticle.id } }}
+              href="#"
+              key={mainArticle.id} className="group block">
               {/* Blog Card */}
               <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
                 {/* Image Wrapper */}
                 <AspectRatio
                   ratio={5 / 3}
-                  className="overflow-hidden rounded"
+                  className="overflow-hidden rounded-lg"
                 >
                   <img
                     src={
@@ -70,9 +83,13 @@ export default async function HomeTopTrendingPosts() {
             <div className="mt-6 flex flex-col gap-8 md:grid md:grid-cols-3 gap-y-12 sm:gap-8">
               {wideAricles?.map((post: Post, index: number) => (
                 <div key={index} className="h-fit">
-                  <Link href={`/articles/${post.id}/content`} className="group block">
+                  <Link 
+                  // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                  href="#"
+                  // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+                  className="group block">
                     <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
-                      <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-lg bg-muted">
+                      <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-muted">
                         <img
                           src={post.image || "https://ui.shadcn.com/placeholder.svg"}
                           className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
@@ -107,7 +124,11 @@ export const BlogPostContainer = ({ post }: {
   post: Post
 }) => {
   return (
-    <Link href={`/articles/${post.id}/content`} key={post.id} className="group block">
+    <Link 
+    // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} 
+    href={{ pathname: "/articles/[id]/content", query: { id: post.id } }}
+
+    key={post.id} className="group block">
       {/* Blog Card */}
       <div className="flex flex-col gap-4 rounded-xl- transition-all duration-200">
         {/* Image Wrapper */}

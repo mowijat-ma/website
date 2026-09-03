@@ -10,6 +10,7 @@ export const routing = defineRouting({
     //   de: '/pfadnamen'
     // }
   }
+  
 });
 
 

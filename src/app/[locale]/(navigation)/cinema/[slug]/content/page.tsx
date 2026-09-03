@@ -9,7 +9,7 @@ import { GoArrowRight } from "react-icons/go";
 import { FiHeart } from "react-icons/fi";
 import { PiLinkSimpleHorizontal, PiPrinter } from "react-icons/pi";
 import { BiShare } from "react-icons/bi";
-import { getWpPostById } from "@/api/posts";
+import { getWpPostById } from "@/api-services/posts";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import Article from "@/components/font/body";

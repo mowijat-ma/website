@@ -78,7 +78,7 @@ export default function CarouselCalendar({
                     <CarouselItem key={i} className="pl-4 md:basis-1/3 lg:basis-1/3">
                         <div className="relative group cursor-pointer overflow-hidden rounded-lg">
                             <AspectRatio ratio={3 / 4}>
-                                <img className="w-full h-full object-cover" src={item.image} alt={item.title} />
+                                <img className="w-full h-full object-cover bg-muted" src={item.image} alt={item.title} />
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
                                 <div className="font-ui px-4 p-4 absolute bottom-0 left-0 w-full translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 bg-gradient-to-t from-black/80 to-transparent text-white">
                                     <h3 className="text-3xl font-semibold mb-2">{item.title}</h3>
@@ -93,7 +93,7 @@ export default function CarouselCalendar({
                                 </div>
                             </AspectRatio>
                         </div>
-                    </CarouselItem>
+                    </CarouselItem> 
                 ))}
             </CarouselContent>
 

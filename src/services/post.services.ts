@@ -1,8 +1,7 @@
 import { apiClient } from "@/lib/apiclient";
-import { Post, WpPost } from "@/types";
 import { WordPressPost } from "@/types/wp.types";
 
-export const extractWpPosts = (res:any) => {
+export const extractWpPosts = (res: WordPressPost[]) => {
   const data = res.map((item: any) => {
     return {
       id: item.id,
@@ -24,21 +23,21 @@ export const extractWpPosts = (res:any) => {
   return data
 }
 
-export const extractWpPost =  (item: any) => {
-    return {
-      id: item.id,
-      title: stripHtml(item.title.rendered),
-      // WP excerpts come wrapped in <p> tags; post.excerpt.rendered is the correct path
-      description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
-      date: new Date(item.date).toLocaleDateString('ar-EG', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      }),
-      category: item.context || "سينما",
-      image: item.yoast_head_json?.og_image?.[0]?.url || item.jetpack_featured_media_url || '',
-      content: item.content.rendered
-    };
+export const extractWpPost = (item: any) => {
+  return {
+    id: item.id,
+    title: stripHtml(item.title.rendered),
+    // WP excerpts come wrapped in <p> tags; post.excerpt.rendered is the correct path
+    description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
+    date: new Date(item.date).toLocaleDateString('ar-EG', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }),
+    category: item.context || "سينما",
+    image: item.yoast_head_json?.og_image?.[0]?.url || item.jetpack_featured_media_url || '',
+    content: item.content.rendered
+  };
 }
 
 
@@ -46,11 +45,11 @@ export const extractWpPost =  (item: any) => {
 export const getWpPostsService = async () => {
   try {
     const { res } = await apiClient<WordPressPost[]>('posts', {
-          method: 'GET',
-        })
+      method: 'GET',
+    })
     return res
   } catch (error) {
-     throw new Error(
+    throw new Error(
       error instanceof Error ? error.message : "Failed to fetch posts"
     )
   }
@@ -61,7 +60,7 @@ export const getWpPostByIdService = async (id: string) => {
     const { res } = await apiClient<WordPressPost>(`posts/${id}`, {})
     return res
   } catch (error) {
-     throw new Error(
+    throw new Error(
       error instanceof Error ? error.message : "Failed to fetch post"
     )
   }
@@ -87,7 +86,7 @@ const stripHtml = (html: string) => {
 
 
 export const getSearchResultsContents = async (results: any) => {
-  let list = []
+  const list: any[] = []
   for (let i = 0; i < results.length; i++) {
     const element = results[i];
     const post = await getWpPostByIdService(element.id)

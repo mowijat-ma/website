@@ -5,7 +5,7 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { cn } from "@/lib/utils";
 // import TitleWithBar from "../typoghraphy/title-with-bar";
 import { getTranslations } from "next-intl/server";
-import { getCinemaWorldWpPostsHome } from "@/api/posts";
+import { getCinemaWorldWpPostsHome } from "@/api-services/posts";
 import SectionTitle from "../font/section-title";
 
 export default async function HomeCinemaWorldSection() {
@@ -43,7 +43,10 @@ export default async function HomeCinemaWorldSection() {
                   // isWide && "md:col-span-2 md:row-span-1"
                 )}
               >
-                <Link href={`/articles/${post.id}/content`}  className="flex flex-col h-full gap-4">
+                <Link 
+                href="#" 
+                // href={{ pathname: "/articles/[id]/content", query: { id: post.id } }} 
+                 className="flex flex-col h-full gap-4">
 
                   {/* Image Container */}
                   <div className={cn(

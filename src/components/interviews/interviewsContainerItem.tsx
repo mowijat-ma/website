@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { AspectRatio } from "../ui/aspect-ratio"
 import { cn } from "@/lib/utils"
-import { InterviewPost } from "@/types"
+import { InterviewPost, Post, WpPost } from "@/types"
+import { Route } from "next"
 
- const InterviewPostContainer = ({ post }: { post: InterviewPost }) => {
+ const InterviewPostContainer = ({ post }: { post: Post }) => {
     return (
-        <Link href={`/interviews/${post.id}`} className="group block h-full relative ">
+        <Link href={`/interviews/${String(post.id)}/content` as Route} className="group block h-full relative ">
             <div className="flex flex-col gap-4 rounded-xl transition-all duration-200 overflow-hidden">
                 {/* Image Wrapper */}
                 <AspectRatio
@@ -13,7 +14,7 @@ import { InterviewPost } from "@/types"
                     className="overflow-hidden rounded-xl bg-muted "
                 >
                     <img
-                        src={post.with?.image || "https://ui.shadcn.com/placeholder.svg"}
+                        src={post.image || "https://ui.shadcn.com/placeholder.svg"}
                         alt={post.title}
                         style={{ boxShadow: "inset 0px -29px 48px 0px #696969" }}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 "
@@ -36,7 +37,7 @@ import { InterviewPost } from "@/types"
                         {post.title}
                     </h3>
                     <p className="text-muted-foreground text-lg line-clamp-2">
-                        {post.with?.name_ar}
+                        {post.category}
                     </p>
                 </div>
             </div>
