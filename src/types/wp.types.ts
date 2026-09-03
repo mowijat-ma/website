@@ -48,7 +48,7 @@ export interface WordPressMeta {
   jetpack_seo_html_title: string;
   jetpack_seo_noindex: boolean;
   // أضف أي حقول Meta أخرى تستخدمها هنا (مثل ACF)
-  [key: string]: any; 
+  // [key: string]: any; 
 }
 
 export interface JetpackRelatedPost {

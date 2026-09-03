@@ -9,6 +9,7 @@ import * as React from "react"
 import { Search } from "lucide-react"
 import { Post } from "@/types"
 import { cn } from "@/lib/utils"
+import { searchWpPosts } from "@/api-services/posts"
 
 
 export function SearchInput() {
@@ -38,12 +39,12 @@ export function SearchInput() {
     const OnUpdateQuery = async (e: any) => {
         setQuery(e.target.value)
         if (e.target.value.length > 0) setOpen(true)
-        // if (e.target.value !== "") {
-        //     const res: any = await searchWpPosts(e.target.value)
-        //     setSearchResults(res)
-        //     console.log(res)
+        if (e.target.value !== "") {
+            const res: any = await searchWpPosts(e.target.value)
+            setSearchResults(res)
+            console.log(res)
 
-        // }
+        }
 
     }
     const isSearchPath = pathname === "/search";

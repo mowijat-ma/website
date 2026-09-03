@@ -1,6 +1,6 @@
 // import { getWpPosts } from "@/app/api/posts"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { BlogPost } from "@/types";
+import { BlogPost, Post } from "@/types";
 import { useTranslations } from "next-intl"
 import CinemaWorldPage from "./world/page";
 import { getHomeTopTrendingPosts } from "@/api-services/posts";
@@ -8,19 +8,19 @@ import { getHomeTopTrendingPosts } from "@/api-services/posts";
 export default async function CinemaPage() {
     // const t = useTranslations()
     const res = await getHomeTopTrendingPosts()    
-    const posts = res.map((item: any) => {
+    const posts = res.map((item: Post) => {
     return {
       id: item.id,
-      title: item.title.rendered,
+      title: item.title,
       // WP excerpts come wrapped in <p> tags; item.excerpt.rendered is the correct path
-      description: item.excerpt.rendered.replace(/<[^>]*>?/gm, ''),
+      description: item.description,
       date: new Date(item.date).toLocaleDateString('ar-EG', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
       }),
-      category: item.context || "Cinema",
-      image: item.jetpack_featured_media_url
+      category: item.category || "Cinema",
+      image: item.image || "/images/placeholder.png"
     };
   });
     return (<>
