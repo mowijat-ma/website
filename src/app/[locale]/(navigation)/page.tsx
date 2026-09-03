@@ -5,7 +5,7 @@ import { HomeInterviewsSection } from "@/components/sections/HomeInterviewsSecti
 import HomeCinemaMorrocanSection from "@/components/sections/HomeCinemaMorrocanSection";
 import HomeCinemaArabeSection from "@/components/sections/HomeCinemaArabeSection";
 import HomeCinemaWorldSection from "@/components/sections/HomeCinemaWorldSection";
-import HomeCalendarSection from "@/components/sections/HomeCalendarSection";
+// import HomeCalendarSection from "@/components/sections/HomeCalendarSection";
 
 
 export default function Home() {
@@ -32,7 +32,7 @@ export default function Home() {
           <HomeCinemaArabeSection />
           <HomeCinemaWorldSection />
       </div>
-      <HomeCalendarSection />
+      {/* <HomeCalendarSection /> */}
     </div>
     </>
   );
