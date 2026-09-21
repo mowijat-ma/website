@@ -1,21 +1,30 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiShare } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import { GoArrowRight } from "react-icons/go";
 import { PiPrinter } from "react-icons/pi";
 
-export default function ArticleContentCtrl({ article }: { article: any }) {
-    const router = useRouter();
-    const [isSaved, setIsSaved] = useState(false);
+interface SavedArticle {
+    id: number | string;
+    title?: string;
+    description?: string;
+}
 
-    // Load the initial saved state safely on the client
-    useEffect(() => {
-        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]");
-        setIsSaved(savedPosts.some((post: any) => post.id === article.id));
-    }, [article.id]);
+export default function ArticleContentCtrl({ article }: { article: SavedArticle }) {
+    const router = useRouter();
+    const [isSaved, setIsSaved] = useState<boolean>(() => {
+        if (typeof window === "undefined") return false;
+        try {
+            const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]") as SavedArticle[];
+            return savedPosts.some((post) => post.id === article.id);
+        } catch {
+            return false;
+        }
+    });
+
     const OnBackClick = () => {
         router.back();
     };
@@ -57,8 +66,8 @@ export default function ArticleContentCtrl({ article }: { article: any }) {
             try {
                 await navigator.share(shareData);
                 console.log('Article shared successfully (Text only)');
-            } catch (error: any) {
-                if (error.name !== 'AbortError') {
+            } catch (error: unknown) {
+                if (error instanceof Error && error.name !== 'AbortError') {
                     console.error('Error sharing article text:', error);
                 }
             }
@@ -78,18 +87,15 @@ export default function ArticleContentCtrl({ article }: { article: any }) {
     };
 
     const OnSaveClick = () => {
-        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]");
+        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]") as SavedArticle[];
 
-        let updatedPosts;
+        let updatedPosts: SavedArticle[];
         if (isSaved) {
-            // Remove if already saved
-            updatedPosts = savedPosts.filter((post: any) => post.id !== article.id);
+            updatedPosts = savedPosts.filter((post) => post.id !== article.id);
             setIsSaved(false);
         } else {
-            // Add to saved list
             updatedPosts = [...savedPosts, article];
             console.log("Saving article:", updatedPosts);
-            // localStorage.setItem("savedPosts", JSON.stringify(updatedPosts));
             setIsSaved(true);
         }
 

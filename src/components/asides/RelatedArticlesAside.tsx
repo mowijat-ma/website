@@ -7,9 +7,13 @@ import { getTranslations } from "next-intl/server";
 import { getWpMoreReads } from "@/api-services/posts";
 import SectionTitle from "../font/section-title";
 
-export default async function RelatedArticlesAside({}: any) {
-    // const t= useTranslations("sections.more_reads")
-    // const data =await getWpMoreReads()
+type RelatedArticle = {
+  title: string;
+  category: string;
+  date: string;
+};
+
+export default async function RelatedArticlesAside({}: Record<string, never>) {
     const [t, data] = await Promise.all([
       getTranslations("asides.related_articles"),
       getWpMoreReads()
@@ -21,7 +25,7 @@ export default async function RelatedArticlesAside({}: any) {
                 <SectionTitle >{t("title")}</SectionTitle>
               </div>
               <div className="flex flex-col gap-2">
-                {data?.slice(0, 5)?.map((item: any, i:number) => (
+                {data?.slice(0, 5)?.map((item: RelatedArticle, i:number) => (
                   
                   <Link 
                   // href={{pathname: 'href={`/cinema/[id]/content`}', query: {

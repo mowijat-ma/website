@@ -8,8 +8,6 @@ import { useRef, useState } from 'react'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import SectionTitle from '../font/section-title'
-import { Calendar } from '@/components/ui/calendar'
 
 import '../../style/calendar.css'
 
@@ -24,10 +22,9 @@ interface EventInfo {
 }
 
 export default function CalendarAside() {
-  const [date, setDate] = useState<Date | undefined>(new Date())
-  const calendarRef = useRef<any>(null)
+  const calendarRef = useRef<{ getApi: () => { next: () => void; prev: () => void } } | null>(null)
   const [calendarTitle, setCalendarTitle] = useState("");
-  const handleDatesSet = (arg: any) => {
+  const handleDatesSet = (arg: { view: { title: string } }) => {
     setCalendarTitle(arg.view.title);
   };
   function goNext() {

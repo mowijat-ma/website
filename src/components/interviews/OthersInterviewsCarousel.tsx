@@ -19,20 +19,20 @@ import { InterviewPost, Post } from "@/types"
 const OthersInterviewsCarousel = ({ interviews }: { interviews: Post[] }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
-    const [count, setCount] = React.useState(0)
     const t = useTranslations('sections.interviews')
-
-
+    const count = interviews.length
 
     React.useEffect(() => {
         if (!api) return
 
-        setCount(api.scrollSnapList().length)
-        setCurrent(api.selectedScrollSnap() + 1)
-
-        api.on("select", () => {
+        const onSelect = () => {
             setCurrent(api.selectedScrollSnap() + 1)
-        })
+        }
+
+        api.on("select", onSelect)
+        return () => {
+            api.off("select", onSelect)
+        }
     }, [api])
 
     // RTL configuration

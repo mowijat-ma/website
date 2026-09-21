@@ -1,34 +1,51 @@
 import { apiClient } from "@/lib/apiclient";
 import { WordPressPost } from "@/types/wp.types";
 
-export const extractWpPosts = (res: WordPressPost[]) => {
-  const data = res.map((item: any) => {
+export const extractWpPosts = (res: Array<Record<string, any>>) => {
+  const data = res.map((item: Record<string, any>) => {
+    const title = typeof item?.title === "string"
+      ? item.title
+      : item?.title?.rendered ?? "";
+    const excerpt = typeof item?.excerpt === "string"
+      ? item.excerpt
+      : item?.excerpt?.rendered ?? "";
+    const content = typeof item?.content === "string"
+      ? item.content
+      : item?.content?.rendered ?? "";
+
     return {
       id: item.id,
-      title: stripHtml(item.title.rendered.replace(/<[^>]*>?/gm, '')),
-      // WP excerpts come wrapped in <p> tags; item.excerpt.rendered is the correct path
-      description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
+      title: stripHtml(title.replace(/<[^>]*>?/gm, '')),
+      description: stripHtml(excerpt.replace(/<[^>]*>?/gm, '')),
       date: new Date(item.date).toLocaleDateString('ar-EG', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
       }),
       category: item.context || "سينما",
-      // image: item.jetpack_featured_media_url ,
       image: item.yoast_head_json?.og_image?.[0]?.url || item.jetpack_featured_media_url || '',
-      content: item.content.rendered
+      content
     };
   });
 
   return data
 }
 
-export const extractWpPost = (item: any) => {
+export const extractWpPost = (item: Record<string, any>) => {
+  const title = typeof item?.title === "string"
+    ? item.title
+    : item?.title?.rendered ?? "";
+  const excerpt = typeof item?.excerpt === "string"
+    ? item.excerpt
+    : item?.excerpt?.rendered ?? "";
+  const content = typeof item?.content === "string"
+    ? item.content
+    : item?.content?.rendered ?? "";
+
   return {
     id: item.id,
-    title: stripHtml(item.title.rendered),
-    // WP excerpts come wrapped in <p> tags; post.excerpt.rendered is the correct path
-    description: stripHtml(item.excerpt.rendered.replace(/<[^>]*>?/gm, '')),
+    title: stripHtml(title.replace(/<[^>]*>?/gm, '')),
+    description: stripHtml(excerpt.replace(/<[^>]*>?/gm, '')),
     date: new Date(item.date).toLocaleDateString('ar-EG', {
       day: 'numeric',
       month: 'long',
@@ -36,7 +53,7 @@ export const extractWpPost = (item: any) => {
     }),
     category: item.context || "سينما",
     image: item.yoast_head_json?.og_image?.[0]?.url || item.jetpack_featured_media_url || '',
-    content: item.content.rendered
+    content
   };
 }
 

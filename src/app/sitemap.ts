@@ -1,17 +1,23 @@
 import { MetadataRoute } from 'next';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await fetch('https://api.example.com/posts').then(res => res.json());
+interface SitemapPost {
+  slug: string;
+  updatedAt: string | number | Date;
+}
 
-  const blogEntries = posts.map((post: any) => ({
-    url: `https://example.com/blog/${post.slug}`,
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+  const posts: SitemapPost[] = [];
+
+  const blogEntries = posts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
     lastModified: new Date(post.updatedAt),
-    changeFrequency: 'weekly',
+    changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 
   return [
-    { url: 'https://example.com', lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
+    { url: siteUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
     ...blogEntries,
   ];
 }

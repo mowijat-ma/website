@@ -15,7 +15,6 @@ export default function CarouselCalendar({
 }) {
     const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
-    const [count, setCount] = useState(0)
     const [isVisible, setIsVisible] = useState(false); // حالة الرؤية
 
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -40,13 +39,19 @@ export default function CarouselCalendar({
         };
     }, []);
 
+    const count = events.length
+
     useEffect(() => {
         if (!api) return
-        setCount(api.scrollSnapList().length)
-        setCurrent(api.selectedScrollSnap())
-        api.on("select", () => {
+
+        const onSelect = () => {
             setCurrent(api.selectedScrollSnap())
-        })
+        }
+
+        api.on("select", onSelect)
+        return () => {
+            api.off("select", onSelect)
+        }
     }, [api])
 
     const handleDotClick = (index: number) => {

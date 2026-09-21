@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import {ListIcon} from "@phosphor-icons/react"
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-export default function MobileHeader({  links}: { links: any[] }) {
+export default function MobileHeader({  links}: { links: { title: string; href?: string }[] }) {
   const [open, setOpen] = useState(false)
   const [openSearch, setOpenSearch] = useState(true)
   const router = useRouter()

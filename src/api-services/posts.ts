@@ -1,7 +1,6 @@
 import { CINEMA_ARABE_CATEGORY, CINEMA_MORROCAN_CATEGORY, CINEMA_WORLD_CATEGORY, CULTURE_ARTS_CATEGORY, LAST_POSTS_CATEGORY, NEWS_CATEGORY } from "@/data/constant"
 import { apiClient } from "@/lib/apiclient"
-import { LocalApiClient } from "@/lib/local_apiclient"
-import { extractWpPost, extractWpPosts, getSearchResultsContents, getWpPostByIdService, getWpPostsService } from "@/services/post.services"
+import { extractWpPost, extractWpPosts, getSearchResultsContents } from "@/services/post.services"
 import { WordPressPost } from "@/types/wp.types"
 // import { extractWpPost, extractWpPosts } from "@/services/post.services"
 // import { WpPost } from "@/types"
@@ -76,11 +75,12 @@ export const getFirstWpPost = async () => {
 }
 export const getCinemaWorldWpPosts = async () => {
   try {
-    const { res } = await apiClient<Post[]>('posts', {
+    const { res } = await apiClient<WordPressPost[]>('posts', {
       method: 'GET',
     })
     // const data = extractWpPosts(res)
-    const data = extractWpPosts(await res)
+    const awaitedData  = await res
+    const data = extractWpPosts(awaitedData)
     return data;
   } catch (error) {
     throw new Error(

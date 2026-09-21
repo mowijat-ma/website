@@ -9,9 +9,13 @@ import SectionTitle from "../font/section-title";
 import Heading3 from "../font/h3";
 import Heading4 from "../font/h4";
 
-export default async function HomeTopReadsAside({ }: any) {
-  // const t= useTranslations("sections.more_reads")
-  // const data =await getWpMoreReads()
+type AsidePost = {
+  title: string;
+  category: string;
+  date: string;
+};
+
+export default async function HomeTopReadsAside({ }: Record<string, never>) {
   const [t, data] = await Promise.all([
     getTranslations("sections.more_reads"),
     getHomeTopReadsPosts()
@@ -23,7 +27,7 @@ export default async function HomeTopReadsAside({ }: any) {
           <SectionTitle >{t("title")}</SectionTitle>
         </div>
         <div className="flex flex-col gap-2">
-          {data?.slice(0, 5)?.map((post: any, i: number) => (
+          {data?.slice(0, 5)?.map((post: AsidePost, i: number) => (
 
             <Link
               href="#"

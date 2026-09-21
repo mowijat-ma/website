@@ -47,9 +47,7 @@ interface MenuItem {
 }
 
 
-const renderMenuItem = (item: MenuItem) => {
-  const t = useTranslations('navigation.links');
-  const pathname = usePathname();
+const renderMenuItem = (item: MenuItem, t: ReturnType<typeof useTranslations>, pathname: string) => {
   let isActive = false
   if (item.href) {
     isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -105,12 +103,13 @@ const DesktopNavbar = ({
   }>
 }) => {
   const pathname = usePathname()
+  const t = useTranslations('navigation.links');
   const isSearchPath = pathname === "/search";
   return (<>
     <nav className="w-full items-center justify-between gap-8 text-nowrap hidden md:flex">
       <div className="gap-4 hidden sm:flex">
           {/* <NavigationMenu> */}
-          {links.map((item) => renderMenuItem(item))}
+          {links.map((item) => renderMenuItem(item, t, pathname))}
           {/* </NavigationMenu> */}
       </div>
       <div className="grow w-full border-mesure">

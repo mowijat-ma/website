@@ -92,32 +92,7 @@ export default async function CinemaArabePage() {
                                 className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-3 md:gap-8 lg:grid-cols-3"
                                 role="list"
                             >
-                                {wideAricles.map((post: WpPost, i: number) => (
-                                    <Link href="#" key={i} className="group block">
-                                        {/* Blog Card */}
-                                        <div className="flex flex-col gap-4 rounded-md transition-all duration-200">
-                                            {/* Image Wrapper */}
-                                            <AspectRatio
-                                                ratio={4 / 3}
-                                                className="overflow-hidden rounded-sm bg-muted"
-                                            >
-                                                <img
-                                                    src={post.image || "https://ui.shadcn.com/placeholder.svg"}
-                                                    alt={`${post.title} thumbnail`}
-                                                    // fill
-                                                    className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                                                />
-                                            </AspectRatio>
-
-                                            {/* Post Content */}
-                                            <div className="flex flex-col gap-3">
-
-                                                <Heading4 className="line-clamp-2">{sideArticle.title}</Heading4>
-                                                <Description className="line-clamp-2">{sideArticle.description}</Description>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
+                                
                             </div>
                             
                         </section>
