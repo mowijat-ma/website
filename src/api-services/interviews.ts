@@ -1,4 +1,4 @@
-import { INTERVIEWS_CATEGORY, NEWS_CATEGORY } from "@/data/constant"
+import { INTERVIEWS_CATEGORY } from "@/data/constant"
 import { extractWpPost, extractWpPosts } from "@/services/post.services"
 
 // export const getHomeInterviews = async () => {
@@ -54,7 +54,7 @@ export const getHomeInterviews = async () => {
     try {
         const res = await fetch(`${process.env.BASE_URL}/posts?categories=${INTERVIEWS_CATEGORY.id}&per_page=6`)
         const data = await res.json()
-        return data.map((post: any) => extractWpPost(post))
+        return data.map((post: Record<string, unknown>) => extractWpPost(post))
     } catch (error) {
         console.error('Error fetching home interviews:', error)
         throw new Error(
