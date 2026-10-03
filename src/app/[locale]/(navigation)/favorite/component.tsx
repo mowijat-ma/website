@@ -1,45 +1,49 @@
 'use client';
 
-import { Description } from "@/components/font/description";
 import Heading4 from "@/components/font/h4";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Link } from "@/i18n/routing";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { FiHeart } from "react-icons/fi";
+
+interface SavedArticle {
+  id: number | string;
+  title: string;
+  image?: string;
+}
+
 export default function FavoritePageComponent() {
-    const [data, setData] = useState<any[]>([]);
-    const [isSaved, setIsSaved] = useState(false);
-    useEffect(() => {
-        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]");
-        console.log('Saved Posts:', savedPosts);
-        setData(savedPosts);
-    }, []);
-    const OnSaveClick = (article: any) => {
-        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]");
-
-        let updatedPosts;
-        if (isSaved) {
-            // Remove if already saved
-            updatedPosts = savedPosts.filter((post: any) => post.id !== article.id);
-            setIsSaved(false);
-        } else {
-            // Add to saved list
-            updatedPosts = [...savedPosts, article];
-            console.log("Saving article:", updatedPosts);
-            // localStorage.setItem("savedPosts", JSON.stringify(updatedPosts));
-            setIsSaved(true);
+    const getSavedPosts = (): SavedArticle[] => {
+        if (typeof window === "undefined") return [];
+        try {
+            return JSON.parse(localStorage.getItem("savedPosts") || "[]") as SavedArticle[];
+        } catch {
+            return [];
         }
-
-        localStorage.setItem("savedPosts", JSON.stringify(updatedPosts));
     };
+
+    const [data, setData] = useState<SavedArticle[]>(getSavedPosts);
+    const [savedIds, setSavedIds] = useState<Set<number | string>>(() => new Set(getSavedPosts().map((article) => article.id)));
+
+    const OnSaveClick = (article: SavedArticle) => {
+        const savedPosts = JSON.parse(localStorage.getItem("savedPosts") || "[]") as SavedArticle[];
+        const nextPosts = savedIds.has(article.id)
+            ? savedPosts.filter((post) => post.id !== article.id)
+            : [...savedPosts, article];
+
+        setSavedIds(new Set(nextPosts.map((post) => post.id)));
+        setData(nextPosts);
+        localStorage.setItem("savedPosts", JSON.stringify(nextPosts));
+    };
+
+    const isSaved = useMemo(() => (article: SavedArticle) => savedIds.has(article.id), [savedIds]);
+
     return (
         <div className="flex flex-col gap-4 w-full">
             <h2 className="text-2xl font-bold">المقالات المحفوظة</h2>
             <p>هنا ستجد جميع المقالات التي قمت بحفظها للرجوع إليها لاحقًا.</p>
             <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-3 gap-8">
-                    {data.map((post: any) => (
+                    {data.map((post) => (
                     <div key={post.id}
                         className="group relative">
                         <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
@@ -56,10 +60,8 @@ export default function FavoritePageComponent() {
                                     onClick={() => OnSaveClick(post)}
                                     className="grow text-center flex flex-col justify-center items-center gap-2 font-semibold"
                                 >
-                                    <FiHeart size={22} fill={isSaved ? "currentColor" : "none"} />
-                                    {/* <span className="hidden sm:block">حفظ</span> */}
+                                    <FiHeart size={22} fill={isSaved(post) ? "currentColor" : "none"} />
                                 </button>
-                                {/* <Description className="line-clamp-2">{post.description}</Description> */}
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,15 @@ import { Description } from "@/components/font/description";
 import BreadcrumbGenerator from "@/components/ux/breadcrumb-generator";
 import { Route } from "next";
 
+type InterviewCard = {
+    id: number;
+    title: string;
+    image?: string;
+    with?: {
+        name_ar?: string;
+    };
+};
+
 export default async function CinemaArabePage() {
     const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.interviews"),
@@ -47,7 +56,7 @@ export default async function CinemaArabePage() {
                 role="list"
             >
 
-                {wideAricles.map((interview: any, i: number) => (
+                {wideAricles.map((interview: InterviewCard, i: number) => (
                     <Link key={i}
 
                         href={`/interviews/${interview.id}/content` as Route}

@@ -80,7 +80,7 @@ export const getCinemaWorldWpPosts = async () => {
     })
     // const data = extractWpPosts(res)
     const awaitedData  = await res
-    const data = extractWpPosts(awaitedData)
+    const data = extractWpPosts(awaitedData as unknown as Array<Record<string, unknown>>)
     return data;
   } catch (error) {
     throw new Error(

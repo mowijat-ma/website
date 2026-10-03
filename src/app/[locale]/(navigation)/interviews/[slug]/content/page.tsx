@@ -85,7 +85,12 @@ export default async function PostContentPage({
 
 }
 
-export async function renderInterviewLine({ line }: { line: any }) {
+type InterviewLine = {
+    type: "question" | "answer";
+    content: string;
+};
+
+export async function renderInterviewLine({ line }: { line: InterviewLine }) {
     if (line.type == "question") {
         return <div className="mb-6">
             <Heading3 className="text-primary mb-2">{line.content}</Heading3>
@@ -96,4 +101,5 @@ export async function renderInterviewLine({ line }: { line: any }) {
             <Article>{line.content}</Article>
         </div>
     }
+    return null;
 }

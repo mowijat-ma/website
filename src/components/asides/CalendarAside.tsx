@@ -22,7 +22,7 @@ interface EventInfo {
 }
 
 export default function CalendarAside() {
-  const calendarRef = useRef<{ getApi: () => { next: () => void; prev: () => void } } | null>(null)
+  const calendarRef = useRef<FullCalendar | null>(null)
   const [calendarTitle, setCalendarTitle] = useState("");
   const handleDatesSet = (arg: { view: { title: string } }) => {
     setCalendarTitle(arg.view.title);

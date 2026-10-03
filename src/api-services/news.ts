@@ -14,7 +14,7 @@ import { WordPressPost } from "@/types/wp.types"
 
 
 export interface LocalApiResponse<T = unknown> {
-  message:String
+  message:string
   data: WordPressPost[]
   res: Promise<T>
   url: string

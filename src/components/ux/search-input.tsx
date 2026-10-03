@@ -36,29 +36,22 @@ export function SearchInput() {
     }
 
     const [searchResults, setSearchResults] = useState<Post[]>([])
-    const OnUpdateQuery = async (e: any) => {
-        setQuery(e.target.value)
-        if (e.target.value.length > 0) setOpen(true)
-        if (e.target.value !== "") {
-            const res: any = await searchWpPosts(e.target.value)
-            setSearchResults(res)
-            console.log(res)
-
+    const OnUpdateQuery = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setQuery(value)
+        if (value.length > 0) setOpen(true)
+        if (value !== "") {
+            const res = await searchWpPosts(value)
+            setSearchResults(Array.isArray(res) ? res : [])
         }
-
     }
     const isSearchPath = pathname === "/search";
-    const onSubmit = (e: any) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (query.trim() !== "") {
-            // if(!isSearchPath){
-                router.push(`/search?query=${encodeURIComponent(query)}`)
-                // revalidatePath(`/search?query=${encodeURIComponent(query)}`)
-            // }
+            router.push(`/search?query=${encodeURIComponent(query)}`)
             setOpen(false)
-            // setQuery("")
         }
-        // console.log(e.target.value)
     }
     const isSearchPage = () => {
     // Check 1: Is the URL path exactly '/search'?

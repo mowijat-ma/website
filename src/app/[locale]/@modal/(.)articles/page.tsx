@@ -3,11 +3,10 @@
 import ModalWrapper from "@/components/wrappers/ModalWrapper";
 import ArticlesPage from "../../(navigation)/articles/page"; // استيراد الصفحة الأصلية إذا أردت عرض نفس المحتوى
 
-export default function ArticlesModal(props: any) {
+export default function ArticlesModal(props: Record<string, unknown>) {
   return (
     <ModalWrapper>
       <div className="">
-        {/* يمكنك عرض مكونات صفحة المقالات هنا مباشرة */}
         <ArticlesPage {...props} />
       </div>
     </ModalWrapper>

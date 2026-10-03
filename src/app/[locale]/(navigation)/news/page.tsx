@@ -17,6 +17,14 @@ import './style.css'
 import { getHomeEvents } from "@/api-services/events";
 type Props = { params: Promise<{ slug: string }> };
 
+type NewsEvent = {
+    image?: string;
+    title?: string;
+    location?: string;
+    description?: string;
+    restDays?: number;
+};
+
 
 // export async function generateMetadata({ params }: Props): Promise<Metadata> {
 //   const { slug } = await params;
@@ -219,7 +227,7 @@ export default async function NewsPage() {
                     {/* <CalendarAside /> */}
                     {events.length > 0 && (
                         <div className="">
-                            {events.map((event: any, i: number) => (
+                            {events.map((event: NewsEvent, i: number) => (
                                 <div key={i} className="rounded-lg mb-4 relative">
                                     <img src={event.image} alt={event.title} className="w-full h-32 rounded- object-cover" />
                                     <div className="p-4 absolute top-0 left-0  w-full h-full bg-black/40 text-white flex flex-col justify-end">
