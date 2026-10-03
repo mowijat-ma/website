@@ -16,7 +16,7 @@ import { FaSquareInstagram, FaThreads } from "react-icons/fa6"
               className="h-12 dark:invert  hidden sm:block" 
               alt="Mowijat Logo" 
             />
-            <img src="/logos/vector.png" className="h-8 dark:invert sm:hidden" 
+            <img src="/logos/Vector.png" className="h-8 dark:invert sm:hidden" 
               alt="Mowijat Logo"/>
             {/* <span className="hidden sm:block text-lg font-semibold">موجات</span> */}
           </Link>
