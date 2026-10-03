@@ -1,15 +1,28 @@
+import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
-export default createMiddleware({
+const intlMiddleware = createMiddleware({
   ...routing,
-  // 1. Force the default locale
   defaultLocale: 'ar',
-  // 2. Disable browser language sensing
   localeDetection: false,
-  // 3. Optional: If you don't want /ar/ in the URL, use 'as-needed'
-  localePrefix: 'as-needed' 
+  localePrefix: 'as-needed',
 });
+
+export default function proxy(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const isComingSoonRoute = routing.locales.some(
+    (locale) => pathname === `/${locale}/coming-soon` || pathname === `/${locale}/coming-soon/`,
+  ) || pathname === '/coming-soon' || pathname === '/coming-soon/';
+
+  if (!isComingSoonRoute) {
+    const locale = routing.locales.find((candidate) => pathname.startsWith(`/${candidate}/`));
+    const destination = locale ? `/${locale}/coming-soon` : '/coming-soon';
+    return NextResponse.redirect(new URL(destination, request.url));
+  }
+
+  return intlMiddleware(request);
+}
 
 export const config = {
   // Matcher remains the same
