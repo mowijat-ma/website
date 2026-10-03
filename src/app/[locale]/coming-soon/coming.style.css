@@ -80,6 +80,24 @@ h1 span { color: var(--blue); }
 .intro { max-width: 405px; color: var(--muted-ink); font-size: 19px; line-height: 1.85; margin: 34px 0 28px; }
 .rule { width: 56px; height: 3px; background: var(--blue); margin: 0 0 22px; }
 .follow-copy { font-weight: 700; margin: 0 0 16px; font-size: 16px; }
+.install-app-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--blue);
+  color: white;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.install-app-button:hover { background: #176db5; transform: translateY(-1px); }
+.install-app-button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .social-pills { display: flex; gap: 8px; flex-wrap: wrap; }
 .social-pills a { display: flex; gap: 10px; align-items: center; color: var(--blue); border: 1px solid rgba(39,135,216,.5); border-radius: 99px; padding: 9px 15px; font-size: 14px; transition: all .2s; }
 .social-pills a:hover { background: var(--blue); color: white; }

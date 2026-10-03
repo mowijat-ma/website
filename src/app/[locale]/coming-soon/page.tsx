@@ -4,9 +4,11 @@ import { IconContext } from 'react-icons'
 import Link from "next/link"
 import { socialLinks } from "@/data/social"
 import { Metadata, Route } from 'next'
+import InstallAppButton from './install-app-button'
 
 export const metadata: Metadata = {
     title: 'مويجات',
+    manifest: '/icons/site.webmanifest',
     openGraph: {
         title: 'مجلة رقمية خاصة بالسينما و الثقافة',
         description: `
@@ -80,6 +82,7 @@ export default async function Page() {
                     <p className="intro">
                         {t('subtitle')}
                     </p>
+                    {/* <InstallAppButton label={t('installApp')} /> */}
                     <div className="">
                         <div className="rule" aria-hidden="true" />
                         <p className="follow-copy text-gray-800">{t('follow')}</p>

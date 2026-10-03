@@ -5,6 +5,18 @@
     "newsTitle": "Dernières Actualités"
   },
   "pages": {
+    "coming-soon": {
+      "title": "Nous écrivons",
+      "title1": "le prochain chapitre",
+      "subtitle": "Le nouveau site Mowijat arrive bientôt. Un nouvel espace dédié aux passionnés de cinéma, aux histoires qui nous accompagnent après le film.",
+      "follow": "Suivez-nous pour être informé de l’ouverture",
+      "installApp": "Installer l’application Mowijat",
+      "social": {
+        "whatsapp": "WhatsApp",
+        "instagram": "Instagram",
+        "facebook": "Facebook"
+      }
+    },
     "cinema": {
       "moroccan": {
         "title": "Cinéma Marocain",
