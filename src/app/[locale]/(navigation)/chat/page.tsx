@@ -20,7 +20,7 @@ export default function ChatPage() {
       setIsConnected(false);
     }
 
-    function onReceiveMessage(data: any) {
+    function onReceiveMessage(data: string | { text: string; timestamp: string }) {
       setChatLog((prev) => [...prev, data]);
     }
 

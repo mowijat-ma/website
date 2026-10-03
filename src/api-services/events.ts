@@ -1,5 +1,4 @@
 import { CalendarEventProps } from "@/types"
-import { Server } from "tls"
 
 export const getEvents = async (): Promise<CalendarEventProps[]> => {
   try {
@@ -58,7 +57,7 @@ interface WpEvent {
     url: string;
   };
 }
-const extractWpEvents = (data: any): CalendarEventProps[] => {
+const extractWpEvents = (data: unknown): CalendarEventProps[] => {
   if (!data || !Array.isArray(data)) {
     return [];
   }
