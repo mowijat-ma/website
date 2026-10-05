@@ -36,7 +36,8 @@ export default async function HomeTopTrendingPosts() {
         <div className=""> {/* أضفنا items-start لضمان عمل sticky */}
           <SectionTitle value={t("title")} />
           {/* الجهة اليسرى: المقال الرئيسي ومقالات الـ topPosts */}
-          <div className="">
+          {mainArticle && (
+            <div className="">
             <Link 
               // href={`/articles/${mainArticle.id}/content`}
               // href={{ pathname: "/articles/[id]/content", query: { id: mainArticle.id } }}
@@ -57,7 +58,7 @@ export default async function HomeTopTrendingPosts() {
                     // fill
                     className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
                   />
-                  {mainArticle.image}
+                  {/* {mainArticle.image} */}
                 </AspectRatio>
 
                 {/* mainArticle Content */}
@@ -106,6 +107,7 @@ export default async function HomeTopTrendingPosts() {
               ))}
             </div>
           </div>
+          )}
 
           {/* الجهة اليمنى: القائمة الجانبية الثابتة */}
 

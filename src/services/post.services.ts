@@ -1,8 +1,6 @@
 import { apiClient } from "@/lib/apiclient";
 import { WordPressPost } from "@/types/wp.types";
 
-type RenderedField = string | { rendered?: string } | null | undefined;
-type WpLike = { [key: string]: unknown };
 type ExtractedWpPost = {
   id: number;
   title: string;
@@ -13,18 +11,22 @@ type ExtractedWpPost = {
   content: string;
 };
 
-const toText = (value: RenderedField): string => {
+type WpLike = Record<string, unknown>;
+
+const isRecord = (value: unknown): value is WpLike =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
+const toText = (value: unknown): string => {
   if (typeof value === "string") return value;
-  if (value && typeof value === "object" && "rendered" in value) {
-    const rendered = value.rendered;
-    return typeof rendered === "string" ? rendered : "";
-  }
-  return "";
+  if (!isRecord(value)) return "";
+  return typeof value.rendered === "string" ? value.rendered : "";
 };
 
 const getImageUrl = (item: WpLike): string => {
-  const yoast = item.yoast_head_json as { og_image?: Array<{ url?: string }> } | undefined;
-  const yoastImage = yoast?.og_image?.[0]?.url ?? "";
+  const yoast = isRecord(item.yoast_head_json) ? item.yoast_head_json : undefined;
+  const ogImages = Array.isArray(yoast?.og_image) ? yoast.og_image : [];
+  const firstOgImage = isRecord(ogImages[0]) ? ogImages[0] : undefined;
+  const yoastImage = typeof firstOgImage?.url === "string" ? firstOgImage.url : "";
   const jetpackImage = typeof item.jetpack_featured_media_url === "string"
     ? item.jetpack_featured_media_url
     : "";
@@ -32,32 +34,43 @@ const getImageUrl = (item: WpLike): string => {
   return yoastImage || jetpackImage;
 };
 
-const normalizeItem = (item: WpLike): ExtractedWpPost => {
-  const title = toText(item.title as RenderedField);
-  const excerpt = toText(item.excerpt as RenderedField);
-  const content = toText(item.content as RenderedField);
-  const dateValue = typeof item.date === "string" ? item.date : "";
+const normalizeItem = (value: unknown): ExtractedWpPost => {
+  if (!isRecord(value)) {
+    throw new TypeError("Expected a WordPress post object");
+  }
+
+  const title = toText(value.title);
+  const excerpt = toText(value.excerpt);
+  const content = toText(value.content);
+  const numericId = typeof value.id === "number" ? value.id : Number(value.id);
+  const dateValue = typeof value.date === "string" ? value.date : "";
 
   return {
-    id: typeof item.id === "number" ? item.id : Number(item.id ?? 0),
-    title: stripHtml(title.replace(/<[^>]*>?/gm, '')),
-    description: stripHtml(excerpt.replace(/<[^>]*>?/gm, '')),
-    date: dateValue ? new Date(dateValue).toLocaleDateString('ar-EG', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    }) : "",
-    category: typeof item.context === "string" ? item.context : "سينما",
-    image: getImageUrl(item),
+    id: Number.isFinite(numericId) ? numericId : 0,
+    title: stripHtml(title),
+    description: stripHtml(excerpt),
+    date: dateValue && !Number.isNaN(Date.parse(dateValue))
+      ? new Date(dateValue).toLocaleDateString('ar-EG', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      })
+      : "",
+    category: typeof value.context === "string" ? value.context : "سينما",
+    image: getImageUrl(value),
     content
   };
 };
 
-export const extractWpPosts = (res: WpLike[]) => {
-  return res.map((item) => normalizeItem(item));
+export const extractWpPosts = (res: unknown) => {
+  console.log("extractWpPosts res:", res);
+  if (!Array.isArray(res)) {
+    throw new TypeError("Expected a list of WordPress posts");
+  }
+  return res.map(normalizeItem);
 };
 
-export const extractWpPost = (item: WpLike): ExtractedWpPost => normalizeItem(item);
+export const extractWpPost = (item: unknown): ExtractedWpPost => normalizeItem(item);
 
 
 
@@ -109,7 +122,7 @@ export const getSearchResultsContents = async (results: Array<{ id: number | str
   for (let i = 0; i < results.length; i++) {
     const element = results[i];
     const post = await getWpPostByIdService(String(element.id));
-    const item = extractWpPost(post as unknown as WpLike);
+    const item = extractWpPost(post);
     list.push(item);
   }
   return list;

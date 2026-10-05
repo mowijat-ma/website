@@ -1,4 +1,4 @@
-const BASE_URL = "https://public-api.wordpress.com/wp/v2/sites/mowijat.wordpress.com";
+const BASE_URL = "https://slategrey-wolverine-872895.hostingersite.com/wp-json/wp/v2";
 // const BASE_URL = "https://public-api.wordpress.com/wp/v2/sites/mowijat.wordpress.com";
 const BASE_URL2 = "https://www.hespress.com/wp-json/wp/v2";
 const BASE_URL3 = "https://cine-philia.com/wp-json/wp/v2";

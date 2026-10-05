@@ -1,25 +1,25 @@
 export const NEWS_CATEGORY = {
-    id:10288888
+    id:15
 };
 
     
 export const LAST_POSTS_CATEGORY = {
-    id: 22951688
+    id: 10
 }
 
 export const INTERVIEWS_CATEGORY = {
-    id: 1109686
+    id: 16
 }
 export const CINEMA_MORROCAN_CATEGORY = {
-    id: 104245071
+    id: 11
 }
 export const CINEMA_ARABE_CATEGORY = {
-    id: 2639356
+    id: 6
 }
 export const CINEMA_WORLD_CATEGORY = {
-    id: 2639361
+    id: 5
 }
 
 export const CULTURE_ARTS_CATEGORY = {
-    id: 6415156
+    id: 14
 }

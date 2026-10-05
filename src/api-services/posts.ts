@@ -189,10 +189,13 @@ export const getHomeTopTrendingPosts = async () => {
   // console.log('HomeTopTrendingPosts data:', data)
   // return data
   try {
-    const res = await fetch(`${process.env.BASE_URL}/posts?categories=${LAST_POSTS_CATEGORY.id}`)
+    const res = await fetch(`${process.env.BASE_URL}/posts`)
+    // console.log('HomeTopTrendingPosts data:', await res.json())
     const data = extractWpPosts(await res.json())
-    console.log('HomeTopTrendingPosts data:', data)
+    // const SJON = JSON.stringify(await res.json())
+    // console.log('HomeTopTrendingPosts data:', SJON)
     return data
+
   } catch (error) {
     console.error('Error fetching news page posts:', error)
     throw new Error(
@@ -206,6 +209,7 @@ export const getHomeTopReadsPosts = async () => {
   try {
     const res = await fetch(`${process.env.BASE_URL}/posts?categories=${LAST_POSTS_CATEGORY.id}`)
     const data = extractWpPosts(await res.json())
+    
     console.log('HomeTopTrendingPosts data:', data)
     return data
   } catch (error) {

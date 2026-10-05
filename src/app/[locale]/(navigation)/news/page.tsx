@@ -40,12 +40,12 @@ type NewsEvent = {
 // }
 export default async function NewsPage() {
 
-    const [t, ui, tNavigation, data, events] = await Promise.all([
+    const [t, ui, tNavigation, data] = await Promise.all([
         getTranslations("pages.news"),
         getTranslations("ui"),
         getTranslations("navigation.links"),
         getNewsPagePosts(),
-        getHomeEvents()
+        // getHomeEvents()
     ])
     const mainArticle = data[0]
     const sideArticle = data[1]
@@ -225,7 +225,7 @@ export default async function NewsPage() {
                 <div className="col-span-4 rounded-xl bg-background p-4 border-mesure hidden md:block sticky top-24 h-fit">
                     <Heading2 className="mb-4 text-primary">{t('lastEvents.title')}</Heading2>
                     {/* <CalendarAside /> */}
-                    {events.length > 0 && (
+                    {/* {events.length > 0 && (
                         <div className="">
                             {events.map((event: NewsEvent, i: number) => (
                                 <div key={i} className="rounded-lg mb-4 relative">
@@ -236,12 +236,12 @@ export default async function NewsPage() {
                                         <Description className="mt-2 text-white!">{event.description}</Description>
                                         <Description className="text-white!">عدد أيام المتبقية: {event.restDays}</Description>
                                     </div>
-                                    {/* <Description>{event.startDate} - {event.endDate}</Description> */}
-                                    {/* <Description>{event.startDate}</Description> */}
+                                    
                                 </div>
                             ))}
                         </div>
-                    )}
+                    )}  
+                    */}
                 </div>
                 {/* Sidebar */}
             </div>
