@@ -5,25 +5,29 @@ export const socialLinks = [
     {
         id: 1,
         title: "Facebook",
-        href: "https://www.facebook.com/mowijat.ma",
-        icon: FaFacebook
+        href: "https://facebook.com/profile.php?id=61587179966907",
+        icon: FaFacebook, 
+        label: "Facebook"
     },
     {
         id: 2,
         title: "Instagram",
         href: "https://www.instagram.com/mowijat.ma",
-        icon: FaSquareInstagram
+        icon: FaSquareInstagram, 
+        label: "Instagram"
     },
     {
         id: 3,
         title: "Threads",
         href: "https://www.threads.net/@mowijat.ma",
-        icon: FaThreads
+        icon: FaThreads,
+        label: "Threads"
     },
     {
         id: 4,
         title: "Mail",
-        href: "mailto:mowijat.contact@gmail.com",
-        icon: FaWhatsapp
+        href: "https://wa.me/212635062998?text=Hi-Mowijat",
+        icon: FaWhatsapp,
+        label: "Whatsapp"
     },
 ] 

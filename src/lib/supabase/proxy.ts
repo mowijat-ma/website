@@ -1,16 +1,41 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { routing } from "../../i18n/routing";
 import { hasEnvVars } from "../utils";
+
+function isPublicPathname(pathname: string) {
+  const segments = pathname.split("/").filter(Boolean);
+  const hasLocale = routing.locales.some((locale) => locale === segments[0]);
+  const routeSegments = hasLocale ? segments.slice(1) : segments;
+  const route = routeSegments[0];
+
+  return route === "coming-soon" || route === "login" || route === "auth";
+}
+
+function redirectToComingSoon(request: NextRequest, response: NextResponse) {
+  const segments = request.nextUrl.pathname.split("/").filter(Boolean);
+  const locale = routing.locales.find((candidate) => candidate === segments[0]);
+  const destination =
+    locale && locale !== routing.defaultLocale
+      ? `/${locale}/coming-soon`
+      : "/coming-soon";
+  const url = request.nextUrl.clone();
+  url.pathname = destination;
+  const redirect = NextResponse.redirect(url);
+
+  response.cookies.getAll().forEach((cookie) => redirect.cookies.set(cookie));
+  return redirect;
+}
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   });
 
-  // If the env vars are not set, skip proxy check. You can remove this
-  // once you setup the project.
   if (!hasEnvVars) {
-    return supabaseResponse;
+    return isPublicPathname(request.nextUrl.pathname)
+      ? supabaseResponse
+      : redirectToComingSoon(request, supabaseResponse);
   }
 
   // With Fluid compute, don't put this client in a global environment
@@ -47,16 +72,8 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  if (
-    request.nextUrl.pathname !== "/" &&
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
+  if (!user && !isPublicPathname(request.nextUrl.pathname)) {
+    return redirectToComingSoon(request, supabaseResponse);
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.

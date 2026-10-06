@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
+import { updateSession } from './lib/supabase/proxy';
 
 const intlMiddleware = createMiddleware({
   ...routing,
@@ -9,19 +10,18 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'as-needed',
 });
 
-export default function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-  const isComingSoonRoute = routing.locales.some(
-    (locale) => pathname === `/${locale}/coming-soon` || pathname === `/${locale}/coming-soon/`,
-  ) || pathname === '/coming-soon' || pathname === '/coming-soon/';
+export default async function proxy(request: NextRequest) {
+  const sessionResponse = await updateSession(request);
 
-  if (!isComingSoonRoute) {
-    const locale = routing.locales.find((candidate) => pathname.startsWith(`/${candidate}/`));
-    const destination = locale ? `/${locale}/coming-soon` : '/coming-soon';
-    return NextResponse.redirect(new URL(destination, request.url));
+  if (sessionResponse.status >= 300) {
+    return sessionResponse;
   }
 
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+  sessionResponse.cookies
+    .getAll()
+    .forEach((cookie) => response.cookies.set(cookie));
+  return response;
 }
 
 export const config = {

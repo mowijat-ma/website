@@ -20,23 +20,6 @@
   --color-border: var(--line);
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Noto Kufi Arabic', Tahoma, Arial, sans-serif;
-}
-a { color: inherit; text-decoration: none; }
-
-.coming-soon-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--paper);
-}
 
 .site-header {
   width: min(1200px, calc(100% - 64px));
