@@ -88,8 +88,8 @@ export default function AdminLoginForm() {
         email: email.trim(),
         password,
       });
-
       if (signInError) {
+        console.log("signInError:", signInError);
         setError(text.invalid);
         return;
       }
@@ -97,6 +97,7 @@ export default function AdminLoginForm() {
       router.replace("/");
       router.refresh();
     } catch {
+      console.error("Unexpected error during sign-in");
       setError(text.unexpected);
     } finally {
       setIsSubmitting(false);

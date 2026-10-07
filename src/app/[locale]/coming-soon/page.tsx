@@ -69,15 +69,15 @@ export default async function Page() {
       </video>
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-slate-950/50"
+        className="absolute inset-0 -z-10 bg-slate-950/30"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-950/65 via-slate-950/25 to-slate-950/75"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-950/65- via-slate-950/25 to-slate-950/75"
       />
 
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 sm:px-8 sm:py-8">
-        <div className="lg:max-w-6xl w-full mx-auto flex items-center justify-between px-4 pt-4">
+      <header className=" mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-6 sm:px-8 sm:py-8">
+        <div className="w-full mx-auto flex items-center justify-between px-4 pt-4 ">
                         <Link href={"/" as Route} className="flex items-center gap-2">
                             <img
                                 src="/logos/logo_light_1.png"
@@ -107,7 +107,7 @@ export default async function Page() {
 
       <section
         aria-labelledby="coming-soon-title"
-        className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start justify-center px-5 py-16 text-start sm:px-8"
+        className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-start justify-center px-5 py-16 text-start sm:px-8"
       >
         {/* <p className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-sky-300 sm:text-sm">
           Mowijat.ma
